@@ -1,0 +1,22 @@
+#principal{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+#tituloPrincipal{
+  font-family: Lucida Bright,arial;
+  margin-bottom: 2%;
+  margin-top: 1%;
+}
+#NavPrincipal{
+  font-family: Times New Roman, arial;
+}
+
+
+#secciones{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 5%;
+}
