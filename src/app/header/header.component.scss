@@ -1,0 +1,56 @@
+#login{
+  padding-top: 1%;
+  .btn-outline-primary{
+    background-color: #9CD2D3 ;
+    color:black;
+    border: rgb(0, 0, 0);
+    font-family: Times New Roman, arial
+  }
+}
+
+#principal{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  #tituloPrincipal{
+    font-family: Lucida Bright,arial;
+    margin-bottom: 2%;
+    margin-top: 1%;
+  }
+}
+
+#nav{
+  font-family: Times New Roman, arial;
+  border-radius: 15px;
+  width: 60%;
+  background-color: #9CD2D3;
+}
+ul{
+  display: flex;
+
+}
+li {
+  border-right: 1px solid #9B9A9A;
+  float: left;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: auto;
+};
+
+  li:last-child {
+    border-right:none;
+}
+
+a{
+font-size: 25px;
+line-height:50%;
+}
+
+
+
+
+
+
+
+
+
