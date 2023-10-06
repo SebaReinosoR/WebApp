@@ -15,6 +15,7 @@ export class InicioSesionComponent {
     login() {
       console.log(this.user);
       console.log(this.password);
+
     }
 
 }
