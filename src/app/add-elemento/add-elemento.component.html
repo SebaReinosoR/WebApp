@@ -1,70 +1,90 @@
-<form>
+<div class="container-fluid">
+  <div class="bloquePrincipal">
+    <h1>Agregar</h1>
+   
+      <div id="caja" >
+  
+        <form onLoad="myOnLoad()">
+    
+          <select class="form-select" name="elementos" (change)="onOptionChange($event)">
+            <option value="0">Seleccionar elemento</option>
+          </select>
+    
+          <div class="input-group mb-3" *ngIf="mostrarPublicacion || mostrarDocumentacion || mostrarSubtema ||mostrarCodigos || mostrarBuenasPracticas || mostrarTemas ">
+            <span class="input-group-text" id="Titulo">Titulo</span>  <!--Todos-->
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          </div>
 
-  <select class="form-select" aria-label="Default select example"  id="option" > <!--input de seleccion de filtro de elementos-->
-    <option value="0">Seleccinar elemento</option>
-    <option value="1">Tema</option>
-    <option value="2">Subtema</option>
-    <option value="3">Codigos</option>
-    <option value="4">Documentación</option>
-    <option value="5">Programación</option>
-    <option value="6">Encargados</option>
-  </select>
+          <div class="input-group mb-3" *ngIf=" mostrarTemas ">
+            <span class="input-group-text" id="Titulo">Descripción</span>  <!--Tema-->
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+          </div>
+
+          <div class="input-group mb-3" *ngIf=" mostrarSubtema ">
+            <span class="input-group-text" id="Titulo">Tema al que pertenece</span>  <!--debe ser cambiado por un select retornado por la bd-->
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          </div>
+          <div class="mb-3" *ngIf="mostrarPublicacion || mostrarDocumentacion || mostrarSubtema ||mostrarCodigos || mostrarBuenasPracticas">
+            <label for="exampleFormControlTextarea1" class="form-label" id="cuerpo">Cuerpo</label>  <!--cod,BP,docu,publi,subtem-->
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+          </div>
+          <div class="input-group mb-3" *ngIf="mostrarPublicacion">
+            <span class="input-group-text" id="Fecha">Fecha</span> <!--publi-->
+            <input type="date" id="start" name="trip-start" value="2000-01-01" min="2000-01-01" max="2030-12-31"/>
+          </div>
+          <div class="input-group mb-3" *ngIf="mostrarPublicacion">
+            <span class="input-group-text" id="Autor">Autor</span>  <!--publi -->
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          </div>
+    
+          <div class="input-group mb-3" *ngIf="mostrarPublicacion || mostrarCodigos || mostrarSubtema ||mostrarCodigos || mostrarDocumentacion">
+            <span class="input-group-text" id="link">Link</span>  <!--cod, publi, subtem-->
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          </div>
+          <div class="input-group mb-3" *ngIf="mostrarPublicacion || mostrarSubtema ||mostrarCodigos || mostrarDocumentacion">
+            <span class="input-group-text" id="Referencias">Referencias</span> <!--publi, subtem-->
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          </div>
+    
+          <!--ENCARGADOS-->
+         
+            <div class="input-group" *ngIf="mostrarEncargados">  <!--Nombre unico para encargados doble parametro-->
+            <span class="input-group-text">Nombre</span>
+            <input type="text" aria-label="name" class="form-control">
+            <span class="input-group-text">Apellido</span>
+            <input type="text" aria-label="apellido" class="form-control">
+            </div>
+        
+            <div class="input-group mb-3" *ngIf="mostrarEncargados">
+              <span class="input-group-text" id="Carrera">Carrera</span> <!--encargados-->
+              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3" *ngIf="mostrarEncargados">
+              <span class="input-group-text" id="Especialidad">Especialidad</span> <!--encargados-->
+              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3" *ngIf="mostrarEncargados">
+              <span class="input-group-text" id="Investigación">Investigación</span> <!--encargados-->
+              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3" *ngIf="mostrarEncargados">
+              <span class="input-group-text" id="Universidad">Universidad</span> <!--encargados-->
+              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+    
+    
+          <div class="input-group mb-3" *ngIf="mostrarPublicacion || mostrarPublicacion || mostrarSubtema ||mostrarCodigos || mostrarBuenasPracticas || mostrarTemas || mostrarEncargados || mostrarDocumentacion"> <!--VER QUE NECESITA MULTIMEDIA -- FOTO PARA LOS ENCARGADOS- SUBTEMAS- PUBLICACIONES -QUE MAS? MEJOR DEJARLO PERMANENTE EN CASO DE?-->
+            <input type="file" class="form-control" id="inputGroupFile02">
+    
+          </div>
+          
+        </form>
+        <button type="submit" class="btn btn-success">Agregar</button>
+      
+    </div>
+   
+  </div>
+ 
 
 
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="Carrera">Carrera</span> <!--encargados-->
-    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="Especialidad">Especialidad</span> <!--encargados-->
-    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="Investigación">Investigación</span> <!--encargados-->
-    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="Universidad">Universidad</span> <!--encargados-->
-    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="Referencias">Referencias</span> <!--publi, subtem-->
-    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="Fecha">Fecha</span> <!--publi-->
-    <input type="date" id="start" name="trip-start" value="2000-01-01" min="2000-01-01" max="2030-12-31"/>
-  </div>
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="Autor">Autor</span>  <!--publi -->
-    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
-
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="link">Link</span>  <!--cod, publi, subtem-->
-    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
-
-  <div class="mb-3">
-    <label for="exampleFormControlTextarea1" class="form-label" id="cuerpo">Cuerpo</label>  <!--cod,BP,docu,publi,subtem-->
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-  </div>
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="Titulo">Titulo</span>  <!--Todos-->
-    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
-
-  <div class="input-group" >  <!--Nombre unico para encargados doble parametro-->
-    <span class="input-group-text">Nombre</span>
-    <input type="text" aria-label="name" class="form-control">
-    <span class="input-group-text">Apellido</span>
-    <input type="text" aria-label="apellido" class="form-control">
-  </div>
-
-
-  <div class="input-group mb-3"> <!--VER QUE NECESITA MULTIMEDIA -- FOTO PARA LOS ENCARGADOS- SUBTEMAS- PUBLICACIONES -QUE MAS? MEJOR DEJARLO PERMANENTE EN CASO DE?-->
-    <input type="file" class="form-control" id="inputGroupFile02">
-
-  </div>
-  <button type="submit" class="btn btn-success">Agregar</button>
-</form>
+</div>
