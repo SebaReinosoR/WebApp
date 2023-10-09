@@ -14,6 +14,7 @@ import { ProgramacionComponent } from './programacion/programacion.component';
 import { EncargadosComponent } from './encargados/encargados.component';
 import { SubtemaComponent } from './subtema/subtema.component';
 import { AdministradorComponent } from './administrador/administrador.component';
+import { AddElementoComponent } from './add-elemento/add-elemento.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AdministradorComponent } from './administrador/administrador.component'
     ProgramacionComponent,
     EncargadosComponent,
     SubtemaComponent,
-    AdministradorComponent
+    AdministradorComponent,
+    AddElementoComponent
   ],
   imports: [
     BrowserModule,
