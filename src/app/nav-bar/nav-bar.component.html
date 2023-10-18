@@ -1,0 +1,41 @@
+
+  <div class="admin-layout" [ngStyle]="{'grid-template-columns':showLeftNav?'100%':'45%'}">
+
+
+  <div class="left-nav">
+
+    <div class="brand">
+      <h2 [ngStyle]="{'font-size':showLeftNav?'30px':'10px'}">
+        Navegador
+      </h2>
+    </div>
+
+
+    <div class="search" [ngStyle]="{'text-align':showLeftNav?'':'center'}">
+      <input type="text" name="" *ngIf="showLeftNav" placeholder="Search item...." id="">
+      <fa-icon [icon]="searchIcon"></fa-icon>
+    </div>
+    <ol>
+      <li *ngFor="let item of left_nav_lis_item;let i=index;" [routerLink]="item.url" routerLinkActive="active-link">
+        <div class="left-nav-list-item">
+          <fa-icon [ngStyle]="{'margin-left':showLeftNav?'':'10px'}" [icon]="item.icon"></fa-icon>
+          <span *ngIf="showLeftNav">
+            {{item.title}}
+          </span>
+        </div>
+      </li>
+    </ol>
+    <div class="content">
+
+      <div class="main-content-nav">
+        <button (click)="showAndHideLeftNav()">
+          <fa-icon [icon]="faHamburger"></fa-icon>
+        </button>
+
+    </div>
+  </div>
+
+
+</div>
+</div>
+

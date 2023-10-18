@@ -1,4 +1,38 @@
 .container-fluid{
   padding-left: 0;
   padding-right: 0;
+  display: grid;
+  grid-template-areas:
+    "head head"
+    "nav contenido"
+    "foot foot"
+    ;
+  grid-template-rows: 3.8em;
+  grid-template-columns: 15%
+
 }
+
+.content-outlet{
+  height: 55em;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 6px;
+  margin: 4px;
+  background-color: rgb(154, 151, 151);
+  grid-area: contenido;
+}
+
+app-header{
+  grid-area: head;
+}
+
+app-nav-bar{
+  grid-area: nav;
+
+}
+
+
+app-footer{
+  grid-area: foot;
+}
+
