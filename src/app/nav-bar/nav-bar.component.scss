@@ -11,7 +11,7 @@
       background-color: rgb(0, 0, 0);
       color: rgb(255, 255, 255);
       max-height: 55em;
-      border-radius :15px;
+      border-radius :0px 15px 15px 0px;
       // for brand name
       .brand{
           h2{
@@ -72,13 +72,14 @@
           button {
 
               padding: 6px 10px 6px 10px;
-              border: 1px solid white;
+              border: 1px solid rgb(0, 0, 0);
               border-radius: 10px;
               transition: all 0.2s ease-in-out;
               width: 4rem;
-              color: rgb(48, 6, 6);
+              color: rgb(167, 33, 33);
+              background-color: black;
               &:hover{
-                  background-color: white;
+                  background-color: rgb(255, 254, 254);
                   color: rgb(43, 146, 83);
               }
           }

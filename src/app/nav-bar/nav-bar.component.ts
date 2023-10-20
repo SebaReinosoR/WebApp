@@ -27,10 +27,10 @@ export class NavBarComponent {
     {
       title: "Tema",
       icon: faBook,
-      url:'Inicio'
+      url:'inicio'
     },
     {
-      title: "Codigos",
+      title: "Códigos",
       icon: faUser,
       url:'Codigo'
     },

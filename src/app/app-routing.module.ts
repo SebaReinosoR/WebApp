@@ -11,7 +11,8 @@ import { EncargadosComponent } from './encargados/encargados.component';
 
 const routes: Routes = [
 
-  { path: 'Inicio', component: PrimaryFrontComponent },
+  { path: 'inicio', component: PrimaryFrontComponent },
+  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path:'Login', component: InicioSesionComponent},
   {path:'Admin', component: AdministradorComponent},
   {path:'Add', component: AddElementoComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path:'Programacion', component:ProgramacionComponent},
   {path: 'Nosotros', component: EncargadosComponent},
 
+  
 
 ];
 

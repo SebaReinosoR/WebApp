@@ -1,8 +1,18 @@
 
-  <div class="admin-layout" [ngStyle]="{'grid-template-columns':showLeftNav?'100%':'45%'}">
+  <div class="admin-layout" [ngStyle]="{'grid-template-columns':showLeftNav?'100%':'40%'}">
 
 
   <div class="left-nav">
+
+    <div class="content">
+
+      <div class="main-content-nav">
+        <button (click)="showAndHideLeftNav()">
+          <fa-icon [icon]="faHamburger"></fa-icon>
+        </button>
+
+    </div>
+  </div>
 
     <div class="brand">
       <h2 [ngStyle]="{'font-size':showLeftNav?'30px':'10px'}">
@@ -25,15 +35,6 @@
         </div>
       </li>
     </ol>
-    <div class="content">
-
-      <div class="main-content-nav">
-        <button (click)="showAndHideLeftNav()">
-          <fa-icon [icon]="faHamburger"></fa-icon>
-        </button>
-
-    </div>
-  </div>
 
 
 </div>

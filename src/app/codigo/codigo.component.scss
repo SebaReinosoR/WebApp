@@ -1,0 +1,81 @@
+
+.container-fluid{
+  display: flex;
+  overflow-y: scroll ;
+  flex-wrap: wrap;
+  max-height: 100%;
+}
+
+.container-fluid::-webkit-scrollbar{
+  width: 8px;     /* Tamaño del scroll en vertical */
+  height: 8px;    /* Tamaño del scroll en horizontal */
+}
+
+.container-fluid::-webkit-scrollbar-thumb{
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.container-fluid::-webkit-scrollbar-thumb:hover{
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+
+.container-fluid::-webkit-scrollbar-thumb:active{
+  background-color: #999999;
+
+}
+
+.container-fluid::-webkit-scrollbar-track:hover,
+.container-fluid::-webkit-scrollbar-track:active {
+background: transparent;
+}
+
+
+
+.box{
+
+  width: 24em;
+  border: 1px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  max-width:  25em;
+  margin: 1.5em;
+  display:block;
+  border-radius: 1em;
+  box-shadow: 10px 5px 10px 5px rgba(0,0,0,0.75);
+
+  h4{
+    margin: 1em 1em 1em 2em;
+    border-bottom: 1px solid black;
+    max-width: 11.6em;
+
+
+  }
+    ul{
+      list-style-type: none;
+      margin-top: 1em;
+      li{
+        border-left: 2px solid black;
+        border-right: 2px solid black;
+        margin-bottom: 1.5em;
+        padding-left: 1em ;
+        padding-right: 1em ;
+        box-shadow:
+        inset 0 -3em 3em rgba(156, 210, 211, 0.61),
+        0 0 0 2px rgb(214, 226, 222),
+        0.3em 0.3em 1em rgba(255, 255, 255, 0.342);
+        border-radius: 0.5em;
+        width: 20em;
+
+        a{
+          display: flex;
+          padding-bottom: 1em;
+        }
+      }
+
+    }
+}
+
+
