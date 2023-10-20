@@ -1,59 +1,47 @@
 <div class="container-fluid">
-
-  <h1 id="titulo">
+  <div class="head">
+    <h2>
       Gestión Administrador
-  </h1>
-  <div class="cuadro">
-    <div id="cuerpo">
+    </h2>
+    <select id="menuSelect" onchange="cambiarContenido()">
+      <option value="1">Temas</option>
+      <option value="2">Subtemas</option>
+      <option value="3">Codigos</option>
+      <option value="4">Documentación</option>
+      <option value="5">Programación</option>
+      <option value="6">Encargados</option>
+    </select>
 
-    <nav id="menu"><!--aqui se usara un tipo nav, para seleccionar el tipo (temas - codigos - documentacion- programacion- encargados) que se quiere cambiar-->
+  </div>
 
-      <ul>
-       <li><a href="#" title="...">Temas</a></li> <!--al hacer clic debe mostrar el contenido retornado desde la bd -> para poder gestionar CRUD :down:  -->
-       <li><a href="..." title="...">Subtemas</a></li>
-       <li><a href="..." title="...">Codigos</a></li>
-       <li><a href="..." title="...">Documentación</a></li>
-       <li><a href="..." title="...">Programación</a></li>
-       <li><a href="..." title="...">Encargados</a></li>
-      </ul>
-    </nav>
+  <div class="body">
 
-
-  <div id="cuadro_elementos">
-
-
-    <div id="elementos_first"> <!--aqui ira la muestre de los elementos de trabajo primarios una vez seleccionados en el selector-->
-      <div id="cuadro_muestra">
+     <div class="element_left"> <!--aqui ira la muestre de los elementos de trabajo primarios una vez seleccionados en el selector-->
         <ul>
-        <li>aqui ira un elemento askjdhaskjdhaskjdahsdkjashdkjashdkajsdh</li>
-        <li>aqui ira un elemento askjdhaskjdhaskjdahsdkjashdkjashdkajsdh</li>
-        <li>aqui ira un elemento askjdhaskjdhaskjdahsdkjashdkjashdkajsdh</li>
-        <li>aqui ira un elemento askjdhaskjdhaskjdahsdkjashdkjashdkajsdh</li>
-        <li>aqui ira un elemento askjdhaskjdhaskjdahsdkjashdkjashdkajsdh</li>
-        <li>aqui ira un elemento askjdhaskjdhaskjdahsdkjashdkjashdkajsdh</li>
-
-
+          <li>aqui ira un elemento askjdhaskjdhaskjdahsdkjashdkjashdkajsdh</li>
+          <li>aqui ira un elemento askjdhaskjdhaskjdahsdkjashdkjashdkajsdh</li>
+          <li>aqui ira un elemento askjdhaskjdhaskjdahsdkjashdkjashdkajsdh</li>
+          <li>aqui ira un elemento askjdhaskjdhaskjdahsdkjashdkjashdkajsdh</li>
+          <li>aqui ira un elemento askjdhaskjdhaskjdahsdkjashdkjashdkajsdh</li>
+          <li>aqui ira un elemento askjdhaskjdhaskjdahsdkjashdkjashdkajsdh</li>
         </ul>
       </div>
-    </div>
 
-    <div id="elementos_second"><!--aqui ira la muestre de los elementos de trabajo secundarios que eventualmente ahora solo funcionaria para subtema-->
-      <div id="cuadro_muestra"></div>
+      <div class="element_right"><!--aqui ira la muestre de los elementos de trabajo secundarios que eventualmente ahora solo funcionaria para subtema-->
         <ul>
           <li>aqui ira un elemento askjdhaskjdhaskjdahsdkjashdkjashdkajsdh</li>
           <li>aqui ira un elemento askjdhaskjdhaskjdahsdkjashdkjashdkajsdh</li>
           <li>aqui ira un elemento askjdhaskjdhaskjdahsdkjashdkjashdkajsdh</li>
           <li>aqui ira un elemento askjdhaskjdhaskjdahsdkjashdkjashdkajsdh</li>
-
-
         </ul>
-    </div>
-    </div>
-    </div>
-    <div id="botones">
+      </div>
+  </div>
+  <div id="botones">
     <button type="button" class="btn btn-success" routerLink="/Add">Agregar</button>
-    <button type="button" class="btn btn-danger">Eliminar</button>
+    <button type="button" class="btn btn-danger">Eliminar</button> <!--HAY QUE AGREGAR UN ALERTA DE ¿ESTAS SEGURO?-->
     <button type="button" class="btn btn-info">Modificar</button>
     </div>
-  </div>
+
 </div>
+
+

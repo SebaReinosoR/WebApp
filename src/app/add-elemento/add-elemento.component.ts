@@ -13,7 +13,7 @@ export class AddElementoComponent implements AfterViewInit{
       "Temas",
       "Encargados",
       "Codigos",
-      "Buenas Practicas",
+      "Programación",
       "Documentación",
       "Publicación",
       "Subtema",
@@ -55,19 +55,19 @@ export class AddElementoComponent implements AfterViewInit{
 
     onOptionChange(event: any) {
       this.opcionSeleccionada = event.target.value;
-    
+
         // Establece las condiciones para mostrar/ocultar campos según la opción seleccionada
         this.mostrarTemas = this.opcionSeleccionada === 'Temas';
         this.mostrarEncargados= this.opcionSeleccionada === 'Encargados';
         this.mostrarCodigos = this.opcionSeleccionada === 'Codigos';
-        this.mostrarBuenasPracticas = this.opcionSeleccionada === 'Buenas Practicas';
+        this.mostrarBuenasPracticas = this.opcionSeleccionada === 'Programación';
         this.mostrarDocumentacion = this.opcionSeleccionada === 'Documentación';
         this.mostrarPublicacion = this.opcionSeleccionada === 'Publicación';
         this.mostrarSubtema = this.opcionSeleccionada === 'Subtema';
         // Define condiciones para otros campos aquí
       };
-  
-    
+
+
   }
 
 

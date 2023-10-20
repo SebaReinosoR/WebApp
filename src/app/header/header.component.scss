@@ -1,6 +1,7 @@
 .container-fluid{
   padding-left: 0;
   padding-right: 0;
+
 }
 
 
@@ -10,7 +11,7 @@
   .main-content-nav{
       padding: 10px;
       width: 100%;
-      background-color: rgb(93, 90, 90);
+      background: rgba(74, 110, 176, 0);
       display: grid;
       grid-template-columns: 90% 10%;
       align-items: center;
@@ -19,10 +20,11 @@
         padding-left: 35%;
       }
       .user-info{
-          color: white;
+          color: rgb(77, 76, 76);
           display: grid;
           grid-template-columns: 20% 10%;
           align-items: center;
+          cursor: pointer;
       }
       b{
         padding-left: 0;

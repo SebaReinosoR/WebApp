@@ -45,7 +45,7 @@ export class NavBarComponent {
       url:'Programacion'
     },
     {
-      title: "Equipo",
+      title: "Publicaciones",
       icon: faAnchorCircleCheck,
       url:'Nosotros'
     },
@@ -56,6 +56,7 @@ export class NavBarComponent {
   showAndHideLeftNav() {
     this.showLeftNav = !this.showLeftNav;
   }
+  
 }
 
 

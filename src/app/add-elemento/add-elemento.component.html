@@ -1,15 +1,15 @@
 <div class="container-fluid">
   <div class="bloquePrincipal">
     <h1>Agregar</h1>
-   
+
       <div id="caja" >
-  
+
         <form onLoad="myOnLoad()">
-    
+
           <select class="form-select" name="elementos" (change)="onOptionChange($event)">
             <option value="0">Seleccionar elemento</option>
           </select>
-    
+
           <div class="input-group mb-3" *ngIf="mostrarPublicacion || mostrarDocumentacion || mostrarSubtema ||mostrarCodigos || mostrarBuenasPracticas || mostrarTemas ">
             <span class="input-group-text" id="Titulo">Titulo</span>  <!--Todos-->
             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
@@ -36,8 +36,8 @@
             <span class="input-group-text" id="Autor">Autor</span>  <!--publi -->
             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
-    
-          <div class="input-group mb-3" *ngIf="mostrarPublicacion || mostrarCodigos || mostrarSubtema ||mostrarCodigos || mostrarDocumentacion">
+
+          <div class="input-group mb-3" *ngIf="mostrarPublicacion || mostrarCodigos || mostrarSubtema ||mostrarCodigos || mostrarDocumentacion ||mostrarBuenasPracticas">
             <span class="input-group-text" id="link">Link</span>  <!--cod, publi, subtem-->
             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
@@ -45,16 +45,16 @@
             <span class="input-group-text" id="Referencias">Referencias</span> <!--publi, subtem-->
             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
           </div>
-    
+
           <!--ENCARGADOS-->
-         
+
             <div class="input-group" *ngIf="mostrarEncargados">  <!--Nombre unico para encargados doble parametro-->
             <span class="input-group-text">Nombre</span>
             <input type="text" aria-label="name" class="form-control">
             <span class="input-group-text">Apellido</span>
             <input type="text" aria-label="apellido" class="form-control">
             </div>
-        
+
             <div class="input-group mb-3" *ngIf="mostrarEncargados">
               <span class="input-group-text" id="Carrera">Carrera</span> <!--encargados-->
               <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
@@ -71,20 +71,20 @@
               <span class="input-group-text" id="Universidad">Universidad</span> <!--encargados-->
               <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
-    
-    
+
+
           <div class="input-group mb-3" *ngIf="mostrarPublicacion || mostrarPublicacion || mostrarSubtema ||mostrarCodigos || mostrarBuenasPracticas || mostrarTemas || mostrarEncargados || mostrarDocumentacion"> <!--VER QUE NECESITA MULTIMEDIA -- FOTO PARA LOS ENCARGADOS- SUBTEMAS- PUBLICACIONES -QUE MAS? MEJOR DEJARLO PERMANENTE EN CASO DE?-->
             <input type="file" class="form-control" id="inputGroupFile02">
-    
+
           </div>
-          
+
         </form>
         <button type="submit" class="btn btn-success">Agregar</button>
-      
+
     </div>
-   
+
   </div>
- 
+
 
 
 </div>

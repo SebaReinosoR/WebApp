@@ -8,22 +8,24 @@
     "foot foot"
     ;
   grid-template-rows: 3.8em;
-  grid-template-columns: 15%
+  grid-template-columns: 15%;
+  background: linear-gradient(to right, rgba(17,76,95,1) 0%, rgba(17,76,95,0.89) 14%, rgba(156,210,211,0.72) 36%, rgba(156,210,211,0.32) 86%);
 
 }
 
 .content-outlet{
   height: 55em;
   width: 99.5%;
-  border: 1px solid black;
+  border: 1.5px solid black;
   border-radius: 6px;
   margin: 4px;
-  background-color: rgb(154, 151, 151);
+  background: linear-gradient(to right, rgba(156,210,211,1) 0%, rgba(242,230,207,0.96) 41%, rgba(242,230,207,0.9) 100%);
   grid-area: contenido;
 }
 
 app-header{
   grid-area: head;
+
 }
 
 app-nav-bar{

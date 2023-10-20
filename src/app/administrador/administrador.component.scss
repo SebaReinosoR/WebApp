@@ -1,164 +1,143 @@
-/* GLOBAL*/
-.container-fluid{
-  padding-left: 0;
-  padding-right: 0;
+
+.head{
+
+  h2{
+    margin: 1em 1em 0.5em 1em;
+    font-family: Times New Roman, arial
+
+
+  }
+  select{
+    max-width: 50em;
+    appearance: none;
+    margin: 2em;
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    padding: 7px 10px;
+    height: 3em;
+    outline: 0;
+    border: 0;
+    border-radius: 0;
+    background: #f0f0f0;
+    font-size: 1em;
+    color: #000000;
+    border:2px solid rgba(255, 0, 0, 0.2);
+    border-radius: 15px;
+    position: relative;
+    transition: all 0.25s ease;
+  }
+  select:hover{
+    background:rgba(177, 234, 236, 0.712);
+  }
 }
-#cuerpo{
+
+.body{
+  font-family: Times New Roman, arial;
   display:flex;
   justify-content: space-around;
-  margin-top:3% ;
   max-width: 100%;
-}
-.cuadro{
-  max-width: 150% ;
-  background: linear-gradient(to top,rgb(242, 230, 207), 20%, rgba(7, 153, 182, 0.651));
-  margin-top: -57px;
 
-}
-#titulo{
-  background: linear-gradient(to bottom,rgb(242, 230, 207), 55%, rgb(7, 153, 182, 0.651));
-}
-h1{
-  padding: 2%;
-  padding-bottom: 2%;
-  padding-left: 4%;
-  font-family: Times New Roman, arial
+      /* elementos derecha*/
+      .element_left{
 
-}
-
-/* CONFI MENU NAV */
-#menu{
-  margin-left: 5%;
-}
-#menu ul {
-  list-style-type: none;
-  margin: 0px;
-  padding: 0px;
-  width: 200px;
-  font-family: Times New Roman, arial ;
-  font-size: 14pt;
-
-}
-#menu ul li a {
-  color: #000000;
-  text-decoration: none;
-  text-transform: uppercase;
-  display: block;
-  padding: 10px 10px 10px 20px;
-}
-#menu ul li a:hover {
-  background: rgb(156, 210, 211);
-  border-left: 10px solid #0799b6;
-  color: #fff;
-
-}
-/* MUESTRA ELEMENTOS */
-#cuadro_elementos{
-  display:flex;
-  font-family: Times New Roman, arial;
-  max-width: 100%;
-  margin-left: 10%;
-  margin-right: 15%;
-}
-
-/* MUESTRA DE ELEMENTOS FIRST */
-
-#elementos_first{
-  width: 600px;
-  height: 500px;
-  overflow-y: scroll ;
-}
-#elementos_first li{
-  margin: 1%;
-  list-style-type: none;
-  padding: 4%;
-  border-radius: 20px;
-  border: 1px solid rgb(7, 153, 182);
-  box-shadow:
-  inset 0 -3em 3em rgba(156, 210, 211, 0.61),
-  0 0 0 2px rgb(214, 226, 222),
-  0.3em 0.3em 1em rgba(255, 255, 255, 0.342);
-
-}
-/* ESTILOS DE SCROLL*/
-
-#elementos_first::-webkit-scrollbar{
-  width: 8px;     /* Tamaño del scroll en vertical */
-  height: 8px;    /* Tamaño del scroll en horizontal */
-}
-
-#elementos_first::-webkit-scrollbar-thumb{
-  background: #ccc;
-  border-radius: 4px;
-}
-
-#elementos_first::-webkit-scrollbar-thumb:hover{
-  background: #b3b3b3;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-}
+      width: 600px;
+      height: 500px;
+      overflow-y: scroll ;
+      li{
+      margin: 0.7em;
+      list-style-type: none;
+      padding: 4%;
+      border-radius: 20px;
+      border: 1px solid #0799b6;
+      background-color: #b1eaeca1;
+      box-shadow:
+      inset 10px 10px 15px 0px rgba(7,153,182,0.5),
+      0 0 0 2px rgb(214, 226, 222);
 
 
-#elementos_first::-webkit-scrollbar-thumb:active{
-  background-color: #999999;
+      }
+    }
+    /* ESTILOS DE SCROLL*/
 
-}
+    .element_left::-webkit-scrollbar{
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+    }
 
-#elementos_first::-webkit-scrollbar-track:hover,
-#elementos_first::-webkit-scrollbar-track:active {
-background: transparent;
-}
+    .element_left::-webkit-scrollbar-thumb{
+    background: #ccc;
+    border-radius: 4px;
+    }
+
+    .element_left::-webkit-scrollbar-thumb:hover{
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    }
 
 
-/* MUESTRA DE ELEMENTOS SECOND */
-#elementos_second{
-  width: 600px;
-  height: 500px;
-  overflow-y: scroll ;
+    .element_left::-webkit-scrollbar-thumb:active{
+    background-color: #999999;
 
-}
-#elementos_second li{
-  margin: 1%;
-  list-style-type: none;
-  padding: 4%;
-  border-radius: 20px;
-  border: 1px solid rgb(7, 153, 182);
-  box-shadow:
-  inset 0 -3em 3em rgba(156, 210, 211, 0.61),
-  0 0 0 2px rgb(214, 226, 222),
-  0.3em 0.3em 1em rgba(255, 255, 255, 0.342);
+    }
+
+    .element_left::-webkit-scrollbar-track:hover,
+    .element_left::-webkit-scrollbar-track:active {
+    background: transparent;
+    }
+    /* elementos izquierda*/
+    .element_right{
+      width: 600px;
+      height: 500px;
+      overflow-y: scroll ;
+
+    }
+    .element_right li{
+      margin: 0.7em;
+      list-style-type: none;
+      padding: 4%;
+      border-radius: 20px;
+      border: 1px solid #0799b6;
+      background-color: #b1eaeca1;
+      box-shadow:
+      inset 10px 10px 15px 0px rgba(7,153,182,0.5),
+      0 0 0 2px rgb(214, 226, 222);
+    }
+
+
+
+    /* ESTILOS DE SCROLL*/
+
+    .element_right::-webkit-scrollbar{
+      width: 8px;     /* Tamaño del scroll en vertical */
+      height: 8px;    /* Tamaño del scroll en horizontal */
+    }
+
+    .element_right::-webkit-scrollbar-thumb{
+      background: #ccc;
+      border-radius: 4px;
+    }
+
+    .element_right::-webkit-scrollbar-thumb:hover{
+      background: #b3b3b3;
+      box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    }
+
+
+    .element_right::-webkit-scrollbar-thumb:active{
+      background-color: #999999;
+
+    }
+
+    .element_right::-webkit-scrollbar-track:hover,
+    .element_right::-webkit-scrollbar-track:active {
+    background: transparent;
+    }
+
+
 }
 
 
-
-/* ESTILOS DE SCROLL*/
-
-#elementos_second::-webkit-scrollbar{
-  width: 8px;     /* Tamaño del scroll en vertical */
-  height: 8px;    /* Tamaño del scroll en horizontal */
-}
-
-#elementos_second::-webkit-scrollbar-thumb{
-  background: #ccc;
-  border-radius: 4px;
-}
-
-#elementos_second::-webkit-scrollbar-thumb:hover{
-  background: #b3b3b3;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-}
-
-
-#elementos_second::-webkit-scrollbar-thumb:active{
-  background-color: #999999;
-
-}
-
-#elementos_second::-webkit-scrollbar-track:hover,
-#elementos_second::-webkit-scrollbar-track:active {
-background: transparent;
-}
-
-/* BOTONES*/
 
 #botones{
   display: flex;

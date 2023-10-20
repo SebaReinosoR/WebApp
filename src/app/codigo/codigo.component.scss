@@ -4,6 +4,7 @@
   overflow-y: scroll ;
   flex-wrap: wrap;
   max-height: 100%;
+  justify-content: space-evenly;
 }
 
 .container-fluid::-webkit-scrollbar{

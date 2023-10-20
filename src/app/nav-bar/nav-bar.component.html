@@ -1,8 +1,8 @@
 
-  <div class="admin-layout" [ngStyle]="{'grid-template-columns':showLeftNav?'100%':'40%'}">
+  <div class="admin-layout" [ngStyle]="{'grid-template-columns':showLeftNav?'100%':'50%'}"> <!-- ver si poner un condicional por tamaño de pantalla-->
 
 
-  <div class="left-nav">
+  <nav class="left-nav">
 
     <div class="content">
 
@@ -19,12 +19,6 @@
         Navegador
       </h2>
     </div>
-
-
-    <div class="search" [ngStyle]="{'text-align':showLeftNav?'':'center'}">
-      <input type="text" name="" *ngIf="showLeftNav" placeholder="Search item...." id="">
-      <fa-icon [icon]="searchIcon"></fa-icon>
-    </div>
     <ol>
       <li *ngFor="let item of left_nav_lis_item;let i=index;" [routerLink]="item.url" routerLinkActive="active-link">
         <div class="left-nav-list-item">
@@ -37,6 +31,6 @@
     </ol>
 
 
-</div>
+  </nav>
 </div>
 
