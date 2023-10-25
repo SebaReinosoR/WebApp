@@ -18,6 +18,7 @@ import { AddElementoComponent } from './add-elemento/add-elemento.component';
 import { ModifyElementoComponent } from './modify-elemento/modify-elemento.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PublicacionComponent } from './publicacion/publicacion.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AdministradorComponent,
     AddElementoComponent,
     ModifyElementoComponent,
-    NavBarComponent
+    NavBarComponent,
+    PublicacionComponent
   ],
   imports: [
     BrowserModule,

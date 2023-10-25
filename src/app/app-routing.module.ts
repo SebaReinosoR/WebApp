@@ -8,20 +8,22 @@ import { CodigoComponent } from './codigo/codigo.component';
 import { DocumentoComponent } from './documento/documento.component';
 import { ProgramacionComponent } from './programacion/programacion.component';
 import { EncargadosComponent } from './encargados/encargados.component';
+import { PublicacionComponent } from './publicacion/publicacion.component';
 
 const routes: Routes = [
 
-  { path: 'inicio', component: PrimaryFrontComponent },
-  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-  { path:'Login', component: InicioSesionComponent},
+  {path: 'inicio', component: PrimaryFrontComponent },
+  {path: '', redirectTo: 'inicio', pathMatch: 'full'},
+  {path:'Login', component: InicioSesionComponent},
   {path:'Admin', component: AdministradorComponent},
   {path:'Add', component: AddElementoComponent},
   {path:'Codigo', component: CodigoComponent},
   {path:'Documento', component:DocumentoComponent},
   {path:'Programacion', component:ProgramacionComponent},
   {path: 'Nosotros', component: EncargadosComponent},
+  {path :'Publicacion',component:PublicacionComponent}
 
-  
+
 
 ];
 
