@@ -20,6 +20,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PublicacionComponent } from './publicacion/publicacion.component';
 import { PubliVComponent } from './publicacion/publi.v/publi.v.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,7 @@ import { PubliVComponent } from './publicacion/publi.v/publi.v.component';
     ModifyElementoComponent,
     NavBarComponent,
     PublicacionComponent,
-    PubliVComponent
+    PubliVComponent,
   ],
   imports: [
     BrowserModule,
