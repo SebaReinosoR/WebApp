@@ -10,6 +10,7 @@ import { ProgramacionComponent } from './programacion/programacion.component';
 import { EncargadosComponent } from './encargados/encargados.component';
 import { PublicacionComponent } from './publicacion/publicacion.component';
 import { PubliVComponent}from './publicacion/publi.v/publi.v.component';
+import { SubtemaComponent } from './primary-front/subtema/subtema.component';
 
 
 const routes: Routes = [
@@ -25,7 +26,7 @@ const routes: Routes = [
   {path: 'Nosotros', component: EncargadosComponent},
   {path :'Publicacion',component:PublicacionComponent},
   {path : 'PubliOpen',component:PubliVComponent},
-
+  {path : 'Subtema', component:SubtemaComponent}
 
 
 ];

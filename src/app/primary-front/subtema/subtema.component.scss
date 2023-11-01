@@ -6,25 +6,29 @@
 
   .head{
     display: flex;
-    img{
-      margin: 2em 0.5em 2em 2em;
-    }
-    ul{
-      margin: 2em 0.5em 2em 0em;
-      border: 5px double black;
-      max-width: 80%;
-      min-width: 30%;
 
-      margin-left: 1.5em;
-      li{
-        h4{
-          margin-top: 1em;
-        }
-        p{
-          margin-top: 2em;
-        }
+    .titulo{
+      display: flex;
+      margin: 1.5em;
+      flex-direction: column;
+      align-items: center;
+
+      h4{
+        border-bottom: 1px solid black;
+        margin-top: 1em;
+
+      }
+      h5{
+        margin-top: 1em;
+        font-weight:400;
       }
     }
+
+    img{
+      margin: 2em 0.5em 2em 2em;
+      border-radius: 15px;
+    }
+
   }
   ul{
 

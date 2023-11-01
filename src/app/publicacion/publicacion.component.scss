@@ -1,67 +1,87 @@
 .box{
-
-  width: 95%;
-  height: 18em;
   border: 1px solid black;
   border-left: 2px solid black;
   border-right: 2px solid black;
-  display: flex;
   margin: 1.5em;
   border-radius: 1em;
   box-shadow: 10px 5px 10px 5px rgba(0,0,0,0.75);
-  .head{
+  display: grid;
+  grid-template-areas:
+     "head head head"
+     "img body box";
 
+  .head{
+    grid-area: head;
+    display: flex;
+    justify-content: space-between;
 
     h4{
-      margin: 1em 1em 1em 2em;
-      border-bottom: 1px solid black;
-      max-width: 8em;
-
-
+      margin: 0.5em 1em 1em 2em;
     }
-     img{
-      width: 10em;
-      height: 10em;
-      margin: 1em 2em 1em 2em;
-      border: 3px dashed black;
-      border-radius: 20px 0px 20px 0px;
+    button{
+      font-size: 0.8em;
+      max-height: 3em;
+      min-width: 10em ;
+      margin: 1em 1.5em 1em 1.5em ;
+      border-radius:10px;
+      border: 1px double black;
+      transition: all 0.2s ease-in-out;
+      color: rgb(167, 33, 33);
+
+      &:hover{
+          background-color: rgba(255, 255, 255, 0.301);
+          color: rgb(43, 146, 83);
+      }
     }
-
-
-
 
   }
-    ul{
-      list-style-type: none;
-      display: flex;
-      flex-direction: column;
-      width: 75%;
-      height: 100%;
-      .body{
+  img{
+    grid-area: img;
+    max-width: 10em;
+    max-height: 10em;
+    margin: 1em 2em 1em 2em;
+    border: 3px dashed black;
+    border-radius: 20px 0px 20px 0px;
+  }
+    .body{
+        max-width: 60em;
+        grid-area: body;
         border: 2px solid black;
         border-radius: 10px;
-        height: 8em;
+        height: 10em;
         overflow:hidden;
-        margin-top: 1.5em;
-        padding: 0em 1.5em 0em 1.5em
+        margin: 1em 0em 0em 0em;
+        padding: 0em 1.5em 0em 1.5em;
+
+        p{
+          text-align: justify;
+        }
+
       }
       .box-1{
+        grid-area: box;
         display: flex;
         margin-top:1.5em ;
-        li{
-          border-left: 2px dashed black;
-          padding: 0em 1.5em 0em 1.5em;
+        ul{
+          list-style: none;
+          li{
+            border-left: 2px dashed black;
+            padding: 0em 0em 0em 1em;
 
-        a{
-          padding: 0em 1em 0em 1em;
+          a{
+            padding: 0em 0.5em 0em 0.5em;
 
+          }
         }
-      }
-      .link{
-        border-right: 2px dashed black;
-        overflow: auto;
-      }
+        .link{
+          border-right: 2px dashed black;
+          overflow: auto;
+        }
+        }
+
       }
 
-    }
+
 }
+
+

@@ -35,83 +35,88 @@ background: transparent;
 
 
 .box{
-
-  width: 46%;
-  height: 20em;
-  border: 1px solid black;
-  border-left: 2px solid black;
-  border-right: 2px solid black;
-  display: flex;
+  width: 70%;
+  height: 30em ;
+  border: 3px solid black;
+  border-radius: 0.5em 0.5em 0.5em 0.5em ;
+  display: grid;
   margin: 1.5em;
-  border-radius: 1em;
   box-shadow: 10px 5px 10px 5px rgba(0,0,0,0.75);
-  .head{
+  grid-template-areas:
+  "head head head"
+  "img  body body"
+  "links body body";
 
+  .head{
+    grid-area: head;
     h4{
       margin: 1em 1em 1em 2em;
       border-bottom: 1px solid black;
       max-width: auto;
 
     }
-     img{
-      width: 9em;
-      height: 9em;
-      margin: 1em 2em 1em 2em;
-      border: 1px solid black;
-      border-radius: 20px;
+  }
+  img{
+    grid-area: img;
+    width: 9em;
+    height: 9em;
+    margin: 1em 2em 1em 2em;
+    border: 1px solid black;
+    border-radius: 20px;
+  }
+  .body{
+    grid-area: body;
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 20em;
+    margin-right: 1em;
+    margin-left: 1em;
+    overflow-y: scroll;
+    padding: 0.5em 1.5em 0.5em 1.5em ;
+    p{
+      text-align: justify;
     }
+  }
+  .body::-webkit-scrollbar{
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+  }
+
+  .body::-webkit-scrollbar-thumb{
+    background: #ccc;
+    border-radius: 4px;
+  }
+
+  .body::-webkit-scrollbar-thumb:hover{
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  }
 
 
-
+  .body::-webkit-scrollbar-thumb:active{
+    background-color: #999999;
 
   }
-    ul{
-      list-style-type: none;
-      margin-top: 1em;
-      display: flex;
-      flex-direction: column;
-      width: 75%;
 
-        li{
-        border-left: 2px solid black;
-        padding-left: 1.5em;
-        margin-bottom: 2em;
-        height: 3.5em;
-        a{
-          display: flex;
-        }
-        }
-        .body{
-          border: 2px solid black;
-          border-radius: 10px;
-          height: 20em;
-          margin-right: 1.5em;
-          overflow-y: scroll;
-        }
-        .body::-webkit-scrollbar{
-          width: 8px;     /* Tamaño del scroll en vertical */
-          height: 8px;    /* Tamaño del scroll en horizontal */
-        }
+  .body::-webkit-scrollbar-track:hover,
+  .body::-webkit-scrollbar-track:active {
+  background: transparent;
+  }
 
-        .body::-webkit-scrollbar-thumb{
-          background: #ccc;
-          border-radius: 4px;
-        }
+  .link{
+    grid-area: links;
+    margin:0em 0em 2em 2em;
+    max-height: 8em;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
 
-        .body::-webkit-scrollbar-thumb:hover{
-          background: #b3b3b3;
-          box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-        }
+    a{
+      padding:0.5em;
 
-
-        .body::-webkit-scrollbar-thumb:active{
-          background-color: #999999;
-
-        }
-
-        .body::-webkit-scrollbar-track:hover,
-        .body::-webkit-scrollbar-track:active {
-        background: transparent;
-        }
     }
+  }
+
+
 }

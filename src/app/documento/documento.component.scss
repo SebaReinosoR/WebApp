@@ -37,59 +37,64 @@ background: transparent;
 
 
 .box{
-
-  width: 95%;
-  height: 20em;
   border: 1px solid black;
   border-left: 2px solid black;
   border-right: 2px solid black;
-  display: flex;
   margin: 1.5em;
   border-radius: 1em;
   box-shadow: 10px 5px 10px 5px rgba(0,0,0,0.75);
-  .head{
+  display: grid;
+  grid-template-areas:
+     "head head head"
+     "img body box";
 
+  .head{
+    grid-area: head;
+    display: flex;
+    justify-content: space-between;
 
     h4{
-      margin: 1em 1em 1em 2em;
-      border-bottom: 1px solid black;
-      max-width: 8em;
-
-
+      margin: 0.5em 1em 1em 2em;
     }
-     img{
-      width: 12em;
-      height: 12em;
-      margin: 1em 2em 1em 2em;
-      border: 1px solid black;
-      border-radius: 20px;
+    button{
+      font-size: 0.8em;
+      max-height: 3em;
+      min-width: 10em ;
+      margin: 1em 1.5em 1em 1.5em ;
+      border-radius:10px;
+      border: 1px double black;
+      transition: all 0.2s ease-in-out;
+      color: rgb(167, 33, 33);
+
+      &:hover{
+          background-color: rgba(255, 255, 255, 0.301);
+          color: rgb(43, 146, 83);
+      }
     }
-
-
-
 
   }
-    ul{
-      list-style-type: none;
-      margin-top: 1em;
-      display: flex;
-      flex-direction: column;
-      width: 75%;
-
-        li{
-        border-left: 2px solid black;
-        padding-left: 1.5em;
-        margin-bottom: 2em;
-        height: 3.5em;
-        a{
-          display: flex;
-        }
-      }
-      .body{
+  img{
+    grid-area: img;
+    max-width: 10em;
+    max-height: 10em;
+    margin: 1em 2em 1em 2em;
+    border: 3px dashed black;
+    border-radius: 20px 0px 20px 0px;
+  }
+    .body{
+        max-width: 60em;
+        grid-area: body;
         border: 2px solid black;
         border-radius: 10px;
-        height: 15em;
-        overflow-y: scroll;
+        height: 20em;
+        overflow-y:scroll;
+        margin: 1em 0em 1.5em 0em;
+        padding: 0em 1.5em 0em 1.5em;
+
+        p{
+          text-align: justify;
+        }
+
       }
       .body::-webkit-scrollbar{
         width: 8px;     /* Tamaño del scroll en vertical */
@@ -117,21 +122,38 @@ background: transparent;
       background: transparent;
       }
 
-    }
+      .box-1{
+        grid-area: box;
+        display: flex;
+        margin-top:1.5em ;
+        flex-wrap: wrap;
+        max-width:15em ;
+        max-height: 12em;
 
+        a{
+            padding: 0em 0.5em 0em 0.5em;
+
+        }
+
+      }
 
 
 }
 
 
   .modal-content{
-    min-width: 60em;
+    min-width: 40vw;
     max-width: 100%;
    .modal-header{
-     display: flex;
-     justify-content: center;
-     .modal-title{
+     display: grid;
+      grid-template-areas:
+      "- titulo boton";
+     h4{
+      grid-area: titulo;
 
+     }
+     button{
+      grid-area: boton;
      }
    }
    .modal-body{

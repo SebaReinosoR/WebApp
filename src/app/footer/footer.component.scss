@@ -1,0 +1,44 @@
+.container-fluid{
+  padding: 0;
+}
+
+footer {
+  background-color: rgba(156, 210, 211, 0.199);
+  text-align: center;
+  padding: 1.5em;
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo{
+    a{
+      img {
+        max-width: 8em;
+        max-height: 8em;
+        margin: 0em 1.5em 0em 1.5em;
+      }
+    }
+
+
+  }
+
+  .footer-links{
+    a {
+      text-decoration: none;
+      color: #000000;
+      margin: 0px 10px;
+      &:hover{
+        border-bottom: 1px solid blueviolet;
+      }
+    }
+
+
+  }
+
+
+}
+
+
