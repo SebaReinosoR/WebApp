@@ -1,77 +1,20 @@
 <div class="container-fluid">
-  <div class="box">
 
-    <h4> Aqui ira el titulo del tema </h4>
 
-    <ul>
-      <li>
-          <p>nombre subtema</p>
-          <a href="referencia a una pagina">Link</a>  <!--debes mostarse desde la bd ... en TS aplicar consulta para que devuelva el link de la tabla temas de cada subtema -->
-          <a href="referencia a una pagina">Link</a> <!--puede ser mas de un link del mismo subtema -->
-        </li>
-      <li>
-        <p>nombre</p>
-        <a href="referencia a una pagina">Link</a>
-    </li>
-    <li>
-      <p>nombre</p>
-      <div class="link">
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      <a href="referencia a una pagina">Link</a>
-      </div>
-
-    </li>
-    <li>
-      <p>nombre</p>
-      <a href="referencia a una pagina">Link</a>
-    </li>
-    <li>
-      <p>nombre</p>
-      <a href="referencia a una pagina">Link</a>
-    </li>
-    <li>
-      <p>nombre</p>
-      <a href="referencia a una pagina">Link</a>
-    </li>
-    <li>
-      <p>nombre</p>
-      <a href="referencia a una pagina">Link</a>
-    </li>
-    <li>
-      <p>nombre</p>
-      <a href="referencia a una pagina">Link</a>
-    </li>
-    <li>
-      <p>nombre</p>
-      <a href="referencia a una pagina">Link</a>
-    </li>
-
+  <div class="box" *ngFor="let tema of temas">
+    <h4>{{tema.name}}</h4>
+    <input type="checkbox" class="toggle-switch" > <!--(change)="toggleList(tema)--->
+    <ul *ngFor="let item of subtemas; index as i">
+      <li *ngIf="!item.hideList">
+        <p>{{item.name}}</p>
+        <div class="link">
+          <a href="#">{{item.id}}</a>
+        </div>
+      </li>
     </ul>
   </div>
 
 
 </div>
-
 
 

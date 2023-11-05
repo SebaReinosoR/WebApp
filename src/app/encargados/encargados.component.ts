@@ -1,5 +1,5 @@
-import { Component} from '@angular/core';
-
+import { Component, OnInit} from '@angular/core';
+import { EncargadosService } from '../services/encargados.service'; /* LLAMAR AL SERVICIO PRINCIPAL DEL COMPONENTE */
 @Component({
   selector: 'app-encargados',
   templateUrl: './encargados.component.html',
@@ -8,4 +8,18 @@ import { Component} from '@angular/core';
 
 export class EncargadosComponent {
 
+  lista:any = {};    /*CREAR VARIABLE PARA LA LISTA DE ELEMENTOS*/
+
+  constructor(private services:EncargadosService){ /*ESTABLECER EL SERVICIO */
+
+
+  }
+  ngOnInit() : void{
+    this.services.getAllencargados().subscribe(lista => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
+      {
+        this.lista = lista.results;
+        console.log(this)
+      });
+
+  }
 }
