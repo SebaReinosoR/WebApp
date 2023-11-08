@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DocumentosService } from '../services/documentos.service';
 
 
 @Component({
@@ -8,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentoComponent implements OnInit{
 
-  constructor() {}
+  constructor(private services:DocumentosService){} /*ESTABLECER EL SERVICIO */
+  documento:any = {};    /*CREAR VARIABLE PARA LA LISTA DE ELEMENTOS*/
 
-  ngOnInit() {}
+  ngOnInit() : void{
+    this.services.getAlldocumento().subscribe(documento => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
+      {
+        this.documento = documento.results;
+      });
+  }
 
   displayStyle = "none";
 
@@ -20,5 +27,8 @@ export class DocumentoComponent implements OnInit{
   closePopup() {
     this.displayStyle = "none";
   }
+
+
+
 
 }

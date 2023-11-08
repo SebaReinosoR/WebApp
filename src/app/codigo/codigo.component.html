@@ -3,15 +3,18 @@
 
   <div class="box" *ngFor="let tema of temas">
     <h4>{{tema.name}}</h4>
-    <input type="checkbox" class="toggle-switch" > <!--(change)="toggleList(tema)--->
-    <ul *ngFor="let item of subtemas; index as i">
-      <li *ngIf="!item.hideList">
+    <div class="box-1">
+      <ul *ngFor="let item of subtemas; index as i">
+        <li *ngIf="!item.hideList">
         <p>{{item.name}}</p>
         <div class="link">
           <a href="#">{{item.id}}</a>
         </div>
       </li>
     </ul>
+
+    </div>
+
   </div>
 
 

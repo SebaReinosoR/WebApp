@@ -1,28 +1,14 @@
 <div class="container-fluid">
-  <div class="box">
+  <div class="box" *ngFor="let ficha of progra ">
     <div class="head">
       <h4> Aqui ira el titulo del tema </h4>
     </div>
 
     <img src="assets/prueba.png" alt="imgz">
 
-    <div class="link">
-      <a href="">LINK</a>
-      <a href="">LINK</a>
-      <a href="">LINK</a>
-      <a href="">LINK</a>
-      <a href="">LINK</a>
-      <a href="">LINK</a>
-      <a href="">LINK</a>
-      <a href="">LINK</a>
-      <a href="">LINK</a>
-      <a href="">LINK</a>
-      <a href="">LINK</a>
-
-      <a href="">LINK</a>
+    <div class="link"  *ngFor="let item of prograLink " >
+      <a href="{{item.url}}">{{item.name}}</a>
     </div>
-
-
 
       <div class="body">
         <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tellus justo, dapibus non quam a, pretium fermentum ex. Etiam volutpat sed diam a blandit. Quisque velit ligula, vulputate et dignissim eget, placerat eget ex. Fusce vitae augue id augue convallis blandit a sed nibh. Quisque semper, tortor ac tristique elementum, eros mi dignissim diam, a lacinia est ante malesuada ipsum. Sed ex dui, viverra eu mi ac, commodo ornare lectus. Curabitur quis pharetra arcu. Sed ut malesuada risus. Ut vulputate magna non massa facilisis consectetur. Quisque aliquam libero ullamcorper ullamcorper vehicula. Quisque quis faucibus nulla, luctus condimentum tortor. Aliquam a pulvinar ex. Donec lacinia enim nec nibh venenatis, pulvinar elementum quam tincidunt.

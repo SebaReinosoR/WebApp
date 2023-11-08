@@ -1,18 +1,13 @@
 <div class="container-fluid">
   <div class="box" *ngFor="let tema of temas">
 
-    <h4> titulo del tema </h4>
+    <h4> {{tema.name}} </h4>
 
-    <ul>
-      <li>
-        <p routerLink="/Subtema">nombre subtema</p> <!--Router-link / ID-->
+    <ul >
+      <li *ngFor="let item of subtemas">
+        <p  routerLink="/Subtema">{{item.name}}</p> <!--Router-link / ID-->
       </li>
-      <li>
-        <p>nombre</p>
-      </li>
-      <li>
-        <p>nombre</p>
-      </li>
+
     </ul>
 
     <span class="btn">Ver todos</span>

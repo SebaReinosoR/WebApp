@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./publi.v.component.scss']
 })
 export class PubliVComponent {
+  
 
 }

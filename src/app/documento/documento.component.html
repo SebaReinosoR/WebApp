@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="box">
+  <div class="box" *ngFor="let item  of documento" >
     <div class="head">
       <h4> titulo documento </h4> <!--PONER EL ACCESO PARA EL ELEMENTO-->
       <button routerLink="vista del elmento" (click)="openPopup()">Ver Documento</button>

@@ -28,9 +28,4 @@ export class CodigoComponent {
     });
 
   }
-  /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS toggleList(tema:temas): void {
-    tema.subtemas.forEach((item: hidelist) => {
-      item.hideList = !item.hideList;
-    });
-  }*/
 }
