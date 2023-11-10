@@ -6,8 +6,10 @@
 
     <img src="assets/prueba.png" alt="imgz">
 
-    <div class="link"  *ngFor="let item of prograLink " >
-      <a href="{{item.url}}">{{item.name}}</a>
+    <div class="link" >
+      <div class="box-a" *ngFor="let item of prograLink ">
+        <a href="{{item.url}}">{{item.name}}</a>
+      </div>
     </div>
 
       <div class="body">

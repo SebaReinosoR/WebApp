@@ -141,29 +141,29 @@ background: transparent;
 }
 
 
-  .modal-content{
-    min-width: 40vw;
-    max-width: 100%;
-   .modal-header{
-     display: grid;
-      grid-template-areas:
-      "- titulo boton";
-     h4{
-      grid-area: titulo;
+.modal-content{
+  min-width: 40vw;
+  max-width: 100%;
+ .modal-header{
+   display: grid;
+    grid-template-areas:
+    "- titulo boton";
+   h4{
+    grid-area: titulo;
 
-     }
-     button{
-      grid-area: boton;
-     }
    }
-   .modal-body{
-     text-align: justify;
-     p{
-       padding: 1.5em;
-       font: small-caps 100%/150% serif;
-     }
+   button{
+    grid-area: boton;
    }
-
  }
+ .modal-body{
+   text-align: justify;
+   p{
+     padding: 1.5em;
+     font: small-caps 100%/150% serif;
+   }
+ }
+
+}
 
 

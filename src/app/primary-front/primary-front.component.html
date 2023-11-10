@@ -1,7 +1,29 @@
 <div class="container-fluid">
   <div class="box" *ngFor="let tema of temas">
-
     <h4> {{tema.name}} </h4>
+
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': tema === activeTema ? 'block' : 'none'}">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">{{tema.name}}</h4>
+            <button type="button" class="btn btn-danger head" (click)="closePopup()"> Close </button>
+          </div>
+
+          <div class="modal-body" *ngFor="let item of subtemas">
+            <p > {{item.name}}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger"
+                    (click)="closePopup()">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 
     <ul >
       <li *ngFor="let item of subtemas">
@@ -10,11 +32,10 @@
 
     </ul>
 
-    <span class="btn">Ver todos</span>
+
+    <span class="btn" (click)="openPopup(tema)">Ver todos</span>
 
   </div>
-
-
 
 
 </div>

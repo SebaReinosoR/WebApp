@@ -107,16 +107,44 @@ background: transparent;
     grid-area: links;
     margin:0em 0em 2em 2em;
     max-height: 8em;
+    display:flex ;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: center;
+    overflow-y: scroll;
+    .box-a{
+      a{
+        padding:0.5em;
 
-    a{
-      padding:0.5em;
-
+      }
     }
+
+
+  }
+  .link::-webkit-scrollbar{
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
   }
 
+  .link::-webkit-scrollbar-thumb{
+    background: #ccc;
+    border-radius: 4px;
+  }
+
+  .link::-webkit-scrollbar-thumb:hover{
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  }
+
+
+  .link::-webkit-scrollbar-thumb:active{
+    background-color: #999999;
+
+  }
+
+  .link::-webkit-scrollbar-track:hover,
+  .link::-webkit-scrollbar-track:active {
+  background: transparent;
+  }
 
 }

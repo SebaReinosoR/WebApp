@@ -57,8 +57,8 @@ background: transparent;
 
       max-height:30em;
       overflow-y: scroll;
-      padding: 1em;
-
+      padding:0;
+      margin: 0em 0em 1em 0em;
       ul{
         list-style-type: none;
         margin: 1em 2em 0em 0em;
@@ -118,7 +118,31 @@ background: transparent;
 
       }
     }
+    .box-1::-webkit-scrollbar{
+      width: 8px;     /* Tamaño del scroll en vertical */
+      height: 8px;    /* Tamaño del scroll en horizontal */
+    }
 
+    .box-1::-webkit-scrollbar-thumb{
+      background: #ccc;
+      border-radius: 4px;
+    }
+
+    .box-1::-webkit-scrollbar-thumb:hover{
+      background: #b3b3b3;
+      box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    }
+
+
+    .box-1::-webkit-scrollbar-thumb:active{
+      background-color: #999999;
+
+    }
+
+    .box-1::-webkit-scrollbar-track:hover,
+    .box-1::-webkit-scrollbar-track:active {
+    background: transparent;
+    }
 }
 
 
