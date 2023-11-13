@@ -42,9 +42,7 @@ export class PublicacionComponent {
         
       }
     
-}  
+} 
+    
+  
 
-        this.publiLink = publiLink;
-      });
-  }
-}

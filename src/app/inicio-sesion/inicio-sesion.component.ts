@@ -7,6 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./inicio-sesion.component.scss']
 })
 export class InicioSesionComponent {
+user!: string;
+password!: string;
 
+constructor(){}
     
+login(){
+  
+}
 }

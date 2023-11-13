@@ -12,13 +12,13 @@
     <div class="body">
       <div class="ngdiv"  *ngIf="mostrarTemas " >
 
-        <div *ngFor="let tema of temas" class="box">   <!--DEBE A VER UN EVENTO DONDE SE GUARDE EL ID DEL TEMA, PARA QUE ASI SE SELECCIONE EL SUBTEMA-->
+        <div *ngFor="let tema of temasAll" class="box">   <!--DEBE A VER UN EVENTO DONDE SE GUARDE EL ID DEL TEMA, PARA QUE ASI SE SELECCIONE EL SUBTEMA-->
           <p>{{tema.name}}</p>
 
           <div> <!--Aplicar un ngif para que haga la comparativa y cambie los datos dentro de mismo select-->
             <select>   <!--DEBE A VER UN EVENTO DONDE SE GUARDE EL ID DEL TEMA, PARA QUE ASI SE SELECCIONE EL SUBTEMA-->
               <option value="0">Seleccionar elemento</option>
-              <option *ngFor="let item of subtemas" >{{item.name}}</option>
+              <option *ngFor="let item of temasAll" >{{item.name}}</option>
             </select>  
           </div>
         </div>
@@ -26,30 +26,30 @@
         
         
     <div class="input-group mb-3" *ngIf=" mostrarCodigos ">
-      <div class="box-1" *ngFor="let item of temas" > <!-- el for debe recorrer cada arreglo de la tabla .. tabla codigos for codigos etc-->
+      <div class="box-1" *ngFor="let item of temasAll" > <!-- el for debe recorrer cada arreglo de la tabla .. tabla codigos for codigos etc-->
         <p>{{item.name}}</p>
       </div>   
     </div>
 
     <div class="input-group mb-3" *ngIf=" mostrarDocumentacion ">
-      <div class="box-1" *ngFor="let item of temas" >
+      <div class="box-1" *ngFor="let item of temasAll" >
         <p>{{item.name}}</p>
       </div>   
     </div>
 
     <div class="input-group mb-3" *ngIf=" mostrarEncargados ">
-      <div class="box-1"  *ngFor="let item of temas" >
+      <div class="box-1"  *ngFor="let item of temasAll" >
         <p>{{item.name}}</p>
       </div>   
     </div>
 
     <div class="input-group mb-3" *ngIf=" mostrarPublicacion ">
-      <div class="box-1" *ngFor="let item of temas" >
+      <div class="box-1" *ngFor="let item of temasAll" >
         <p>{{item.name}}</p>
       </div>   
     </div>
     <div class="input-group mb-3" *ngIf=" mostrarProgramacion ">
-      <div class="box-1" *ngFor="let item of temas" >
+      <div class="box-1" *ngFor="let item of temasAll" >
         <p>{{item.name}}</p>
       </div>   
     </div>
