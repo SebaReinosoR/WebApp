@@ -11,7 +11,7 @@
           </div>
 
           <div class="modal-body" *ngFor="let item of subtemas">
-            <p > {{item.name}}</p>
+            <p [routerLink]="['/Subtema',item.id]" routerLinkActive="router-link-active"> {{item.name}}</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger"
@@ -27,7 +27,7 @@
 
     <ul >
       <li *ngFor="let item of subtemas">
-        <p  routerLink="/Subtema">{{item.name}}</p> <!--Router-link / ID-->
+        <p  [routerLink]="['/Subtema',item.id]" routerLinkActive="router-link-active">{{item.name}}</p> <!--Router-link / ID-->
       </li>
 
     </ul>

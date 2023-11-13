@@ -2,7 +2,7 @@
   <div class="box" *ngFor="let itemPubli  of publi" >
     <div class="head">
       <h4 > {{itemPubli.name}} </h4> <!--PONER EL ACCESO PARA EL ELEMENTO-->
-      <button routerLink="/PubliOpen" >Ver Publicación</button>
+      <button [routerLink]="['/PubliOpen',itemPubli.id]" routerLinkActive="router-link-active" >Ver Publicación</button>
     </div>
     <img src="/assets/prueba.png" alt="AQUI VA LA IMG">
 
@@ -33,6 +33,6 @@
 
   </div>
 
-
+  
 
 </div>

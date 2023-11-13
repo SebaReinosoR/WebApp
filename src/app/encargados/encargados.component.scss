@@ -1,8 +1,8 @@
 .container-fluid{
 display: grid;
 grid-template-areas:
-"box-1 box-1 box-1"
-"box-2 box-2 box-2";
+"box-1 "
+"box-2 ";
 overflow-y: scroll;
 max-height: 100%
 }
@@ -38,15 +38,16 @@ background: transparent;
   width: 80%;
   margin: 2em 1em 3em 1em;
   display: flex;
-  max-height:20vw ;
+  max-height:30vw ;
   border-radius: 0px 20px 0px 20px;
   grid-area: box-1;
 
   .head{
     margin-right: 4em;
+    display: flex;
     img{
-      width: 15em;
-      height: 15em;
+      max-width: 15em;
+      max-height: 15em;
       margin: 1.5em;
       border: 1px solid black;
       border-radius: 15px 0px 15px 0px;

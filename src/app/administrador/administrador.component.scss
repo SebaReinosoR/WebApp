@@ -1,14 +1,13 @@
+.container-fluid{
+  display: grid;
+  grid-template-areas:
+  "head head "
+  "body body"
+  "btn btn";
+  max-height: 100%;
 
-.head{
-
-  h2{
-    margin: 1em 1em 0.5em 1em;
-    font-family: Times New Roman, arial
-
-
-  }
   select{
-    max-width: 50em;
+    max-width: 70em;
     appearance: none;
     margin: 2em;
     display: inline-block;
@@ -29,125 +28,118 @@
   }
   select:hover{
     background:rgba(177, 234, 236, 0.712);
+  }  
+
+.head{
+  grid-area: head;
+  display: flex;
+  align-items: center;
+  max-width: 80%;
+  border-bottom: 5px double black;
+  h2{
+    margin: 1em 1em 0.5em 1em;
+    font-family: Times New Roman, arial
+
   }
+ 
+}
 }
 
-.body{
-  font-family: Times New Roman, arial;
-  display:flex;
-  justify-content: space-around;
-  max-width: 100%;
-
-      /* elementos derecha*/
-      .element_left{
-
-      width: 600px;
-      height: 500px;
-      overflow-y: scroll ;
-      li{
-      margin: 0.7em;
-      list-style-type: none;
-      padding: 4%;
-      border-radius: 20px;
-      border: 1px solid #0799b6;
-      background-color: #b1eaeca1;
-      box-shadow:
-      inset 10px 10px 15px 0px rgba(7,153,182,0.5),
-      0 0 0 2px rgb(214, 226, 222);
-
-
+  .body{
+    
+    grid-area: body;
+    overflow: scroll;
+    max-height: 35vw;
+    .ngdiv{
+      max-height: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      
+      .box{
+        margin: 2em 0.5em 2em 0em;
+        border: 1px  double black;
+        border-radius: 15px;
+        padding: 1em 1em 1em 1em;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        p{
+          cursor: pointer;
+        }
+        p:hover{
+          background:rgba(205, 224, 225, 0.712);
+        }
+        select{
+          max-width: 80%;
+          cursor: pointer;
+        }
+       
+      
       }
     }
-    /* ESTILOS DE SCROLL*/
+    .input-group{
 
-    .element_left::-webkit-scrollbar{
+      display: flex;
+      flex-direction: column;
+      .box-1 {
+        padding: 0.5em;
+        margin-bottom: 0.5em;
+        margin-top: 0.5em;
+
+        p{
+          border: 1px solid black;
+          border-radius: 5px;
+          padding: 1em;
+          cursor: pointer;
+        }
+        p:hover{
+          background:rgba(205, 224, 225, 0.712);
+        }
+      }
+
+
+    }
+
+  }
+
+
+  .body::-webkit-scrollbar{
     width: 8px;     /* Tamaño del scroll en vertical */
     height: 8px;    /* Tamaño del scroll en horizontal */
-    }
+  }
 
-    .element_left::-webkit-scrollbar-thumb{
+  .body::-webkit-scrollbar-thumb{
     background: #ccc;
     border-radius: 4px;
-    }
+  }
 
-    .element_left::-webkit-scrollbar-thumb:hover{
+  .body::-webkit-scrollbar-thumb:hover{
     background: #b3b3b3;
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-    }
+  }
 
 
-    .element_left::-webkit-scrollbar-thumb:active{
+  .body::-webkit-scrollbar-thumb:active{
     background-color: #999999;
 
-    }
+  }
 
-    .element_left::-webkit-scrollbar-track:hover,
-    .element_left::-webkit-scrollbar-track:active {
-    background: transparent;
-    }
-    /* elementos izquierda*/
-    .element_right{
-      width: 600px;
-      height: 500px;
-      overflow-y: scroll ;
+  .body::-webkit-scrollbar-track:hover,
+  .body::-webkit-scrollbar-track:active {
+  background: transparent;
+  }
 
-    }
-    .element_right li{
-      margin: 0.7em;
-      list-style-type: none;
-      padding: 4%;
-      border-radius: 20px;
-      border: 1px solid #0799b6;
-      background-color: #b1eaeca1;
-      box-shadow:
-      inset 10px 10px 15px 0px rgba(7,153,182,0.5),
-      0 0 0 2px rgb(214, 226, 222);
-    }
-
-
-
-    /* ESTILOS DE SCROLL*/
-
-    .element_right::-webkit-scrollbar{
-      width: 8px;     /* Tamaño del scroll en vertical */
-      height: 8px;    /* Tamaño del scroll en horizontal */
-    }
-
-    .element_right::-webkit-scrollbar-thumb{
-      background: #ccc;
-      border-radius: 4px;
-    }
-
-    .element_right::-webkit-scrollbar-thumb:hover{
-      background: #b3b3b3;
-      box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-    }
-
-
-    .element_right::-webkit-scrollbar-thumb:active{
-      background-color: #999999;
-
-    }
-
-    .element_right::-webkit-scrollbar-track:hover,
-    .element_right::-webkit-scrollbar-track:active {
-    background: transparent;
-    }
-
-
-}
-
-
-
-#botones{
+.btns{
+  grid-area: btn;
+  margin-top: 0.5em;
   display: flex;
   justify-content: flex-end;
-  margin-top: 5%;
-  margin-right: 15%;
-}
-#botones .btn{
-  margin: 2%;
-  color:#000000;
+  .btn{
+    margin: 2%;
+    color:#000000;
+  }
+  
 }
 
 

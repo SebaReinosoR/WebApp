@@ -25,8 +25,8 @@ const routes: Routes = [
   {path:'Programacion', component:ProgramacionComponent},
   {path: 'Nosotros', component: EncargadosComponent},
   {path :'Publicacion',component:PublicacionComponent},
-  {path : 'PubliOpen',component:PubliVComponent},
-  {path : 'Subtema', component:SubtemaComponent}
+  {path : 'PubliOpen/:id',component:PubliVComponent},
+  {path : 'Subtema/:id', component:SubtemaComponent}
 
 
 ];

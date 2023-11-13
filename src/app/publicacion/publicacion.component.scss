@@ -39,7 +39,7 @@
   display: grid;
   grid-template-areas:
      "head head head"
-     "img body box";
+     "img body  box";
 
   .head{
     grid-area: head;
@@ -97,7 +97,10 @@
           list-style: none;
           li{
             border-left: 2px dashed black;
-            padding: 0em 0em 0em 1em;
+            padding: 0em 1em 0em 1em;
+            p{
+              padding: 0em 2em 0em 1em;
+            }
 
         }
         .link{

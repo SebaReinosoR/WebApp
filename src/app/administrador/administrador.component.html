@@ -3,29 +3,61 @@
     <h2>
       Gestión Administrador
     </h2>
-    <select id="menuSelect" onchange="cambiarContenido()">
-      <option value="1">Temas</option>
-      <option value="2">Subtemas</option>
-      <option value="3">Codigos</option>
-      <option value="4">Documentación</option>
-      <option value="5">Programación</option>
-      <option value="6">Encargados</option>
-    </select>
-
+    <form onLoad="myOnLoad()">
+      <select class="form-select" name="elementos" (change)="onOptionChange($event)">
+        <option value="0">Seleccionar elemento</option>
+      </select>
+    </form>
   </div>
+    <div class="body">
+      <div class="ngdiv"  *ngIf="mostrarTemas " >
 
-  <div class="body">
+        <div *ngFor="let tema of temas" class="box">   <!--DEBE A VER UN EVENTO DONDE SE GUARDE EL ID DEL TEMA, PARA QUE ASI SE SELECCIONE EL SUBTEMA-->
+          <p>{{tema.name}}</p>
 
-     <div class="element_left"> <!--aqui ira la muestre de los elementos de trabajo primarios una vez seleccionados en el selector-->
-        <ul>
-          <li></li>
-
-        </ul>
+          <div> <!--Aplicar un ngif para que haga la comparativa y cambie los datos dentro de mismo select-->
+            <select>   <!--DEBE A VER UN EVENTO DONDE SE GUARDE EL ID DEL TEMA, PARA QUE ASI SE SELECCIONE EL SUBTEMA-->
+              <option value="0">Seleccionar elemento</option>
+              <option *ngFor="let item of subtemas" >{{item.name}}</option>
+            </select>  
+          </div>
+        </div>
       </div>
-  </div>
-  <div id="botones">
+        
+        
+    <div class="input-group mb-3" *ngIf=" mostrarCodigos ">
+      <div class="box-1" *ngFor="let item of temas" > <!-- el for debe recorrer cada arreglo de la tabla .. tabla codigos for codigos etc-->
+        <p>{{item.name}}</p>
+      </div>   
+    </div>
+
+    <div class="input-group mb-3" *ngIf=" mostrarDocumentacion ">
+      <div class="box-1" *ngFor="let item of temas" >
+        <p>{{item.name}}</p>
+      </div>   
+    </div>
+
+    <div class="input-group mb-3" *ngIf=" mostrarEncargados ">
+      <div class="box-1"  *ngFor="let item of temas" >
+        <p>{{item.name}}</p>
+      </div>   
+    </div>
+
+    <div class="input-group mb-3" *ngIf=" mostrarPublicacion ">
+      <div class="box-1" *ngFor="let item of temas" >
+        <p>{{item.name}}</p>
+      </div>   
+    </div>
+    <div class="input-group mb-3" *ngIf=" mostrarProgramacion ">
+      <div class="box-1" *ngFor="let item of temas" >
+        <p>{{item.name}}</p>
+      </div>   
+    </div>
+    </div>
+    
+  <div class="btns">
     <button type="button" class="btn btn-success" routerLink="/Add">Agregar</button>
-    <button type="button" class="btn btn-danger">Eliminar</button> <!--HAY QUE AGREGAR UN ALERTA DE ¿ESTAS SEGURO?-->
+    <button type="button" class="btn btn-danger">Eliminar</button> <!--agregar pop de seguridad '' cambiar los colores de todos los btn-->
     <button type="button" class="btn btn-info">Modificar</button>
     </div>
 
