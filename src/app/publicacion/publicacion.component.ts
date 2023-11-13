@@ -27,7 +27,7 @@ export class PublicacionComponent {
   ngOnInit() : void{
     this.services.getAllpubli().subscribe(publi => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
       {
-        this.publi = publi.results;
+        this.publi = publi;
       });
       this.services.getAllpubliLink().subscribe(publiLink => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
       {
@@ -44,3 +44,7 @@ export class PublicacionComponent {
     
 }  
 
+        this.publiLink = publiLink;
+      });
+  }
+}

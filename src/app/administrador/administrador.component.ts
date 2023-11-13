@@ -1,33 +1,62 @@
 import {Component , AfterViewInit  } from '@angular/core';
 import { AdminService } from '../services/admin.service';
 
+
 @Component({
   selector: 'app-administrador',
   templateUrl: './administrador.component.html',
   styleUrls: ['./administrador.component.scss']
 })
 export class AdministradorComponent implements AfterViewInit {
+  constructor(private services:AdminService){} /*ESTABLECER EL SERVICIO */
 
-  constructor(private services:AdminService,){} /*ESTABLECER EL SERVICIO */
-  temas:any = {};    /*CREAR VARIABLE PARA LA LISTA DE ELEMENTOS*/
-  subtemas:any = {};
+  codigosAll:any = {};
+  subtemasAll:any ={};
+  publiAll:any = {};
+  programacionAll:any = {};
+  documentosAll:any = {};
+  temasAll:any = {};
 
 
   ngOnInit() : void{
-    this.services.getAllTema().subscribe(temas => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
+
+    /*GET ALL */
+    {
+      this.services.getDocumentacion().subscribe(temasAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
       {
-        this.temas = temas.results;
+        this.temasAll = temasAll;
       });
-
-    this.services.getAllsubtema().subscribe(subtemas=>
-
-      {
-      this.subtemas = subtemas.results;
-      
-    });
-
   
-}
+      this.services.getCodigos().subscribe(codigosAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
+        {
+          this.codigosAll = codigosAll;
+        });
+  
+        this.services.getSubtemas().subscribe(subtemasAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
+        {
+          this.subtemasAll = subtemasAll;
+        });
+  
+        this.services.getPublicacion().subscribe(publiAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
+        {
+          this.publiAll = publiAll;
+        });
+  
+        this.services.getProgramacion().subscribe(programacionAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
+        {
+          this.programacionAll = programacionAll;
+        });
+  
+        this.services.getDocumentacion().subscribe(documentosAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
+        {
+          this.documentosAll = documentosAll;
+        });
+  
+  
+    }
+   
+
+  }
  /*CONTROL DE SELECT */
 
   arreglo: string[] = [
@@ -84,4 +113,8 @@ export class AdministradorComponent implements AfterViewInit {
       this.mostrarSubtema = this.opcionSeleccionada === 'Subtema';
       // Define condiciones para otros campos aquí
     };
+
+
+
+
 }

@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DocumentosService {
 
-  private api_conexion="https://rickandmortyapi.com/api/character";  /* AQUI SE DEBE REALIZAR LA CONEXICION CON LA API */
+  private api_conexion="http://localhost:3000/documentacion";  /* AQUI SE DEBE REALIZAR LA CONEXICION CON LA API */
 
   constructor(private http:HttpClient) { }
 

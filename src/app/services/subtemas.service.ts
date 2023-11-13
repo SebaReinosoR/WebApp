@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SubtemasService {
 
-  private api_conexion="https://rickandmortyapi.com/api/location";  /* AQUI SE DEBE REALIZAR LA CONEXICION CON LA API */
+  private api_conexion="http://localhost:3000/subtemas";  /* AQUI SE DEBE REALIZAR LA CONEXICION CON LA API */
 
   constructor(private http:HttpClient) { }
 

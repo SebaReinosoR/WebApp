@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-inicio-sesion',
   templateUrl: './inicio-sesion.component.html',
@@ -7,15 +8,5 @@ import { Component } from '@angular/core';
 })
 export class InicioSesionComponent {
 
-    user!: string;
-    password!: string;
-
-    constructor() {}
-
-    login() {
-      console.log(this.user);
-      console.log(this.password);
-
-    }
-
+    
 }

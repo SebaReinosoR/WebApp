@@ -7,8 +7,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PublicacionService {
 
-  private api_conexion="https://rickandmortyapi.com/api/character";  /* AQUI SE DEBE REALIZAR LA CONEXICION CON LA API */
-  private api_conexion_location = "https://rickandmortyapi.com/api/location";
+  private api_conexion="http://localhost:3000/publicaciones";  /* AQUI SE DEBE REALIZAR LA CONEXICION CON LA API */
+  //private api_conexion_location = "https://rickandmortyapi.com/api/location";
 
   constructor(private http:HttpClient) { }
 

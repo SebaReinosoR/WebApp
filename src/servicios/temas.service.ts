@@ -1,27 +1,12 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+// temas.service.ts
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
 
-
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
-})
-
-export class AppComponent {
-  title = 'WebApp';
-  constructor( public router: Router ){}
-
-}
-/*
 @Injectable({
   providedIn: 'root',
 })
-
-export class temasService {
+export class TemasService {
   private apiUrl = 'http://localhost:3000/temas';
 
   constructor(private http: HttpClient) {}
@@ -35,5 +20,3 @@ export class temasService {
     return this.http.post(this.apiUrl, tema);
   }
 }
-*/
-

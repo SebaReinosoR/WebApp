@@ -7,17 +7,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CodigoService {
 
-  private api_conexion_caracter="https://rickandmortyapi.com/api/character";  /* AQUI SE DEBE REALIZAR LA CONEXICION CON LA API */
-  private api_conexion_location = "https://rickandmortyapi.com/api/location";
+  private api_conexion="http://localhost:3000/codigo";  /* AQUI SE DEBE REALIZAR LA CONEXICION CON LA API */
+  private api_conexion_location = "http://localhost:3000/subtemas";
 
   constructor(private http:HttpClient) { }
 
-  public getAllcodigo(): Observable<any>{ /* CREAR FUNCION PUBLICA QUE RETORNE LA CONEXION */
+  public getCodigo(): Observable<any>{ /* CREAR FUNCION PUBLICA QUE RETORNE LA CONEXION */
 
-    return this.http.get(this.api_conexion_caracter);
+    return this.http.get(this.api_conexion);
 
   }
-  public getAllsubtema(): Observable<any>{
+  public getSubtema(): Observable<any>{
     return this.http.get(this.api_conexion_location);
 
   }

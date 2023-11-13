@@ -15,12 +15,12 @@ export class CodigoComponent {
 
 
   ngOnInit() : void{
-    this.services.getAllcodigo().subscribe(temas => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
+    this.services.getCodigo().subscribe(temas => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
       {
         this.temas = temas.results;
       });
 
-    this.services.getAllsubtema().subscribe(subtemas=>
+    this.services.getSubtema().subscribe(subtemas=>
 
       {
       this.subtemas = subtemas.results;

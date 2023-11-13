@@ -7,14 +7,14 @@ import {HttpClient} from '@angular/common/http';
 })
 export class TemasService  {
 
-  private api_conexion="https://rickandmortyapi.com/api/character";  /* AQUI SE DEBE REALIZAR LA CONEXICION CON LA API */
-  private api_conexion_location = "https://rickandmortyapi.com/api/location";
+  private apiURL="http://localhost:3000/temas"  /* AQUI SE DEBE REALIZAR LA CONEXICION CON LA API */
+  private api_conexion_location = "http://localhost:3000/subtemas";
 
   constructor(private http:HttpClient) { }
 
   public getAlltemas(): Observable<any>{ /* CREAR FUNCION PUBLICA QUE RETORNE LA CONEXION */
 
-    return this.http.get(this.api_conexion);
+    return this.http.get(this.apiURL);
 
   }
   public getAllsubtema(): Observable<any>{
