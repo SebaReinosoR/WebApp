@@ -2,28 +2,18 @@
   display: grid;
   grid-template-areas:
   "head head "
-  "body body"
-  "btn btn";
+  "body body";
   max-height: 100%;
 
   select{
-    max-width: 70em;
     appearance: none;
-    margin: 2em;
-    display: inline-block;
-    width: 100%;
+    margin: 1em 1em 1em 1em;
     cursor: pointer;
-    padding: 7px 10px;
     height: 3em;
-    outline: 0;
-    border: 0;
-    border-radius: 0;
     background: #f0f0f0;
-    font-size: 1em;
     color: #000000;
     border:2px solid rgba(255, 0, 0, 0.2);
     border-radius: 15px;
-    position: relative;
     transition: all 0.25s ease;
   }
   select:hover{
@@ -34,7 +24,7 @@
   grid-area: head;
   display: flex;
   align-items: center;
-  max-width: 80%;
+  max-width: 100%;
   border-bottom: 5px double black;
   h2{
     margin: 1em 1em 0.5em 1em;
@@ -50,34 +40,6 @@
     grid-area: body;
     overflow: scroll;
     max-height: 35vw;
-    .ngdiv{
-      max-height: 100%;
-      display: flex;
-      justify-content: space-evenly;
-      flex-wrap: wrap;
-      
-      .box{
-        margin: 2em 0.5em 2em 0em;
-        border: 1px  double black;
-        border-radius: 15px;
-        padding: 1em 1em 1em 1em;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        p{
-          cursor: pointer;
-        }
-        p:hover{
-          background:rgba(205, 224, 225, 0.712);
-        }
-        select{
-          max-width: 80%;
-          cursor: pointer;
-        }
-       
-      
-      }
-    }
     .input-group{
 
       display: flex;
@@ -87,15 +49,35 @@
         margin-bottom: 0.5em;
         margin-top: 0.5em;
 
-        p{
+        .box{
           border: 1px solid black;
           border-radius: 5px;
           padding: 1em;
           cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          p{
+            padding: 1em;
+          }
+          .btns{
+            display: flex;
+            flex-direction: column;
+            .btn{
+              margin: 0.5em 1em 0.5em 1em;
+              background-color: rgba(41, 185, 229, 0.404);
+               
+            }
+            .btn:hover{
+              background-color: rgb(41, 185, 229);
+            }
+
+          }
         }
-        p:hover{
+        .box:hover{
           background:rgba(205, 224, 225, 0.712);
         }
+        
       }
 
 
@@ -130,16 +112,5 @@
   background: transparent;
   }
 
-.btns{
-  grid-area: btn;
-  margin-top: 0.5em;
-  display: flex;
-  justify-content: flex-end;
-  .btn{
-    margin: 2%;
-    color:#000000;
-  }
-  
-}
 
 

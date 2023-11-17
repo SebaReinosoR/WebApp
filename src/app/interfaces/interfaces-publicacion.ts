@@ -1,11 +1,11 @@
 export interface Publicacion {
-  id:number;
-  name: string;
-  body: string;
-  date: Date;
-  autor: string;
-  link: string[];
-  ref: string[];
-  img: string;
+  id_admin:string;
+  idPublicacion:number;
+  Nombre: string;
+  Fecha: Date;
+  Body: string;
+  Autor: string;
+  Referencia: string;
+  Link: string;
 
 }

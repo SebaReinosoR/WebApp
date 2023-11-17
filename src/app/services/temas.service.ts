@@ -8,7 +8,7 @@ import {HttpClient} from '@angular/common/http';
 export class TemasService  {
 
   private apiURL="http://localhost:3000/temas"  /* AQUI SE DEBE REALIZAR LA CONEXICION CON LA API */
-  private api_conexion_location = "http://localhost:3000/subtemas";
+  private api_subtemas = "http://localhost:3000/subtemas";
 
   constructor(private http:HttpClient) { }
 
@@ -18,8 +18,13 @@ export class TemasService  {
 
   }
   public getAllsubtema(): Observable<any>{
-    return this.http.get(this.api_conexion_location);
+    return this.http.get(this.api_subtemas);
 
   }
+  public getSubtemaById(id:number): Observable<any>{ /* CREAR FUNCION PUBLICA QUE RETORNE LA CONEXION */
+  const url = `${this.api_subtemas}/${id}`;
+  return this.http.get(url);
+  } 
+
 }
 

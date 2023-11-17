@@ -8,16 +8,16 @@ const getPublicacionById = (id) => {
   return db.query('SELECT * FROM publicacion WHERE idPublicacion = ?', [id]);
 };
 
-const createPublicacion = (nombre, fecha, cuerpo, referencia, autor) => {
-  return db.query('INSERT INTO publicacion (Nombre, Fecha, Cuerpo, Referencia, Autor) VALUES (?, ?, ?, ?, ?)', [nombre, fecha, cuerpo, referencia, autor]);
+const createPublicacion = (id_admin,Nombre,Fecha,Body,Referencia,Autor, Link) => {
+  return db.query('INSERT INTO publicacion (id_admin,Nombre,Fecha,Body,Referencia,Autor, Link) VALUES (?,?, ?, ?, ?, ?,?)', [id_admin,Nombre,Fecha,Body,Referencia,Autor, Link]);
 };
 
-const updatePublicacion = (id, nombre, fecha, cuerpo, referencia, autor) => {
-  return db.query('UPDATE publicacion SET Nombre = ?, Fecha = ?, Cuerpo = ?, Referencia = ?, Autor = ? WHERE idPublicacion = ?', [id, nombre, fecha, cuerpo, referencia, autor]);
+const updatePublicacion = (id, Nombre,Fecha,Body,Referencia,Autor, Link) => {
+  return db.query('UPDATE publicacion SET Nombre = ?, Fecha = ?, Body = ?, Referencia = ?, Autor = ? , Link = ? WHERE idPublicacion = ?', [Nombre,Fecha,Body,Referencia,Autor, Link,id]);
 };
 
 const deletePublicacion = (id) => {
-  return db.query('DELETE FROM temas WHERE idPublicacion = ?', [id]);
+  return db.query('DELETE FROM publicacion WHERE idPublicacion = ?', [id]);
 };
 
 module.exports = { getPublicacion, getPublicacionById, createPublicacion, updatePublicacion, deletePublicacion };

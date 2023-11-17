@@ -1,5 +1,6 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { CodigoService } from '../services/codigo.service';
+import { REMOVE_STYLES_ON_COMPONENT_DESTROY } from '@angular/platform-browser';
 
 
 
@@ -8,24 +9,27 @@ import { CodigoService } from '../services/codigo.service';
   templateUrl: './codigo.component.html',
   styleUrls: ['./codigo.component.scss']
 })
-export class CodigoComponent {
-  constructor(private services:CodigoService,){} /*ESTABLECER EL SERVICIO */
-  temas:any = {};    /*CREAR VARIABLE PARA LA LISTA DE ELEMENTOS*/
-  subtemas:any = {};
+export class CodigoComponent implements OnInit {
 
+  codigo:any = [];
 
-  ngOnInit() : void{
-    this.services.getCodigo().subscribe(temas => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
-      {
-        this.temas = temas.results;
-      });
+  ping:boolean=false;
 
-    this.services.getSubtema().subscribe(subtemas=>
+  constructor(private services:CodigoService){
 
-      {
-      this.subtemas = subtemas.results;
-      console.log(this);
+  } /*ESTABLECER EL SERVICIO */
+  ngOnInit(): void {
+    this.services.getCodigo().subscribe((codigo) => {
+      this.codigo = codigo;
+
     });
 
+
+
+  }
+  public hidden(item: any,tema: any): boolean {
+    this.ping =item!== tema;
+
+    return this.ping;
   }
 }

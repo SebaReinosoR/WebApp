@@ -21,12 +21,12 @@ app.use(cors());
 
 
 // --------------------------Obtener todos los temas----------------------------------
-app.get('/temas', async (req, res) => {
+app.get('/temas', async (req, res) => { 
   try {
-    const temas = await temasService.getTemas();
-    res.status(200).json(temas);
+    const tema = await temasService.getTemas();
+    res.status(200).json(tema);
   } catch (error) {
-    console.error('Error al obtener los temas:', error);
+    console.error('Error al obtener los temas y subtemas', error);
     res.status(500).send('Error interno del servidor');
   }
 });
@@ -45,10 +45,10 @@ app.get('/temas/:id', async (req, res) => {
 
 // Crear un nuevo tema
 app.post('/temas', async (req, res) => {
-  const { nombre, id_subtema } = req.body;
+  const { id_admin,Nombre } = req.body;
   try {
-    await temasService.createTema(nombre, id_subtema);
-    res.status(201).send('Tema creado exitosamente');
+    await temasService.createTema(id_admin,Nombre);
+    res.status(201).json({ message: 'Tema agregado exitosamente' });
   } catch (error) {
     console.error('Error al crear un nuevo tema:', error);
     res.status(500).send('Error interno del servidor');
@@ -58,10 +58,10 @@ app.post('/temas', async (req, res) => {
 // Actualizar un tema por ID
 app.put('/temas/:id', async (req, res) => {
   const id = req.params.id;
-  const { nombre, id_subtema } = req.body;
+  const {Nombre, id_admin} = req.body;
   try {
-    await temasService.updateTema(id, nombre, id_subtema);
-    res.status(200).send('Tema actualizado exitosamente');
+    await temasService.updateTema(id, id_admin, Nombre);
+    res.status(200).json({ message:'Tema actualizado exitosamente'});
   } catch (error) {
     console.error('Error al actualizar el tema por ID:', error);
     res.status(500).send('Error interno del servidor');
@@ -73,7 +73,7 @@ app.delete('/temas/:id', async (req, res) => {
   const id = req.params.id;
   try {
     await temasService.deleteTema(id);
-    res.status(200).send('Tema eliminado exitosamente');
+    res.status(200).json({ message: 'Subtema eliminado exitosamente' });
   } catch (error) {
     console.error('Error al eliminar el tema por ID:', error);
     res.status(500).send('Error interno del servidor');
@@ -99,6 +99,18 @@ app.get('/administradores/:id', async (req, res) => {
     res.status(200).json(administrador);
   } catch (error) {
     console.error('Error al obtener el administrador por ID:', error);
+    res.status(500).send('Error interno del servidor');
+  }
+});
+
+//obtener boolean de confirmacion para login
+app.post('/administrador', async (req, res) => {
+  const { usuario, contrasena } = req.body;  
+  try {
+    const administrador = await adminService.postLogin(usuario, contrasena);
+    res.status(200).json(administrador);
+  } catch (error) {
+    console.error('Error al obtener el administrador para el login:', error);
     res.status(500).send('Error interno del servidor');
   }
 });
@@ -133,12 +145,15 @@ app.delete('/administradores/:id', async (req, res) => {
   const id = req.params.id;
   try {
     await adminService.deleteAdministrador(id);
-    res.status(200).send('Administrador eliminado exitosamente');
+    res.status(200).json({ message: 'Administrador eliminado exitosamente' });
   } catch (error) {
     console.error('Error al eliminar el administrador por ID:', error);
     res.status(500).send('Error interno del servidor');
   }
 });
+
+
+
 // ------------------------------Subtemas----------------------------------------------
 /*CRUD SUBTEMAS*/
 // Obtener todos los subtemas
@@ -164,12 +179,25 @@ app.get('/subtemas/:id', async (req, res) => {
   }
 });
 
+//obtener subtemas por ID tema
+
+app.get('/subtemas/tema/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const subtema = await subtemaService.getSubTemaByIdTema(id);
+    res.status(200).json(subtema);
+  } catch (error) {
+    console.error('Error al obtener el subtema por IDTema:', error);
+    res.status(500).send('Error interno del servidor');
+  }
+});
+
 // Crear un nuevo subtema
 app.post('/subtemas', async (req, res) => {
-  const { nombre, id_tema } = req.body;
+  const { id_tema, Nombre, Body, Link, Referencia } = req.body;
   try {
-    await subtemaService.createSubtema(nombre, id_tema);
-    res.status(201).send('Subtema creado exitosamente');
+    await subtemaService.createSubtema(id_tema, Nombre, Body, Link, Referencia);
+    res.status(200).json({ message: 'Subtema agregado exitosamente' });
   } catch (error) {
     console.error('Error al crear un nuevo subtema:', error);
     res.status(500).send('Error interno del servidor');
@@ -179,10 +207,10 @@ app.post('/subtemas', async (req, res) => {
 // Actualizar un subtema por ID
 app.put('/subtemas/:id', async (req, res) => {
   const id = req.params.id;
-  const { nombre, id_tema } = req.body;
+  const { id_tema, Nombre, Body, Link, Referencia} = req.body;
   try {
-    await subtemaService.updateSubtema(id, nombre, id_tema);
-    res.status(200).send('Subtema actualizado exitosamente');
+    await subtemaService.updateSubtema(id, id_tema, Nombre, Body, Link, Referencia);
+    res.status(200).json({message:'Subtema actualizado exitosamente'});
   } catch (error) {
     console.error('Error al actualizar el subtema por ID:', error);
     res.status(500).send('Error interno del servidor');
@@ -194,7 +222,7 @@ app.delete('/subtemas/:id', async (req, res) => {
   const id = req.params.id;
   try {
     await subtemaService.deleteSubtema(id);
-    res.status(200).send('Subtema eliminado exitosamente');
+    res.status(200).json({ message: 'Subtema eliminado exitosamente' });
   } catch (error) {
     console.error('Error al eliminar el subtema por ID:', error);
     res.status(500).send('Error interno del servidor');
@@ -228,10 +256,10 @@ app.get('/encargados/:id', async (req, res) => {
 
 // Crear un nuevo encargado
 app.post('/encargados', async (req, res) => {
-  const { nombre,  carrera, especialidad, investigacion, universidad} = req.body;
+  const {  id_admin, Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad} = req.body;
   try {
-    await encargadoService.createEncargado(nombre, carrera, especialidad, investigacion, universidad);
-    res.status(201).send('Encargado creado exitosamente');
+    await encargadoService.createEncargado(id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad);
+    res.status(201).json({ message: 'Encargado creado exitosamente' });;
   } catch (error) {
     console.error('Error al crear un nuevo encargado:', error);
     res.status(500).send('Error interno del servidor');
@@ -241,10 +269,10 @@ app.post('/encargados', async (req, res) => {
 // Actualizar un encargado por ID
 app.put('/encargados/:id', async (req, res) => {
   const id = req.params.id;
-  const { nombre,  carrera, especialidad, investigacion, universidad} = req.body;
+  const {id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad} = req.body;
   try {
-    await encargadoService.updateEncargado(id, nombre, carrera, especialidad, investigacion, universidad);
-    res.status(200).send('Encargado actualizado exitosamente');
+    await encargadoService.updateEncargado(id, id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad);
+    res.status(200).json({message:'Encargado actualizado exitosamente'});
   } catch (error) {
     console.error('Error al actualizar el encargado por ID:', error);
     res.status(500).send('Error interno del servidor');
@@ -256,7 +284,7 @@ app.delete('/encargados/:id', async (req, res) => {
   const id = req.params.id;
   try {
     await encargadoService.deleteEncargado(id);
-    res.status(200).send('Encargado eliminado exitosamente');
+    res.status(200).json({ message: 'Encargado eliminado exitosamente' });
   } catch (error) {
     console.error('Error al eliminar el encargado por ID:', error);
     res.status(500).send('Error interno del servidor');
@@ -289,10 +317,10 @@ app.get('/codigo/:id', async (req, res) => {
 
 // Crear una nuevo codigo
 app.post('/codigo', async (req, res) => {
-  const { nombre, descripcion, link } = req.body;
+  const {id_admin, Nombre, Body , Link, Referencia } = req.body;
   try {
-    await codigoService.createCodigos(nombre, descripcion, link);
-    res.status(201).send('Código creado exitosamente');
+    await codigoService.createCodigos(id_admin, Nombre, Body , Link, Referencia);
+    res.status(201).json({ message: 'Codigo creado exitosamente' });
   } catch (error) {
     console.error('Error al crear un nuevo código:', error);
     res.status(500).send('Error interno del servidor');
@@ -302,12 +330,12 @@ app.post('/codigo', async (req, res) => {
 // Actualizar una codigo por ID
 app.put('/codigo/:id', async (req, res) => {
   const id = req.params.id;
-  const { nombre,  descripcion, link } = req.body;
+  const { id_admin, Nombre, Body , Link, Referencia } = req.body;
   try {
-    await programacionService.updateCodigos(id, nombre, descripcion, link);
-    res.status(200).send('Programacion actualizada exitosamente');
+    await codigoService.updateCodigos(id, id_admin, Nombre, Body , Link, Referencia);
+    res.status(200).json({ message: 'Codigo actualizado exitosamente' });
   } catch (error) {
-    console.error('Error al actualizar la programacion por ID:', error);
+    console.error('Error al actualizar la Codigo por ID:', error);
     res.status(500).send('Error interno del servidor');
   }
 });
@@ -317,9 +345,9 @@ app.delete('/codigo/:id', async (req, res) => {
   const id = req.params.id;
   try {
     await codigoService.deleteCodigos(id);
-    res.status(200).send('codigo eliminado exitosamente');
+    res.status(200).json({ message: 'Codigo eliminado exitosamente' });
   } catch (error) {
-    console.error('Error al eliminar la programacion por ID:', error);
+    console.error('Error al eliminar la Codigo por ID:', error);
     res.status(500).send('Error interno del servidor');
   }
 });
@@ -348,11 +376,11 @@ app.get('/programacion/:id', async (req, res) => {
 });
 
 // Crear una programacion
-app.post('/progrmacion', async (req, res) => {
-  const { nombre, informacion } = req.body;
+app.post('/programacion', async (req, res) => {
+  const { id_admin, Nombre, Body, Link} = req.body;
   try {
-    await programacionService.createProgramacion(nombre, informacion);
-    res.status(201).send('Programacion creada exitosamente');
+    await programacionService.createProgramacion( id_admin,Nombre, Body, Link);
+    res.status(201).json({ message: 'Programacion actualizado exitosamente' });
   } catch (error) {
     console.error('Error al crear una nueva programacion:', error);
     res.status(500).send('Error interno del servidor');
@@ -362,10 +390,10 @@ app.post('/progrmacion', async (req, res) => {
 // Actualizar una programacion por ID
 app.put('/programacion/:id', async (req, res) => {
   const id = req.params.id;
-  const { nombre, informacion } = req.body;
+  const {Nombre, Body, Link, id_admin } = req.body;
   try {
-    await programacionService.updateProgramacion(id, nombre, informacion);
-    res.status(200).send('programacion actualizada exitosamente');
+    await programacionService.updateProgramacion(id,Nombre, Body, Link, id_admin);
+    res.status(200).json({message:'programacion actualizada exitosamente'});
   } catch (error) {
     console.error('Error al actualizar la programacion por ID:', error);
     res.status(500).send('Error interno del servidor');
@@ -377,7 +405,7 @@ app.delete('/programacion/:id', async (req, res) => {
   const id = req.params.id;
   try {
     await programacionService.deleteProgramacion(id);
-    res.status(200).send('Programacion eliminada exitosamente');
+    res.status(200).json({ message: 'Programación eliminado exitosamente' });
   } catch (error) {
     console.error('Error al eliminar la programacion por ID:', error);
     res.status(500).send('Error interno del servidor');
@@ -409,10 +437,10 @@ app.get('/publicaciones/:id', async (req, res) => {
 
 // Crear una nueva publicación
 app.post('/publicaciones', async (req, res) => {
-  const { nombre,fecha,cuerpo,referencia,autor} = req.body;
+  const {id_admin, Nombre,Fecha,Body,Referencia,Autor, Link} = req.body;
   try {
-    await publicacionesService.createPublicacion(nombre,fecha,cuerpo,referencia,autor);
-    res.status(201).send('Publicación creada exitosamente');
+    await publicacionesService.createPublicacion(id_admin,Nombre,Fecha,Body,Referencia,Autor, Link);
+    res.status(201).json({message: 'Publicación creada exitosamente' });
   } catch (error) {
     console.error('Error al crear una nueva publicación:', error);
     res.status(500).send('Error interno del servidor');
@@ -422,10 +450,10 @@ app.post('/publicaciones', async (req, res) => {
 // Actualizar una publicación por ID
 app.put('/publicaciones/:id', async (req, res) => {
   const id = req.params.id;
-  const { nombre,fecha,cuerpo,referencia,autor} = req.body;
+  const { Nombre,Fecha,Body,Referencia,Autor, Link} = req.body;
   try {
-    await publicacionesService.updatePublicacion(id, nombre,fecha,cuerpo,referencia,autor);
-    res.status(200).send('Publicación actualizada exitosamente');
+    await publicacionesService.updatePublicacion(id, Nombre,Fecha,Body,Referencia,Autor, Link);
+    res.status(200).json({message:'Publicación actualizada exitosamente'});
   } catch (error) {
     console.error('Error al actualizar la publicación por ID:', error);
     res.status(500).send('Error interno del servidor');
@@ -437,7 +465,8 @@ app.delete('/publicaciones/:id', async (req, res) => {
   const id = req.params.id;
   try {
     await publicacionesService.deletePublicacion(id);
-    res.status(200).send('Publicación eliminada exitosamente');
+    res.status(200).json({ message: 'Publicación eliminado exitosamente' });
+
   } catch (error) {
     console.error('Error al eliminar la publicación por ID:', error);
     res.status(500).send('Error interno del servidor');
@@ -469,10 +498,10 @@ app.get('/documentacion/:id', async (req, res) => {
 });
 
 app.post('/documentacion', async (req, res) => {
-  const { nombre, informacion } = req.body;
+  const {id_admin, Nombre,Body,Referencia, Link} = req.body;
   try {
-    await documentacionService.createDocumentacion(nombre, informacion);
-    res.status(201).send('Documentación creada exitosamente');
+    await documentacionService.createDocumentacion(id_admin,Nombre,Body, Link ,Referencia);
+    res.status(200).json({ message: 'Documentación eliminado exitosamente' });
   } catch (error) {
     console.error('Error en la ruta /documentacion', error);
     res.status(500).send('Error interno del servidor');
@@ -481,10 +510,10 @@ app.post('/documentacion', async (req, res) => {
 
 app.put('/documentacion/:id', async (req, res) => {
   const { id } = req.params;
-  const { nombre, informacion } = req.body;
+  const { id_admin,Nombre,Body, Link ,Referencia } = req.body;
   try {
-    await documentacionService.updateDocumentacion(id, nombre, informacion);
-    res.status(200).send('Documentación actualizada exitosamente');
+    await documentacionService.updateDocumentacion(id,id_admin,Nombre,Body, Link ,Referencia);
+    res.status(200).json({message:'Documentación actualizada exitosamente'});
   } catch (error) {
     console.error('Error en la ruta /documentacion/:id', error);
     res.status(500).send('Error interno del servidor');
@@ -495,7 +524,7 @@ app.delete('/documentacion/:id', async (req, res) => {
   const { id } = req.params;
   try {
     await documentacionService.deleteDocumentacion(id);
-    res.status(200).send('Documentación eliminada exitosamente');
+    res.status(200).json({ message: 'Documentación eliminado exitosamente' });
   } catch (error) {
     console.error('Error en la ruta /documentacion/:id', error);
     res.status(500).send('Error interno del servidor');

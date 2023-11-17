@@ -1,8 +1,9 @@
 export interface Documento {
-  id:number;
-  name: string;
-  body: string;
-  link: string[];
-  ref: string[];
-  img: string;
+  id_admin:number;
+  idDocumentacion:number;
+  Nombre: string;
+  Body: string;
+  link: string;
+  referencia: string;
+ 
 }

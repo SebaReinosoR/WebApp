@@ -17,8 +17,7 @@ export class EncargadosComponent {
   ngOnInit() : void{
     this.services.getAllencargados().subscribe(lista => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
       {
-        this.lista = lista.results;
-        console.log(this)
+        this.lista = lista;
       });
 
   }

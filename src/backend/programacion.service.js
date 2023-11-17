@@ -6,15 +6,15 @@ const getProgramacion = () => {
 };
 
 const getProgramacionById = (id) => {
-  return db.query('SELECT * FROM programacion WHERE id = ?', [id]);
+  return db.query('SELECT * FROM programacion WHERE idProgramacion = ?', [id]);
 };
 
-const createProgramacion = (nombre, informacion) => {
-  return db.query('INSERT INTO programacion (Nombre, Informacion) VALUES (?, ?)', [nombre, informacion]);
+const createProgramacion = (id_admin,Nombre, Body, Link) => {
+  return db.query('INSERT INTO programacion ( id_admin,Nombre, Body,Link) VALUES (?, ?,?,?)', [ id_admin,Nombre, Body, Link]);
 };
 
-const updateProgramacion = (id, nombre, informacion) => {
-  return db.query('UPDATE programacion SET Nombre = ?, Descripcion = ? WHERE idProgramacion = ?', [nombre,informacion, id]);
+const updateProgramacion = (id, Nombre, Body, Link, id_admin) => {
+  return db.query('UPDATE programacion SET Nombre = ?, Body = ? , Link = ? , id_admin = ? WHERE idProgramacion = ?', [Nombre, Body, Link, id_admin, id]);
 };
 
 const deleteProgramacion = (id) => {

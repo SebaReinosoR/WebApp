@@ -1,40 +1,30 @@
 <div class="container-fluid">
   <div class="box" *ngFor="let tema of temas">
-    <h4> {{tema.name}} </h4>
+    <h4> {{tema.Nombre}} </h4>
 
-    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': tema === activeTema ? 'block' : 'none'}">
+    <div *ngFor="let item of captura(subtemas.id_tema)">
+      <p  [routerLink]="['/Subtema',item.idSubtema]" routerLinkActive="router-link-active">{{item.Nombre}}</p>
+    </div>
+
+    <button  type="button" class="btn" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + tema.idTema" >Ver todos</button>
+
+    <div class="modal fade" [id]="'exampleModal' + tema.idTema" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">{{tema.name}}</h4>
-            <button type="button" class="btn btn-danger head" (click)="closePopup()"> Close </button>
+            <h4 class="modal-title">{{tema.Nombre}}</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
-          <div class="modal-body" *ngFor="let item of subtemas">
-            <p [routerLink]="['/Subtema',item.id]" routerLinkActive="router-link-active"> {{item.name}}</p>
+          <div class="modal-body" *ngFor="let item of subtemasID; let i = index">
+            <p [routerLink]="['/Subtema',item.idSubtema]" data-bs-dismiss="modal"></p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger"
-                    (click)="closePopup()">
-              Close
-            </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
-
-
-
-    <ul >
-      <li *ngFor="let item of subtemas">
-        <p  [routerLink]="['/Subtema',item.id]" routerLinkActive="router-link-active">{{item.name}}</p> <!--Router-link / ID-->
-      </li>
-
-    </ul>
-
-
-    <span class="btn" (click)="openPopup(tema)">Ver todos</span>
-
   </div>
 
 

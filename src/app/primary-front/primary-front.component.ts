@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { TemasService } from '../services/temas.service';
-import {Temas} from '../interfaces/interfaces-temas';
-import { Router,ActivatedRoute } from '@angular/router';
+import {ActivatedRoute } from '@angular/router';
 
 
 
@@ -11,18 +10,17 @@ import { Router,ActivatedRoute } from '@angular/router';
   styleUrls: ['./primary-front.component.scss']
 })
 export class PrimaryFrontComponent {
-  
-  temas:any = {};    /*CREAR VARIABLE PARA LA LISTA DE ELEMENTOS*/
-  subtemas:any = {};
-  public activeTema: Temas | null = null;
-  id:any;
 
+  temas:any;    /*CREAR VARIABLE PARA LA LISTA DE ELEMENTOS*/
+  subtemas:any;
+  id:any;
+  subtemasID:any;
 
   constructor(private services:TemasService ,private ruta:ActivatedRoute) {
     this.ruta.params.subscribe(datos=>{
       this.id=datos["id"];
       console.log(this.id);
-      
+
     });}
 
 
@@ -31,25 +29,26 @@ export class PrimaryFrontComponent {
   ngOnInit() : void{
     this.services.getAlltemas().subscribe(temas => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
       {
-        this.temas = temas.results;
+        this.temas = temas;
       });
 
     this.services.getAllsubtema().subscribe(subtemas=>
-
       {
-      this.subtemas = subtemas.results;
+      this.subtemas = subtemas;
       console.log(this);
     });
 
+
 }
 
+captura(id:number):any{
+  this.services.getSubtemaById(id).subscribe(subtemasID =>
+    {
+      return  this.subtemasID ;
+      
+    });
 
 
-openPopup(tema: Temas): void {
-  this.activeTema = tema;
 }
 
-closePopup(): void {
-  this.activeTema = null;
-}
 }

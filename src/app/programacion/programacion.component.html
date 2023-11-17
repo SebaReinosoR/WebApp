@@ -1,32 +1,22 @@
 <div class="container-fluid">
-  <div class="box" *ngFor="let ficha of progra ">
+  <div class="box" *ngFor="let item of progra ">
     <div class="head">
-      <h4> Aqui ira el titulo del tema </h4>
+      <h4> {{item.Nombre}} </h4>
     </div>
 
     <img src="assets/prueba.png" alt="imgz">
 
     <div class="link" >
-      <div class="box-a" *ngFor="let item of prograLink ">
-        <a href="{{item.url}}">{{item.name}}</a>
+      <div class="box-a">
+        <a href="">{{item.Link}}</a>
       </div>
     </div>
 
       <div class="body">
-        <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tellus justo, dapibus non quam a, pretium fermentum ex. Etiam volutpat sed diam a blandit. Quisque velit ligula, vulputate et dignissim eget, placerat eget ex. Fusce vitae augue id augue convallis blandit a sed nibh. Quisque semper, tortor ac tristique elementum, eros mi dignissim diam, a lacinia est ante malesuada ipsum. Sed ex dui, viverra eu mi ac, commodo ornare lectus. Curabitur quis pharetra arcu. Sed ut malesuada risus. Ut vulputate magna non massa facilisis consectetur. Quisque aliquam libero ullamcorper ullamcorper vehicula. Quisque quis faucibus nulla, luctus condimentum tortor. Aliquam a pulvinar ex. Donec lacinia enim nec nibh venenatis, pulvinar elementum quam tincidunt.
-
-          Sed interdum, magna at interdum efficitur, elit lorem aliquet mi, quis aliquam odio mauris non risus. In hac habitasse platea dictumst. Integer lobortis sapien vel lacus posuere, efficitur commodo eros dapibus. Phasellus sapien nisl, porttitor vel congue a, dictum quis nunc. Nulla magna magna, dictum id sem at, ullamcorper lacinia lorem. Pellentesque vulputate nisl a magna volutpat, ac efficitur magna tincidunt. Nulla sollicitudin massa turpis, ac aliquam quam ornare vel. Nullam faucibus feugiat maximus. Nullam efficitur imperdiet ultrices. Pellentesque dignissim nec tortor sollicitudin bibendum. Cras sit amet mi id neque elementum lobortis. Nunc venenatis sagittis pellentesque. Quisque blandit ante a quam accumsan bibendum. Nunc ut nisi libero. In hac habitasse platea dictumst.
-
-          Pellentesque sit amet lacinia diam, eu efficitur ligula. Sed libero nisi, rutrum sed dignissim id, scelerisque fringilla velit. Nullam ac iaculis ipsum, vitae rutrum nibh. Duis ultricies lacus nec sem facilisis, vel sollicitudin ante finibus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus aliquam nisl eu lorem rutrum, a feugiat justo ornare. Pellentesque felis nisl, mollis sed velit vel, lacinia consectetur arcu. Proin in massa dui. Vivamus nec nisl rhoncus, suscipit lectus nec, facilisis magna. Morbi efficitur dui magna, eget tempor mauris dictum varius. Curabitur pharetra maximus sagittis. Suspendisse potenti.
-
-          Integer leo nisl, laoreet a quam non, pharetra fringilla eros. Etiam et elementum est. Sed consectetur consectetur nisl, vitae aliquet felis lacinia efficitur. Cras nibh mauris, porttitor dapibus nisi ut, tempor tristique ligula. Curabitur porttitor suscipit eros eu placerat. Nullam porta lectus sed magna dapibus vehicula. Vestibulum vitae sagittis erat. Nunc ut scelerisque leo. Nullam sodales enim sit amet fermentum interdum.
-
-          Curabitur sed justo elit. Nunc viverra erat erat, sed pretium felis lobortis at. Phasellus ut enim ac sem dictum interdum. Nam vulputate auctor lorem, convallis aliquam dui accumsan nec. Vestibulum sagittis eros lectus. Ut risus dolor, congue vel semper sed, elementum id felis. Vestibulum consectetur dignissim nisl. Duis porttitor maximus neque, et vulputate velit porta ut. Suspendisse in nulla augue. Nulla in risus blandit, ultricies ipsum ac, euismod erat. Cras libero velit, placerat eget ultrices ac, mattis et lacus. In porta sem id augue sollicitudin, consectetur condimentum ipsum tempus.</p> <!--limitar la cantidad de caracteres al mostrar -- mostrar completo en la vista principal-->
-
+        <p >
+          {{item.Body}}
+          </p>
       </div>
-
-
-
 
   </div>
 

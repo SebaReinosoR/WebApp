@@ -1,3 +1,5 @@
+
+
 const db = require('./db');
 
 const getSubtemas = () => {
@@ -5,19 +7,22 @@ const getSubtemas = () => {
 };
 
 const getSubtemaById = (id) => {
-  return db.query('SELECT * FROM subtemas WHERE idSubtema = ?', [id]);
+  return db.query('SELECT * FROM subtema WHERE idSubtema = ?', [id]);
+};
+const getSubTemaByIdTema = (id) => {
+  return db.query('SELECT * FROM subtema WHERE id_tema = ?', [id]);
 };
 
-const createSubtema = (nombre, informacion, link, referencia) => {
-  return db.query('INSERT INTO subtemas (Nombre, Informacion, Link_git, Referencia) VALUES (?, ?)', [nombre, informacion, link, referencia]);
+const createSubtema = (id_tema, Nombre, Body, Link, Referencia) => {
+  return db.query('INSERT INTO subtema (id_tema, Nombre, Body, Link, Referencia) VALUES (?, ?,?,?,?)', [id_tema, Nombre, Body, Link, Referencia]);
 };
 
-const updateSubtema = (id, nombre, informacion, link, referencia) => {
-  return db.query('UPDATE subtemas SET Nombre = ?, Informacion = ?, Link_git = ?, Referencia = ? WHERE idSubtema = ?', [id, nombre, informacion, link, referencia]);
+const updateSubtema = (id, id_tema, Nombre, Body, Link, Referencia) => {
+  return db.query('UPDATE subtema SET id_tema = ?, Nombre = ?, Body = ?, Link= ?, Referencia = ? WHERE idSubtema = ?', [id_tema, Nombre, Body, Link, Referencia, id]);
 };
 
 const deleteSubtema = (id) => {
-  return db.query('DELETE FROM subtemas WHERE idSubtema = ?', [id]);
+  return db.query('DELETE FROM subtema WHERE idSubtema = ?', [id]);
 };
 
-module.exports = { getSubtemas, getSubtemaById, createSubtema, updateSubtema, deleteSubtema };
+module.exports = { getSubTemaByIdTema, getSubtemas, getSubtemaById, createSubtema, updateSubtema, deleteSubtema };

@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class ProgramacionService {
 
   private api_conexion="http://localhost:3000/programacion";  /* AQUI SE DEBE REALIZAR LA CONEXICION CON LA API */
-  private api_conexion_location = "https://rickandmortyapi.com/api/location";
+  
 
   constructor(private http:HttpClient) { }
 
@@ -17,8 +17,5 @@ export class ProgramacionService {
     return this.http.get(this.api_conexion);
 
   }
-  public getAllprograLink(): Observable<any>{
-    return this.http.get(this.api_conexion_location);
 
-  }
 }

@@ -1,8 +1,8 @@
 export interface Codigo {
-  id:number;
-  name: string;
-  body: string;
-  link: string[];
-  ref: string[];
-  img: string;
+  id_admin:number;
+  idCodigos:number;
+  Nombre: string;
+  Body: string;
+  link: string;
+  referencia: string;
 }

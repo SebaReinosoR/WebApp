@@ -1,11 +1,20 @@
-<button class="arrow_box" routerLink="/inicio">Back</button>
+<button class="arrow_box" routerLink="/inicio">Back</button> <!--crear alerta-->
 
 
 <div class="login">
-  <form class="custom-form" method="post">
+  <form [formGroup]="myform" (ngSubmit)="submitForm()" class="custom-form" >
     <h4>Inicio Administrador</h4>
-    <input type="email" [(ngModel)]="user" name="User" placeholder="User" required="required"/>
-    <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required="required"/>
-    <button type="submit" (click)="login()" routerLink="/Admin">Ingresar</button>
+    <input type="email" formControlName="usuario" [class.is-invalid]="f.usuario.errors && f.usuario.touched" placeholder="User" required="required"/>
+    <div id="validationServerUsernameFeedback" class="invalid-feedback">
+      Usuario obligatorio
+    </div>
+    
+    <input type="password" formControlName="password" [class.is-invalid]="f.password.errors && f.password.touched" placeholder="Password" required="required"/>
+    <div id="validationServerUsernameFeedback" class="invalid-feedback">
+      contraseña obligatoria
+    </div>
+    
+    <button class="btn-success" >Ingresar</button>
   </form>
+  
 </div>

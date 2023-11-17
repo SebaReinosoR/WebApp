@@ -16,11 +16,7 @@ export class ProgramacionComponent {
   ngOnInit() : void{
     this.services.getAllprogramacion().subscribe(progra => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
       {
-        this.progra = progra.results;
-      });
-      this.services.getAllprograLink().subscribe(prograLink => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
-      {
-        this.prograLink = prograLink.results;
+        this.progra = progra;
       });
   }
 }

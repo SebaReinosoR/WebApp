@@ -1,37 +1,71 @@
-
-h1{
-  padding: 2%;
-  padding-bottom: 2%;
-  padding-left: 4%;
-  font-family: Times New Roman, arial;
-
-  margin: 0;
-}
-
-.bloquePrincipal{
-max-width: 100%;
-max-height: 100%;
+.box-1{
+  h1{
+    padding: 2%;
+    padding-bottom: 2%;
+    padding-left: 4%;
+    font-family: Times New Roman, arial;
+    margin: 0;
+  }
 
 }
 
-#caja{
+.box{
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
-  min-height: 700px;
+   form{
+    .box-2{
+      max-width: 100%;
+      width: 50em;
+      overflow: scroll;
+      max-height: 700px;
+      select{
+  
+      }
+      #Subtema{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+
+        .input-group{
+          margin: 1em 0em 1em 0em;
+        }
+      }
+    
+    }
+   } 
+ 
+  
+}
+
+
+
+
+
+
+.box-2::-webkit-scrollbar{
+  width: 8px;     /* Tamaño del scroll en vertical */
+  height: 8px;    /* Tamaño del scroll en horizontal */
+}
+
+.box-2::-webkit-scrollbar-thumb{
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.box-2::-webkit-scrollbar-thumb:hover{
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+
+.box-2::-webkit-scrollbar-thumb:active{
+  background-color: #999999;
 
 }
-form{
-  max-width: 50%;
-  width: 600px;
 
-}
- input, span{
-  margin: 1%;
+.box-2::-webkit-scrollbar-track:hover,
+.box-2::-webkit-scrollbar-track:active {
+background: transparent;
 }
 
-select{
-  margin: 1%;
-  margin-bottom: 5%;
-}

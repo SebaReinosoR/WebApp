@@ -1,28 +1,13 @@
 <div class="container-fluid">
-
-
-  <div class="box" *ngFor="let tema of temas">
-    <h4>{{tema.name}}</h4>
-    <div class="box-1">
-      <ul *ngFor="let item of subtemas; index as i">
-        <li *ngIf="!item.hideList">
-        <p>{{item.name}}</p>
+  <div class="box" *ngFor="let item of codigo">
+    <h4>{{item.Nombre}}</h4>
+    <div class="box-1" >
+      <p>{{item.Body}}</p>
         <div class="link">
-          <a href= {{item.url}} >{{item.name}}</a>
-          <a href= {{item.url}} >{{item.name}}</a>
-          <a href= {{item.url}} >{{item.name}}</a>
-          <a href= {{item.url}} >{{item.name}}</a>
-          <a href= {{item.url}} >{{item.name}}</a>
-          
+          <a [href]="">{{item.Link}}</a>
+          <a [href]="">{{item.Referencia}}</a>
         </div>
-      </li>
-    </ul>
-
     </div>
-
   </div>
-
-
 </div>
-
 

@@ -11,11 +11,13 @@ export class DocumentoComponent implements OnInit{
 
   constructor(private services:DocumentosService){} /*ESTABLECER EL SERVICIO */
   documento:any = {};    /*CREAR VARIABLE PARA LA LISTA DE ELEMENTOS*/
-  public activeTema: Documento | null = null;
+    activeTema: Documento | null = null;
+
+
   ngOnInit() : void{
     this.services.getAlldocumento().subscribe(documento => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
       {
-        this.documento = documento.results;
+        this.documento = documento;
       });
   }
 

@@ -9,12 +9,12 @@ const getCodigosById = (id) => {
   return db.query('SELECT * FROM codigos WHERE idCodigos = ?', [id]);
 };
 
-const createCodigos = (nombre, descripcion, link) => {
-  return db.query('INSERT INTO codigos (Nombre, Descripcion, Link) VALUES (?, ?, ?)', [nombre, descripcion, link]);
+const createCodigos = (id_admin, Nombre, Body , Link, Referencia) => {
+  return db.query('INSERT INTO codigos (id_admin, Nombre, Body , Link, Referencia) VALUES (?, ?, ?,?,?)', [id_admin, Nombre, Body , Link, Referencia]);
 };
 
-const updateCodigos = (id, nombre, descripcion, link) => {
-  return db.query('UPDATE codigos SET Nombre = ?, Duracion = ?, Link = ? WHERE idCodigos = ?', [nombre, descripcion, link, id]);
+const updateCodigos = (id, id_admin, Nombre, Body , Link, Referencia) => {
+  return db.query('UPDATE codigos SET id_admin = ?, Nombre = ?, Body = ? , Link = ?, Referencia = ? WHERE idCodigos = ?', [id_admin, Nombre, Body , Link, Referencia, id]);
 };
 
 const deleteCodigos = (id) => {

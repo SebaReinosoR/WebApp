@@ -1,0 +1,93 @@
+<div class="container-fluid">
+  <div class="head">
+    <h2 *ngFor="let tem of tema">
+      {{ tem.Nombre | uppercase }}
+      
+    </h2>
+  </div>
+  <div class="body">
+    <div class="input-group mb-3">
+      <div class="box-1" *ngFor="let item of subtema; let i = index">  
+        <div class="box">
+          <p>
+            {{item.Nombre}}
+          </p>
+          <div class="btns">
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idSubtema" >Eliminar</button>
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModalModificarSubtema' + item.idSubtema">Modificar</button>
+          </div>
+         
+        </div> 
+
+        <div class="modal fade" [id]="'exampleModalModificarSubtema' + item.idSubtema" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Modificando {{item.Nombre}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                
+                <form #Subtemaform="ngForm">
+                  <div class="input-group mb-3" >
+                    <span  class="input-group-text mb-3"  for="Nombre">Titulo</span>  
+                    <input [(ngModel)]="item.Nombre" type="text" aria-label="name" name="Nombre" class="input-style" >
+                  </div>
+    
+                  <div class="input-group mb-3">
+                    <span  class="input-group-text mb-3"  for="Nombre">Tema</span>
+                    <select class="input-group" name="id_tema" [(ngModel)]="item.id_tema" > 
+                      <option *ngFor="let item of temasAll" value="{{item.idTema}}" >{{item.Nombre}}</option>
+                    </select>
+                    
+                  </div>
+                  
+                  <div >
+                    <span  class="input-group-text mb-3"  for="Nombre">Cuerpo</span>
+                    <textarea class="form-control mb-3" id="exampleFormControlTextarea1" rows="5"  name="Body" [(ngModel)]="item.Body"></textarea>
+                  </div>
+                  
+                  <div class="input-group mb-3" >
+                    <span class="input-group-text mb-3" id="link">Link</span>  
+                    <input type="text" class="input-style" aria-label="Sizing example input" name= "Link"aria-describedby="inputGroup-sizing-default" [(ngModel)]="item.Link">
+                  </div>
+                  
+                  <div class="input-group mb-3" >
+                    <span class="input-group-text mb-3" id="Referencias">Referencias</span>
+                    <input type="text" class="input-style" aria-label="Sizing example input" name="Referencia"aria-describedby="inputGroup-sizing-default" [(ngModel)]="item.Referencia">
+                  </div>
+                </form>
+               
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" (click)="PutSubtema(item.idSubtema, Subtemaform)" data-bs-dismiss="modal">Modificar</button>
+              </div>
+            </div>
+          </div>
+        </div> 
+          <div class="modal fade" [id]="'exampleModal' + item.idSubtema" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Confirmación</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>¿Estás seguro de borrar el subtema "{{item.Nombre}}"?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-danger" (click)="deleteSubtema(item.idSubtema)" data-bs-dismiss="modal">Eliminar</button>
+                </div>
+              </div>
+            </div>
+          </div>  
+        </div>
+      </div>
+  </div>
+  
+  </div>
+
+
+

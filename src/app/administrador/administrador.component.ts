@@ -1,5 +1,6 @@
 import {Component , AfterViewInit  } from '@angular/core';
 import { AdminService } from '../services/admin.service';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -10,53 +11,211 @@ import { AdminService } from '../services/admin.service';
 export class AdministradorComponent implements AfterViewInit {
   constructor(private services:AdminService){} /*ESTABLECER EL SERVICIO */
 
-  codigosAll:any = {};
-  subtemasAll:any ={};
-  publiAll:any = {};
-  programacionAll:any = {};
-  documentosAll:any = {};
-  temasAll:any = {};
-
+  codigosAll:any;
+  subtemasAll:any;
+  publiAll:any;
+  programacionAll:any;
+  documentosAll:any;
+  temasAll:any;
+  encargadosAll:any;
+  id_admin:number= 1;
 
   ngOnInit() : void{
 
     /*GET ALL */
     {
-      this.services.getDocumentacion().subscribe(temasAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
+      this.services.getTemas().subscribe(temasAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
       {
         this.temasAll = temasAll;
       });
-  
+
       this.services.getCodigos().subscribe(codigosAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
         {
           this.codigosAll = codigosAll;
+       
+          
         });
-  
+
         this.services.getSubtemas().subscribe(subtemasAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
         {
           this.subtemasAll = subtemasAll;
         });
-  
+
         this.services.getPublicacion().subscribe(publiAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
         {
           this.publiAll = publiAll;
+          
         });
-  
+
         this.services.getProgramacion().subscribe(programacionAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
         {
           this.programacionAll = programacionAll;
+          
         });
-  
+
         this.services.getDocumentacion().subscribe(documentosAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
         {
           this.documentosAll = documentosAll;
+          
         });
-  
-  
+        this.services.getEncargados().subscribe(encargadosAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
+        {
+          this.encargadosAll = encargadosAll;
+          
+        });
+
+
     }
-   
+
 
   }
+  // PUT 
+  PutCodigo(idCodigo: number, form: NgForm): void {
+    const { Nombre, Body, Link, Referencia } = form.value;
+    this.services.PutCodigos(idCodigo, this.id_admin, Nombre, Body, Link, Referencia).subscribe(() => {
+      alert('Modificado correctamente');
+      this.services.getCodigos().subscribe(codigosAll => {
+        this.codigosAll = codigosAll;
+      });
+    });
+  }
+  PutTema(idTema:number, form:NgForm):void{
+    const { Nombre} = form.value;
+    this.services.PutTema(idTema,this.id_admin,Nombre).subscribe(()=>{
+      alert('Modificado correctamente');
+      this.services.getTemas().subscribe(temasAll => {
+        this.temasAll = temasAll;
+      });
+
+    });
+  }
+  PutProgramacion(idProgra: number, form: NgForm): void {
+    const { Nombre, Body, Link} = form.value;
+    this.services.PutProgramacion(idProgra, this.id_admin, Nombre, Body, Link).subscribe(() => {
+      alert('Modificado correctamente');
+      this.services.getProgramacion().subscribe(programacionAll => {
+        this.programacionAll = programacionAll;
+      });
+    });
+  }
+  PutPublicacion(idPublicacion: number, form: NgForm): void {
+    const { Nombre,Fecha,Body,Referencia,Autor, Link } = form.value;
+    this.services.PutPublicacion(idPublicacion, this.id_admin, Nombre,Fecha,Body,Referencia,Autor, Link).subscribe(() => {
+      alert('Modificado correctamente');
+      this.services.getPublicacion().subscribe(publiAll => {
+        this.publiAll = publiAll;
+      });
+    });
+  }
+  PutDocumentacion(idDocu: number, form: NgForm): void {
+    const { Nombre, Body, Link, Referencia} = form.value;
+    console.log(form.value);
+    this.services.PutDocumentacion(idDocu, this.id_admin, Nombre, Body, Link, Referencia).subscribe(() => {
+      alert('Modificado correctamente');
+      this.services.getDocumentacion().subscribe(documentosAll => {
+        this.documentosAll = documentosAll;
+      });
+    });
+  }
+  PutEncargados(idEncargado:number, form:NgForm):void{
+    const { Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad} = form.value;
+    this.services.PutEncargados(idEncargado,this.id_admin,Nombre,Apellido, Carrera, Especialidad, Investigacion, Universidad).subscribe(()=>{
+      alert('Modificado correctamente');
+      this.services.getEncargados().subscribe(encargadosAll => {
+        this.encargadosAll = encargadosAll;
+      });
+
+    });
+  }
+
+
+  // DELETE
+
+  //Eliminar Temas
+
+  deletetema(idtema:number): void {
+    this.services.deleteTema(idtema).subscribe(() => {
+      alert('Eliminado correctamente');
+      this.services.getTemas().subscribe(temasAll => 
+      {
+        this.temasAll = temasAll;
+      });
+    });
+  }
+  //Eliminar Subtemas se realiza en componente subtema-ud
+
+  //Eliminar Codigos
+
+  deleteCodigo(idCodigo:number): void {
+    this.services.deleteCodigos(idCodigo).subscribe(() => {
+      alert('Eliminado correctamente');
+      this.services.getCodigos().subscribe(codigosAll => 
+        {
+          this.codigosAll = codigosAll;
+        });
+    });
+  }
+   //Eliminar Publicacion
+
+  deletePubli(idPubli:number): void {
+
+    this.services.deletePublicacion(idPubli).subscribe(() => {
+      alert('Eliminado correctamente');
+      this.services.getPublicacion().subscribe(publiAll => 
+      {
+        this.publiAll = publiAll;
+      });
+
+    });
+  }
+ //Eliminar Programacion
+
+  deleteProgra(idProgra:number): void {
+  this.services.deleteProgramacion(idProgra).subscribe(() => {
+    alert('Eliminado correctamente');
+    this.services.getProgramacion().subscribe(programacionAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
+    {
+        this.programacionAll = programacionAll;
+    });
+
+  });
+  }
+
+ //Eliminar Documentacion
+
+  deleteDocumento(idDocu:number): void {
+  this.services.deleteDocumentacion(idDocu).subscribe(() => {
+    alert('Eliminado correctamente');
+    this.services.getDocumentacion().subscribe(documentosAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
+    {
+      this.documentosAll = documentosAll;
+    });
+
+  });
+  }
+
+//Eliminar Encargado
+
+  deleteEncargado(idEncargado:number): void {
+  this.services.deleteEncargado(idEncargado).subscribe(() => {
+    console.log(idEncargado);
+    alert('Eliminado correctamente');
+    this.services.getEncargados().subscribe(encargadosAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
+    {
+      this.encargadosAll = encargadosAll;
+    });
+
+  });
+  }
+
+
+
+
+
+
+
+
+
  /*CONTROL DE SELECT */
 
   arreglo: string[] = [
@@ -66,7 +225,7 @@ export class AdministradorComponent implements AfterViewInit {
     "Programación",
     "Documentación",
     "Publicación",
-    
+
   ];
 
   ngAfterViewInit() {

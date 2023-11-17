@@ -1,48 +1,35 @@
 <div class="container-fluid">
   <div class="box" *ngFor="let item  of documento" >
     <div class="head">
-      <h4> titulo documento </h4> <!--PONER EL ACCESO PARA EL ELEMENTO-->
+      <h4> {{item.Nombre}} </h4>
       <button  (click)="openPopup(item)">Ver Documento</button>
     </div>
     <img src="/assets/prueba.png" alt="AQUI VA LA IMG">
-
-
       <div class="body">
         <p>
-          {{item.name}}
+          {{item.Body}}
         </p>
       </div>
 
         <div class="box-1">
-          <a href="">LINK</a>
-          <a href="">Referencia</a>
-        
+          <a href="{{item.Link}}">{{item.Link}}</a>
+          <a href="{{item.Referencia}}">{{item.Referencia}}</a>
         </div>
 
         <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': item === activeTema ? 'block' : 'none'}">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Titulo</h4>
-            <button type="button" class="btn btn-danger head"
-                    (click)="closePopup()">
-              Close
-            </button>
+            <h4 class="modal-title">{{item.Nombre}}</h4>
+            <button type="button" class="btn btn-close" (click)="closePopup()"></button>
           </div>
           <div class="modal-body">
             <p >
-              {{item.name}}
+              {{item.Body}}
             </p>
-
-
-             <!--limitar la cantidad de caracteres al mostrar -- mostrar completo en la vista principal-->
-
             </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger"
-                    (click)="closePopup()">
-              Close
-            </button>
+            <button type="button" class="btn btn-danger" (click)="closePopup()"> Close </button>
           </div>
         </div>
       </div>

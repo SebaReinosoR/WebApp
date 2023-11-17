@@ -9,40 +9,23 @@ import { Router,ActivatedRoute } from '@angular/router';
 })
 export class PublicacionComponent {
    /*ESTABLECER EL SERVICIO */
-  publi:any = {};    /*CREAR VARIABLE PARA LA LISTA DE ELEMENTOS*/
-  publiLink:any ={};
-  id:any;
-
-  
-  constructor(private services:PublicacionService ,private ruta:ActivatedRoute) {
-    this.ruta.params.subscribe(datos=>{
-      this.id=datos["id"];
-      console.log(this.id);
-      
-    });}
+  publi:any;    /*CREAR VARIABLE PARA LA LISTA DE ELEMENTOS*/
+  publiLink:any;
+  id:number=-1;
 
 
-
+  constructor(private services:PublicacionService ,private ruta:ActivatedRoute) {}
 
   ngOnInit() : void{
     this.services.getAllpubli().subscribe(publi => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
       {
         this.publi = publi;
       });
-      this.services.getAllpubliLink().subscribe(publiLink => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
-      {
-        this.publiLink = publiLink.results;
-        
-      });
-     
-        
-     
-        
-        
-        
+    
+
       }
-    
-} 
-    
-  
+
+}
+
+
 

@@ -23,6 +23,11 @@ export class PublicacionService {
   return this.http.get(this.api_conexion);
 
 }
+public getPubliById(id:number): Observable<any>{ /* CREAR FUNCION PUBLICA QUE RETORNE LA CONEXION */
+    const url = `${this.api_conexion}/${id}`;
+    return this.http.get(url);
+
+  }
 
 
 }

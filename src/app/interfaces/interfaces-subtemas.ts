@@ -1,8 +1,8 @@
 export interface Subtema {
-  id:number;
-  tema_padre:string;
-  body: string;
-  link: string[];
-  ref : string[];
-  img: string;
+  id_tema:number;
+  idSubtema:number;
+  Nombre:string;
+  Body: string;
+  Link: string;
+  Referencia : string;
 }

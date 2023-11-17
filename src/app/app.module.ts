@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +30,7 @@ import { ProgramacionService } from './services/programacion.service';
 import { SubtemasService } from './services/subtemas.service';
 import { EncargadosService } from './services/encargados.service';
 import { AdminService } from './services/admin.service';
+import { SubtemaUDComponent } from './administrador/subtema-ud/subtema-ud.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { AdminService } from './services/admin.service';
     PublicacionComponent,
     PubliVComponent,
     SubtemaComponent,
+    SubtemaUDComponent,
    
   ],
   imports: [
@@ -58,6 +60,7 @@ import { AdminService } from './services/admin.service';
     FormsModule,
     FontAwesomeModule,
     HttpClientModule,
+    ReactiveFormsModule
 
   ],
   providers: [

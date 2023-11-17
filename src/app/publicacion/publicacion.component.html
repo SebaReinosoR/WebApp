@@ -1,32 +1,30 @@
 <div class="container-fluid">
-  <div class="box" *ngFor="let itemPubli  of publi" >
+  <div class="box" *ngFor="let item  of publi" >
     <div class="head">
-      <h4 > {{itemPubli.Nombre}} </h4> <!--PONER EL ACCESO PARA EL ELEMENTO-->
-      <button [routerLink]="['/PubliOpen',itemPubli.id]" routerLinkActive="router-link-active" >Ver Publicación</button>
+      <h4 > {{item.Nombre}} </h4> <!--PONER EL ACCESO PARA EL ELEMENTO-->
+      <button [routerLink]="['/PubliOpen',item.idPublicacion]" routerLinkActive="router-link-active" >Ver Publicación</button>
     </div>
     <img src="/assets/prueba.png" alt="AQUI VA LA IMG">
 
       <div class="body"> <!--MOSTAR EL ABSTRAC O RESUMEN  // DE SER ASI HAY QUE REESTRUCTURAR EL AGREGAR-->
       <p>
-        {{itemPubli.Cuerpo}}
+        {{item.Body}}
       </p>
       </div>
 
         <div class="box-1">
           <ul>
             <li>
-              <p>{{itemPubli.Autor}}</p>
+              <p>{{item.Autor}}</p>
             </li>
             <li>
-              <p>{{itemPubli.Fecha}}</p>
+              <p>{{item.Fecha}}</p>
             </li>
-           
+
           </ul>
 
         </div>
 
   </div>
-
-  
 
 </div>
