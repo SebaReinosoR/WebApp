@@ -1,3 +1,4 @@
+
 <div class="container-fluid">
 
   <div class="box-1">
@@ -6,7 +7,7 @@
       <img src="/assets/prueba.png" alt="AQUI VA LA IMG">
 
     </div>
-    <ul class="big-box" *ngFor="let item of lista" >
+    <ul *ngIf="item!== '' ">
       <li class="name">
       <h4 class="Nombre"> {{item.Nombre}} </h4>
       <h4 class="Apellido" > {{item.Apellido}} </h4>
@@ -54,7 +55,7 @@
             </li>
 
           </ul>
-          <p class="btn">↑</p> <!--debe mostrar los elementos por array desde ts-->
+          <p class="btn" (click)="EnvioDatos(item)">↑</p> <!--debe mostrar los elementos por array desde ts-->
         </div>
 
 

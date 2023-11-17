@@ -24,7 +24,7 @@
             </p>
             
             <div class="btns">
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idTema" >Eliminar</button>
+              <button type="button" id="eliminar" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idTema" >Eliminar</button>
               <button type="button" class="btn btn-info" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModalModificarTema' + item.idTema">Modificar</button>
             </div>
            
@@ -84,7 +84,7 @@
               {{item.Body}}
           </p>
           <div class="btns">
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idCodigos" >Eliminar</button>
+            <button type="button" id="eliminar" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idCodigos" >Eliminar</button>
             <button type="button" class="btn btn-info" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModalModificarCodigos' + item.idCodigos">Modificar</button>
           </div>
         </div> 
@@ -155,7 +155,7 @@
               {{item.Autor}}
           </p>
           <div class="btns">
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idPublicacion" >Eliminar</button> <!--HAY QUE AGREGAR UN ALERTA DE ¿ESTAS SEGURO? en el evento Onclic-->
+            <button type="button" id="eliminar" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idPublicacion" >Eliminar</button> <!--HAY QUE AGREGAR UN ALERTA DE ¿ESTAS SEGURO? en el evento Onclic-->
             <button type="button" class="btn btn-info" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModalModificarPublicacion' + item.idPublicacion">Modificar</button>
           </div>
         </div> 
@@ -236,7 +236,7 @@
             {{item.Nombre}}
           </p>
           <div class="btns">
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idProgramacion" >Eliminar</button>
+            <button type="button"  id="eliminar"class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idProgramacion" >Eliminar</button>
             <button type="button" class="btn btn-info" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModalModificarProgramacion' + item.idProgramacion">Modificar</button>
           </div>
         </div>
@@ -304,7 +304,7 @@
             {{item.Nombre}}
           </p>
           <div class="btns">
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idDocumentacion" >Eliminar</button>
+            <button type="button"  id="eliminar"class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idDocumentacion" >Eliminar</button>
             <button type="button" class="btn btn-info" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModalModificarDocumento' + item.idDocumentacion">Modificar</button>
           </div>
         </div> 
@@ -380,7 +380,7 @@
               
           </p>
           <div class="btns">
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idEncargado" >Eliminar</button>
+            <button type="button" id="eliminar" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idEncargado" >Eliminar</button>
             <button type="button" class="btn btn-info" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModalModificarEncargado' + item.idEncargado">Modificar</button>
           </div>
          

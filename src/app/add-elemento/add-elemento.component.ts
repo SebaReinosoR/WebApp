@@ -84,6 +84,12 @@ export class AddElementoComponent implements AfterViewInit{
       alert('Agregado correctamente');
          
     })
+    this.id_tema = 0; 
+    this.Body = '';
+    this.Link = '';
+    this.Referencia = '';
+    this.Nombre = '';
+    
   }
 
   //TEMA
@@ -93,6 +99,8 @@ export class AddElementoComponent implements AfterViewInit{
       alert('Agregado correctamente');
          
     })
+
+    this.Nombre = '';
   }
 
   //CODIGOS
@@ -102,6 +110,12 @@ export class AddElementoComponent implements AfterViewInit{
       alert('Agregado correctamente');
          
     })
+   
+    this.Body = '';
+    this.Link = '';
+    this.Referencia = '';
+    this.Nombre = '';
+
   }
 
   //Programacion
@@ -112,6 +126,9 @@ export class AddElementoComponent implements AfterViewInit{
       alert('Agregado correctamente');
          
     })
+    this.Body = '';
+    this.Link = '';
+    this.Nombre = '';
   }
 
   //Documentacion
@@ -121,6 +138,10 @@ export class AddElementoComponent implements AfterViewInit{
       alert('Agregado correctamente');
          
     })
+    this.Body = '';
+    this.Link = '';
+    this.Referencia = '';
+    this.Nombre = '';
   }
   
 
@@ -132,6 +153,16 @@ export class AddElementoComponent implements AfterViewInit{
       alert('Agregado correctamente');
          
     })
+
+    
+    this.Body = '';
+    this.Link = '';
+    this.Referencia = '';
+    this.Nombre = '';
+    this.Autor='';
+    this.Fecha=new Date();
+    
+    
   }
 
     // Encargados
@@ -142,6 +173,13 @@ export class AddElementoComponent implements AfterViewInit{
         alert('Agregado correctamente');
            
       })
+    this.Nombre = ''; 
+    this.Carrera='';
+    this.Especialidad='';
+    this.Investigacion=''
+    this.Universidad='';
+    this.Apellido='';
+
     }
 
 

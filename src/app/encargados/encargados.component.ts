@@ -8,8 +8,8 @@ import { EncargadosService } from '../services/encargados.service'; /* LLAMAR AL
 
 export class EncargadosComponent {
 
-  lista:any = {};    /*CREAR VARIABLE PARA LA LISTA DE ELEMENTOS*/
-
+  lista:any;    /*CREAR VARIABLE PARA LA LISTA DE ELEMENTOS*/
+  item:any = {};
   constructor(private services:EncargadosService){ /*ESTABLECER EL SERVICIO */
 
 
@@ -20,5 +20,12 @@ export class EncargadosComponent {
         this.lista = lista;
       });
 
+  }
+
+
+
+  EnvioDatos(item:any){
+    this.item=item;
+    console.log(this.item);
   }
 }

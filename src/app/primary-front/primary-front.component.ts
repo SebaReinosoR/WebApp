@@ -16,15 +16,7 @@ export class PrimaryFrontComponent {
   id:any;
   subtemasID:any;
 
-  constructor(private services:TemasService ,private ruta:ActivatedRoute) {
-    this.ruta.params.subscribe(datos=>{
-      this.id=datos["id"];
-      console.log(this.id);
-
-    });}
-
-
-
+  constructor(private services:TemasService ,private ruta:ActivatedRoute) {}
 
   ngOnInit() : void{
     this.services.getAlltemas().subscribe(temas => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
@@ -44,11 +36,11 @@ export class PrimaryFrontComponent {
 captura(id:number):any{
   this.services.getSubtemaById(id).subscribe(subtemasID =>
     {
-      return  this.subtemasID ;
+      this.subtemasID= subtemasID;
       
     });
 
-
+    
 }
 
 }

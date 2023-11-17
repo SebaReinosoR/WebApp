@@ -31,6 +31,12 @@
 .container-fluid::-webkit-scrollbar-track:active {
 background: transparent;
 }
+p{
+  cursor:pointer;
+}
+p:hover{
+  box-shadow: 1px 0 5px  white, 0em 0 .4em cadetblue;
+}
 
 .box{
   max-width: 30em;

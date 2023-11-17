@@ -2,8 +2,11 @@
   <div class="box" *ngFor="let tema of temas">
     <h4> {{tema.Nombre}} </h4>
 
-    <div *ngFor="let item of captura(subtemas.id_tema)">
-      <p  [routerLink]="['/Subtema',item.idSubtema]" routerLinkActive="router-link-active">{{item.Nombre}}</p>
+    <div *ngFor="let item of subtemas">
+      <div *ngIf="item.id_tema === tema.idTema">
+        <p  [routerLink]="['/Subtema',item.idSubtema]" routerLinkActive="router-link-active">{{item.Nombre}}</p>
+      </div>
+     
     </div>
 
     <button  type="button" class="btn" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + tema.idTema" >Ver todos</button>
@@ -16,8 +19,10 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
-          <div class="modal-body" *ngFor="let item of subtemasID; let i = index">
-            <p [routerLink]="['/Subtema',item.idSubtema]" data-bs-dismiss="modal"></p>
+          <div class="modal-body" *ngFor="let item of subtemas;">
+            <div *ngIf="item.id_tema === tema.idTema">
+              <p [routerLink]="['/Subtema',item.idSubtema]" data-bs-dismiss="modal">{{item.Nombre}}</p>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
