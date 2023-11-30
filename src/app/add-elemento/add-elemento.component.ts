@@ -58,7 +58,6 @@ export class AddElementoComponent implements AfterViewInit{
   });
 
    }
-    
    //Validators
    formTemas: FormGroup;
    

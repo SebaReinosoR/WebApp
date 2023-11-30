@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { AuthService } from './auth/auth.service';
 
 
 @Component({
@@ -13,8 +14,13 @@ import { Injectable } from '@angular/core';
 
 export class AppComponent {
   title = 'WebApp';
-  constructor( public router: Router ){}
-
+  isAuthenticated = false;
+  constructor( public router: Router, public authService: AuthService ){}
+  ngOnInit(): void {
+    this.authService.isAuthenticated().subscribe((isAuthenticated) => {
+      this.isAuthenticated = isAuthenticated;
+    });
+  }
 }
 /*
 @Injectable({

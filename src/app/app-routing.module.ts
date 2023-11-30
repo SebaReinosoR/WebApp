@@ -13,6 +13,7 @@ import { PubliVComponent}from './publicacion/publi.v/publi.v.component';
 import { SubtemaComponent } from './primary-front/subtema/subtema.component';
 import { PermisoRutasService } from './services/otros/permiso-rutas.service';
 import {SubtemaUDComponent} from './administrador/subtema-ud/subtema-ud.component';
+import { AuthGuard } from './auth/auth.guard';
 
 
 const routes: Routes = [
@@ -20,8 +21,8 @@ const routes: Routes = [
   {path: 'inicio', component: PrimaryFrontComponent },
   {path: '', redirectTo: 'inicio', pathMatch: 'full'},
   {path:'Login', component: InicioSesionComponent},
-  {path:'Admin',canActivate:[PermisoRutasService], component: AdministradorComponent},
-  {path:'Add',canActivate:[PermisoRutasService], component: AddElementoComponent},
+  {path:'Admin',canActivate:[AuthGuard], component: AdministradorComponent},
+  {path:'Add',canActivate:[AuthGuard], component: AddElementoComponent},
   {path:'Codigo', component: CodigoComponent},
   {path:'Documento', component:DocumentoComponent},
   {path:'Programacion', component:ProgramacionComponent},
@@ -31,7 +32,7 @@ const routes: Routes = [
   //rutas ID
   {path : 'PubliOpen/:id',component:PubliVComponent},
   {path : 'Subtema/:id', component:SubtemaComponent},
-  {path : 'Admin/SubtemaUD/:id',canActivate:[PermisoRutasService],component:SubtemaUDComponent}
+  {path : 'Admin/SubtemaUD/:id',canActivate:[AuthGuard],component:SubtemaUDComponent}
 
 ];
 

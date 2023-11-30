@@ -10,6 +10,7 @@ import {
   faAmbulance,
   faAnchorCircleCheck,
 } from "@fortawesome/free-solid-svg-icons";
+import { AuthService } from '../auth/auth.service';
 
 
 @Component({
@@ -20,8 +21,6 @@ import {
 export class NavBarComponent {
   searchIcon = faSearch;
   faHamburger = faHamburger;
-
-
 
   left_nav_lis_item: Array<{ title: string; icon: any,url:string }> = [
     {

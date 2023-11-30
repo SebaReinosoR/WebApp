@@ -6,9 +6,18 @@
       </div>
 
       <div class="user-info">
-        <fa-icon [icon]="userIcon" routerLink="Login"></fa-icon>  <!--NO OLVIDAR CAMBIAR EL ICONO AL INGRESAR COMO ADMIN  Y CAMBIAR EL BOTON A "CERRAR SESIÓN"-->
-        <b routerLink="Login" >Admin</b>
+        <fa-icon [icon]="userIcon" (click)="verificar()" ></fa-icon>  <!--NO OLVIDAR CAMBIAR EL ICONO AL INGRESAR COMO ADMIN  Y CAMBIAR EL BOTON A "CERRAR SESIÓN"-->
+        <div *ngIf="isAuthenticated; else loginButtons">
+          <b (click)="logout()">Cerrar Sesión</b>
+        </div>
+        <ng-template #loginButtons>
+          <b routerLink="/Login">Iniciar Sesión</b>
+        </ng-template>
       </div>
+
+      
+
+
     </div>
 
     </div>

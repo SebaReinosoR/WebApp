@@ -50,7 +50,7 @@ import { SubtemaUDComponent } from './administrador/subtema-ud/subtema-ud.compon
     PublicacionComponent,
     PubliVComponent,
     SubtemaComponent,
-    SubtemaUDComponent,
+    SubtemaUDComponent
    
   ],
   imports: [
