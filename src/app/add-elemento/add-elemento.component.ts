@@ -1,15 +1,16 @@
-import { Component , AfterViewInit } from '@angular/core';
+import { Component , AfterViewInit, OnInit } from '@angular/core';
 import {AdminService}  from '../services/admin.service'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { Location } from '@angular/common';
+import { finalize } from 'rxjs/internal/operators/finalize';
 
 @Component({
   selector: 'app-add-elemento',
   templateUrl: './add-elemento.component.html',
   styleUrls: ['./add-elemento.component.scss']
 })
-export class AddElementoComponent implements AfterViewInit{
-  
+export class AddElementoComponent implements AfterViewInit, OnInit {
+
   //variables
   id_admin: number = 1;
   Nombre: string;
@@ -19,17 +20,17 @@ export class AddElementoComponent implements AfterViewInit{
   Fecha: Date;
   Autor:string;
   Apellido: string;
-   Carrera: string;
-   Especialidad: string; 
-   Investigacion: string;
-   Universidad: string;
-  
-  
+  Carrera: string;
+  Especialidad: string;
+  Investigacion: string;
+  Universidad: string;
 
-   
 
-  constructor( private services:AdminService, private formBuilder: FormBuilder) {
-    this.id_tema = 0; 
+  temasAll: any[] = [];
+
+
+  constructor( private services:AdminService, private formBuilder: FormBuilder, private location: Location, private fb:FormBuilder) {
+    this.id_tema = 0;
     this.Body = '';
     this.Link = '';
     this.Referencia = '';
@@ -41,65 +42,97 @@ export class AddElementoComponent implements AfterViewInit{
     this.Especialidad='';
     this.Investigacion=''
     this.Universidad='';
-    
+
 
   // GET ALL TEMA
-    this.services.getTemas().subscribe(temasAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
+  this.services.getTemas().subscribe(temasAll =>
     {
       this.temasAll = temasAll;
-      
     });
 
-  //VALIDATORS
-  
-  this.formTemas = this.formBuilder.group({
-    titulo: ['', Validators.required],
-  
-  });
-
-   }
-   //Validators
-   formTemas: FormGroup;
-   
-  temasAll: any[] = [];
-  id_tema: number;
-  mostrarAlerta: boolean = true;
-  
-  seleccionarTema() {
-    // Verificar si se ha seleccionado un tema
-    this.mostrarAlerta =  (this.id_tema === 0);
-    console.log('Tema seleccionado:', this.id_tema);
-    console.log(this.mostrarAlerta);
   }
 
 
- /*--------------------------------------------POST-------------------------------------------- */ 
 
 
+  id_tema: number;
+  mostrarAlerta: boolean = true;
+
+
+
+  ngOnInit(): void {
+    this.myformTema = this.createmyformTema(); // CREAR LA VALIDACION TEMA
+
+  }
+
+
+
+
+ /*--------------------------------------------POST-------------------------------------------- */
+
+  //TEMA
+
+  PostTema(): void {
+    this.services.createTema(this.id_admin, this.Nombre).pipe(
+      finalize(() => {
+        this.updateTemas();
+      })
+    ).subscribe(() => {
+      console.log(this.Nombre)
+      this.Nombre = '';
+      this.myformTema.get('titulo')?.setValue('');
+      alert('Agregado correctamente');
+
+    });
+  }
+  //ACTUALIZAR LISTA DE TEMAS
+  updateTemas(){
+    this.services.getTemas().subscribe(temasAll =>
+      {
+        this.temasAll = temasAll;
+      });
+  }
+
+  //VALIDACIONES
+  public myformTema!:FormGroup;
+
+  private createmyformTema():FormGroup{
+    return this.fb.group({
+      titulo:['',[Validators.required]]
+    });
+  }
+
+  public submitFormTema(){
+    if(this.myformTema.invalid){
+      Object.values(this.myformTema.controls).forEach(control=>{
+        control.markAllAsTouched();
+      });
+      return;
+    }
+    this.Nombre= this.myformTema.get('titulo')?.value ?? '';
+    this.PostTema();
+
+  }
+
+  public get fTema():any{
+    return this.myformTema.controls;
+  }
 
   //SUBTEMA
   PostSubtema(): void {
     this.services.createSubtema(this.id_tema, this.Nombre, this.Body, this.Link, this.Referencia).subscribe(() => {
       alert('Agregado correctamente');
-         
+
     })
-    this.id_tema = 0; 
+    this.id_tema = 0;
     this.Body = '';
     this.Link = '';
     this.Referencia = '';
     this.Nombre = '';
-    
+
   }
-
-  //TEMA
-
-  PostTema(): void {
-    this.services.createTema(this.id_admin, this.Nombre).subscribe(() => {
-      alert('Agregado correctamente');
-         
-    })
-
-    this.Nombre = '';
+  seleccionarTema() {
+    this.mostrarAlerta =  (this.id_tema === 0 ) ;
   }
 
   //CODIGOS
@@ -107,9 +140,9 @@ export class AddElementoComponent implements AfterViewInit{
   PostCodigo(): void {
     this.services.createCodigo(this.id_admin, this.Nombre, this.Body, this.Link, this.Referencia).subscribe(() => {
       alert('Agregado correctamente');
-         
+
     })
-   
+
     this.Body = '';
     this.Link = '';
     this.Referencia = '';
@@ -123,7 +156,7 @@ export class AddElementoComponent implements AfterViewInit{
     this.services.createProgramacion(this.id_admin, this.Nombre, this.Body, this.Link).subscribe(() => {
       console.log(this)
       alert('Agregado correctamente');
-         
+
     })
     this.Body = '';
     this.Link = '';
@@ -135,14 +168,14 @@ export class AddElementoComponent implements AfterViewInit{
     this.services.createDocumentacion(this.id_admin, this.Nombre, this.Body, this.Link, this.Referencia).subscribe(() => {
       console.log(this)
       alert('Agregado correctamente');
-         
+
     })
     this.Body = '';
     this.Link = '';
     this.Referencia = '';
     this.Nombre = '';
   }
-  
+
 
   // Publicacion
 
@@ -150,18 +183,18 @@ export class AddElementoComponent implements AfterViewInit{
     this.services.createPublicacion(this.id_admin, this.Nombre,this.Fecha, this.Body, this.Link,this.Autor, this.Referencia).subscribe(() => {
       console.log(this)
       alert('Agregado correctamente');
-         
+
     })
 
-    
+
     this.Body = '';
     this.Link = '';
     this.Referencia = '';
     this.Nombre = '';
     this.Autor='';
     this.Fecha=new Date();
-    
-    
+
+
   }
 
     // Encargados
@@ -170,9 +203,9 @@ export class AddElementoComponent implements AfterViewInit{
       this.services.createEncargados(this.id_admin,this.Nombre, this.Apellido, this.Carrera, this.Especialidad, this.Investigacion, this.Universidad).subscribe(() => {
         console.log(this)
         alert('Agregado correctamente');
-           
+
       })
-    this.Nombre = ''; 
+    this.Nombre = '';
     this.Carrera='';
     this.Especialidad='';
     this.Investigacion=''
@@ -181,6 +214,8 @@ export class AddElementoComponent implements AfterViewInit{
 
     }
 
+
+/*--------------------------------------------FUNCION PARA SELECT PRINCIPAL-------------------------------------------- */
 
 
     arreglo: string[] = [
@@ -192,6 +227,8 @@ export class AddElementoComponent implements AfterViewInit{
       "Publicación",
       "Subtema",
     ];
+
+
 
     // Llamada a la función para cargar elementos en ngAfterViewInit
     ngAfterViewInit() {

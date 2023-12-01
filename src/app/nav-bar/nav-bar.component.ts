@@ -10,7 +10,7 @@ import {
   faAmbulance,
   faAnchorCircleCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../services/otros/auth/auth.service';
 
 
 @Component({

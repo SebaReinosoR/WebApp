@@ -22,13 +22,13 @@
               <br> <br>
               <button class="btn btn-subtema" [routerLink]="['/Admin/SubtemaUD/', item.idTema]">Ver Subtemas</button>
             </p>
-            
+
             <div class="btns">
               <button type="button" id="eliminar" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idTema" >Eliminar</button>
               <button type="button" class="btn btn-info" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModalModificarTema' + item.idTema">Modificar</button>
             </div>
-           
-          </div> 
+
+          </div>
 
           <div class="modal fade" [id]="'exampleModalModificarTema' + item.idTema" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -38,14 +38,14 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  
+
                   <form #Temaform="ngForm">
                     <div class="input-group mb-3">
-                      <span  class="input-group-text mb-3">Titulo</span>  
+                      <span  class="input-group-text mb-3">Titulo</span>
                       <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" id="input-styles">
                     </div>
                   </form>
-                 
+
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -53,7 +53,7 @@
                 </div>
               </div>
             </div>
-          </div> 
+          </div>
 
           <div class="modal fade" [id]="'exampleModal' + item.idTema" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -72,10 +72,10 @@
                 </div>
               </div>
             </div>
-          </div> 
-        </div> 
-    </div> 
-        
+          </div>
+        </div>
+    </div>
+
     <div class="input-group mb-3" *ngIf=" mostrarCodigos ">
       <div class="box-1" *ngFor="let item of codigosAll" > <!-- el for debe recorrer cada arreglo de la tabla .. tabla codigos for codigos etc-->
         <div class="box">
@@ -87,7 +87,7 @@
             <button type="button" id="eliminar" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idCodigos" >Eliminar</button>
             <button type="button" class="btn btn-info" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModalModificarCodigos' + item.idCodigos">Modificar</button>
           </div>
-        </div> 
+        </div>
         <div class="modal fade" [id]="'exampleModalModificarCodigos' + item.idCodigos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -96,29 +96,29 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                
+
                 <form #Codigoform="ngForm">
                   <div class="input-group mb-3">
-                    <span  class="input-group-text mb-3">Titulo</span>  
+                    <span  class="input-group-text mb-3">Titulo</span>
                     <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" id="input-styles">
                   </div>
-    
+
                   <div >
                     <span  class="input-group mb-3" >Cuerpo</span>
                     <textarea [(ngModel)]="item.Body" class="form-control mb-3" id="exampleFormControlTextarea1" rows="5"  name="Body">{{item.Body}}</textarea>
                   </div>
-                  
+
                   <div class="input-group mb-3">
-                    <span class="input-group-text mb-3" id="link">Link</span>  
+                    <span class="input-group-text mb-3" id="link">Link</span>
                     <input [(ngModel)]="item.Link" name="Link" type="text" class="input-styles" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
                   </div>
-                  
+
                   <div class="input-group mb-3">
                     <span class="input-group-text mb-3" id="Referencias">Referencias</span>
                     <input [(ngModel)]="item.Referencia"name="Referencia" type="text" class="input-styles" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
                 </form>
-               
+
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -126,7 +126,7 @@
               </div>
             </div>
           </div>
-        </div> 
+        </div>
         <div class="modal fade" [id]="'exampleModal' + item.idCodigos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -143,10 +143,10 @@
               </div>
             </div>
           </div>
-        </div> 
-      </div>    
-    </div> 
-  
+        </div>
+      </div>
+    </div>
+
     <div class="input-group mb-3" *ngIf=" mostrarPublicacion ">
       <div class="box-1" *ngFor="let item of publiAll" >
         <div class="box">
@@ -158,7 +158,7 @@
             <button type="button" id="eliminar" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idPublicacion" >Eliminar</button> <!--HAY QUE AGREGAR UN ALERTA DE ¿ESTAS SEGURO? en el evento Onclic-->
             <button type="button" class="btn btn-info" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModalModificarPublicacion' + item.idPublicacion">Modificar</button>
           </div>
-        </div> 
+        </div>
         <div class="modal fade" [id]="'exampleModalModificarPublicacion' + item.idPublicacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -167,38 +167,38 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                
+
                 <form #Publiform="ngForm">
                   <div class="input-group mb-3">
-                    <span  class="input-group-text mb-3">Titulo</span>  
+                    <span  class="input-group-text mb-3">Titulo</span>
                     <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" id="input-styles">
                   </div>
-                  
+
                   <div class="input-group mb-3">
-                    <span  class="input-group-text" >Autor</span>  
+                    <span  class="input-group-text" >Autor</span>
                     <input [(ngModel)]="item.Autor"  type="text" aria-label="name" name="Autor" class="input-styles"  placeholder="Nombre">
                   </div>
 
                   <div class="input-group mb-3" >
-                    <span  class="input-group-text"  for="Fecha">Fecha</span>  
-                    <input [(ngModel)]="item.Fecha" type="date" aria-label="name" name="Fecha" class="input-styles">
+                    <span  class="input-group-text"  for="Fecha">Fecha</span>
+                    <input [(ngModel)]="item.Fecha" type="number" aria-label="name" name="Fecha" class="input-styles">
                   </div>
                   <div >
                     <span  class="input-group mb-3" >Cuerpo</span>
                     <textarea [(ngModel)]="item.Body" class="form-control mb-3" id="exampleFormControlTextarea1" rows="5"  name="Body">{{item.Body}}</textarea>
                   </div>
-                  
+
                   <div class="input-group mb-3">
-                    <span class="input-group-text mb-3" id="link">Link</span>  
+                    <span class="input-group-text mb-3" id="link">Link</span>
                     <input [(ngModel)]="item.Link" name="Link" type="text" class="input-styles" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
                   </div>
-                  
+
                   <div class="input-group mb-3">
                     <span class="input-group-text mb-3" id="Referencias">Referencias</span>
                     <input [(ngModel)]="item.Referencia"name="Referencia" type="text" class="input-styles" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
                 </form>
-               
+
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -225,8 +225,8 @@
               </div>
             </div>
           </div>
-        </div> 
-      </div>   
+        </div>
+      </div>
     </div>
 
     <div class="input-group mb-3" *ngIf=" mostrarProgramacion ">
@@ -240,7 +240,7 @@
             <button type="button" class="btn btn-info" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModalModificarProgramacion' + item.idProgramacion">Modificar</button>
           </div>
         </div>
-        
+
         <div class="modal fade" [id]="'exampleModalModificarProgramacion' + item.idProgramacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -249,25 +249,25 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                
+
                 <form #Prograform="ngForm">
                   <div class="input-group mb-3">
-                    <span  class="input-group-text mb-3">Titulo</span>  
+                    <span  class="input-group-text mb-3">Titulo</span>
                     <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" id="input-styles">
                   </div>
-    
+
                   <div >
                     <span  class="input-group mb-3" >Cuerpo</span>
                     <textarea [(ngModel)]="item.Body" class="form-control mb-3" id="exampleFormControlTextarea1" rows="5"  name="Body">{{item.Body}}</textarea>
                   </div>
-                  
+
                   <div class="input-group mb-3">
-                    <span class="input-group-text mb-3" id="link">Link</span>  
+                    <span class="input-group-text mb-3" id="link">Link</span>
                     <input [(ngModel)]="item.Link" name="Link" type="text" class="input-styles" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
                   </div>
-                  
+
                 </form>
-               
+
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -275,7 +275,7 @@
               </div>
             </div>
           </div>
-        </div> 
+        </div>
 
         <div class="modal fade" [id]="'exampleModal' + item.idProgramacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -293,8 +293,8 @@
               </div>
             </div>
           </div>
-        </div> 
-      </div>   
+        </div>
+      </div>
     </div>
 
     <div class="input-group mb-3" *ngIf=" mostrarDocumentacion ">
@@ -307,7 +307,7 @@
             <button type="button"  id="eliminar"class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idDocumentacion" >Eliminar</button>
             <button type="button" class="btn btn-info" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModalModificarDocumento' + item.idDocumentacion">Modificar</button>
           </div>
-        </div> 
+        </div>
         <div class="modal fade" [id]="'exampleModalModificarDocumento' + item.idDocumentacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -316,29 +316,29 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                
+
                 <form #Documentacionform="ngForm">
                   <div class="input-group mb-3">
-                    <span  class="input-group-text mb-3">Titulo</span>  
+                    <span  class="input-group-text mb-3">Titulo</span>
                     <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" id="input-styles">
                   </div>
-    
+
                   <div >
                     <span  class="input-group mb-3" >Cuerpo</span>
                     <textarea [(ngModel)]="item.Body" class="form-control mb-3" id="exampleFormControlTextarea1" rows="5"  name="Body">{{item.Body}}</textarea>
                   </div>
-                  
+
                   <div class="input-group mb-3">
-                    <span class="input-group-text mb-3" id="link">Link</span>  
+                    <span class="input-group-text mb-3" id="link">Link</span>
                     <input [(ngModel)]="item.Link" name="Link" type="text" class="input-styles" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
                   </div>
-                  
+
                   <div class="input-group mb-3">
                     <span class="input-group-text mb-3" id="Referencias">Referencias</span>
                     <input [(ngModel)]="item.Referencia"name="Referencia" type="text" class="input-styles" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
                 </form>
-               
+
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -346,7 +346,7 @@
               </div>
             </div>
           </div>
-        </div>   
+        </div>
         <div class="modal fade" [id]="'exampleModal' + item.idDocumentacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -364,7 +364,7 @@
             </div>
           </div>
         </div>
-      </div>   
+      </div>
     </div>
 
     <div class="input-group mb-3" *ngIf=" mostrarEncargados ">
@@ -374,17 +374,17 @@
             <br> <br>
               {{item.Carrera}}
             <br> <br>
-              {{item.Universidad}} 
+              {{item.Universidad}}
             <br> <br>
-              {{item.Investigacion}} 
-              
+              {{item.Investigacion}}
+
           </p>
           <div class="btns">
             <button type="button" id="eliminar" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idEncargado" >Eliminar</button>
             <button type="button" class="btn btn-info" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModalModificarEncargado' + item.idEncargado">Modificar</button>
           </div>
-         
-        </div> 
+
+        </div>
 
         <div class="modal fade" [id]="'exampleModalModificarEncargado' + item.idEncargado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -394,33 +394,33 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                
+
                 <form #Encargadoform="ngForm">
-                 
-                  <div class="input-group mb-3"> 
+
+                  <div class="input-group mb-3">
                     <span class="input-group-text mb-3" >Nombre</span>
                     <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" class="input-style">
                     <span class="input-group-text mb-3">Apellido</span>
-                    <input [(ngModel)]="item.Apellido" name="Apellido"  type="text" aria-label="apellido" class="input-style"> 
+                    <input [(ngModel)]="item.Apellido" name="Apellido"  type="text" aria-label="apellido" class="input-style">
                   </div>
                   <div class="input-group mb-3">
                     <span class="input-group-text mb-3" id="Carrera">Carrera</span>
                     <input [(ngModel)]="item.Carrera" name="Carrera" type="text" class="input-style" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
                   <div class="input-group mb-3" >
-                    <span class="input-group-text mb-3" id="Especialidad">Especialidad</span> 
+                    <span class="input-group-text mb-3" id="Especialidad">Especialidad</span>
                     <input [(ngModel)]="item.Especialidad" name="Especialidad" type="text" class="input-style" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
                   <div class="input-group mb-3" >
-                    <span class="input-group-text mb-3" id="Investigación">Investigación</span> 
+                    <span class="input-group-text mb-3" id="Investigación">Investigación</span>
                     <input [(ngModel)]="item.Investigacion" name="Investigacion" type="text" class="input-style" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
                   <div class="input-group mb-3" >
-                    <span class="input-group-text mb-3" id="Universidad">Universidad</span> 
+                    <span class="input-group-text mb-3" id="Universidad">Universidad</span>
                     <input [(ngModel)]="item.Universidad" name="Universidad" type="text" class="input-style" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
                 </form>
-               
+
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -428,7 +428,7 @@
               </div>
             </div>
           </div>
-        </div> 
+        </div>
 
         <div class="modal fade" [id]="'exampleModal' + item.idEncargado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -447,14 +447,14 @@
             </div>
           </div>
         </div>
-      </div>   
+      </div>
     </div>
 
-   
-    
+
+
     </div>
-    
- 
+
+
 
 </div>
 
