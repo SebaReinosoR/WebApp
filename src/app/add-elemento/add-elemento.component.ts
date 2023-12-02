@@ -1,16 +1,19 @@
-import { Component , AfterViewInit } from '@angular/core';
+import { Component , OnDestroy, AfterViewInit , ChangeDetectorRef} from '@angular/core';
 import {AdminService}  from '../services/admin.service'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-elemento',
   templateUrl: './add-elemento.component.html',
   styleUrls: ['./add-elemento.component.scss']
 })
-export class AddElementoComponent implements AfterViewInit{
+export class AddElementoComponent implements AfterViewInit, OnDestroy{
   
   //variables
+  nombreArchivoProgramacion: string = '';
+  nombreArchivoDocumentacion: string = '';
+  nombreArchivoPublicacion: string = '';
   id_admin: number = 1;
   Nombre: string;
   Body: string;
@@ -23,12 +26,14 @@ export class AddElementoComponent implements AfterViewInit{
    Especialidad: string; 
    Investigacion: string;
    Universidad: string;
-  
-  
-
+  imagenEncargado: File | null = null;
+  imagenPublicacion: File | null = null;
+  imagenDocumentacion: File | null = null;
+  imagenProgramacion: File | null = null;
+  private subscriptions = new Subscription();
    
 
-  constructor( private services:AdminService, private formBuilder: FormBuilder) {
+  constructor( private services:AdminService, private formBuilder: FormBuilder,private cdr: ChangeDetectorRef) {
     this.id_tema = 0; 
     this.Body = '';
     this.Link = '';
@@ -58,6 +63,119 @@ export class AddElementoComponent implements AfterViewInit{
   });
 
    }
+
+  ngOnInit() {
+    this.loadFormDataFromLocalStorage();
+  }
+
+  saveFormDataToLocalStorage(): void {
+    const formData = {
+      Nombre: this.Nombre,
+      Body: this.Body,
+      Link: this.Link,
+      Referencia: this.Referencia,
+      Fecha: this.Fecha,
+      Autor: this.Autor,
+      Apellido: this.Apellido,
+      Carrera: this.Carrera,
+      Especialidad: this.Especialidad,
+      Investigacion: this.Investigacion,
+      Universidad: this.Universidad
+      // ... otras propiedades ...
+    };
+    localStorage.setItem('formData', JSON.stringify(formData));
+  }
+  loadFormDataFromLocalStorage(): void {
+    const savedFormData = localStorage.getItem('formData');
+    if (savedFormData) {
+      const formData = JSON.parse(savedFormData);
+      this.Nombre = formData.Nombre;
+      this.Body = formData.Body;
+      this.Link = formData.Link;
+      this.Referencia = formData.Referencia;
+      this.Fecha = formData.Fecha;
+      this.Autor = formData.Autor;
+      this.Apellido = formData.Apellido;
+      this.Carrera = formData.Carrera;
+      this.Especialidad = formData.Especialidad;
+      this.Investigacion = formData.Investigacion;
+      this.Universidad = formData.Universidad;
+      // ... establecer otras propiedades ...
+    }
+  }
+  ngOnDestroy() {
+    // Limpia tus suscripciones y cualquier otra limpieza necesaria
+    this.subscriptions.unsubscribe();
+  }
+  
+  onFileChange(event: Event, section: string): void {
+    console.log('Se ha cambiado un archivo en la sección:', section);
+    this.saveFormDataToLocalStorage();
+  
+    const target = event.target as HTMLInputElement;
+    
+    if (target.files && target.files.length) {
+      const file = target.files[0];
+      if (file) {
+        const fileName = file.name; // Obtén el nombre del archivo
+  
+        switch (section) {
+          case 'programacion':
+            this.imagenProgramacion = file;
+            this.nombreArchivoProgramacion = fileName; // Almacena el nombre del archivo
+            break;
+          case 'documentacion':
+            this.imagenDocumentacion = file;
+            this.nombreArchivoDocumentacion = fileName;
+            break;
+          case 'publicacion':
+            this.imagenPublicacion = file;
+            this.nombreArchivoPublicacion = fileName;
+            break;
+          // ... otros casos si los hay
+        }
+
+        // Limpia el valor del input de archivo
+        target.value = '';
+
+        // Forzar la actualización de la vista
+        this.cdr.detectChanges();
+      } else {
+        // Manejar el caso cuando file es null
+      }
+      
+    }
+    
+  }
+  onSubmitForm(): void {
+    // Determina qué acción tomar basándose en la lógica de tu formulario
+    // Por ejemplo, si tienes un selector para el tipo de contenido a enviar
+    switch (this.opcionSeleccionada) {
+      case 'Temas':
+        this.PostTema();
+        break;
+      case 'Subtema':
+        this.PostSubtema();
+        break;
+      case 'Codigos':
+        this.PostCodigo();
+        break;
+      case 'Programación':
+        this.PostProgramacion();
+        break;
+      case 'Documentación':
+        this.PostDocumentacion();
+        break;
+      case 'Publicación':
+        this.PostPublicacion();
+        break;
+      case 'Encargados':
+        this.PostEncargados();
+        break;
+      // ... otros casos según sea necesario ...
+    }
+  }
+  
    //Validators
    formTemas: FormGroup;
    
@@ -73,6 +191,7 @@ export class AddElementoComponent implements AfterViewInit{
   }
 
 
+
  /*--------------------------------------------POST-------------------------------------------- */ 
 
 
@@ -81,7 +200,8 @@ export class AddElementoComponent implements AfterViewInit{
   PostSubtema(): void {
     this.services.createSubtema(this.id_tema, this.Nombre, this.Body, this.Link, this.Referencia).subscribe(() => {
       alert('Agregado correctamente');
-         
+      this.resetFormSubtema();
+      localStorage.removeItem('formData'); // Limpiar el almacenamiento local 
     })
     this.id_tema = 0; 
     this.Body = '';
@@ -90,16 +210,28 @@ export class AddElementoComponent implements AfterViewInit{
     this.Nombre = '';
     
   }
+  resetFormSubtema(): void {
+    this.id_tema = 0;
+    this.Nombre = '';
+    this.Body = '';
+    this.Link = '';
+    this.Referencia = '';
+    // ... restablecer otros campos para 'Subtema' ...
+  }
 
   //TEMA
 
   PostTema(): void {
     this.services.createTema(this.id_admin, this.Nombre).subscribe(() => {
       alert('Agregado correctamente');
-         
+      this.resetFormTema();  
     })
 
     this.Nombre = '';
+  }
+  resetFormTema(): void {
+    this.Nombre = '';
+    // ... restablecer cualquier otro campo relevante para 'Tema' ...
   }
 
   //CODIGOS
@@ -107,7 +239,7 @@ export class AddElementoComponent implements AfterViewInit{
   PostCodigo(): void {
     this.services.createCodigo(this.id_admin, this.Nombre, this.Body, this.Link, this.Referencia).subscribe(() => {
       alert('Agregado correctamente');
-         
+      this.resetFormCodigo();   
     })
    
     this.Body = '';
@@ -116,72 +248,172 @@ export class AddElementoComponent implements AfterViewInit{
     this.Nombre = '';
 
   }
-
-  //Programacion
-
-  PostProgramacion(): void {
-    this.services.createProgramacion(this.id_admin, this.Nombre, this.Body, this.Link).subscribe(() => {
-      console.log(this)
-      alert('Agregado correctamente');
-         
-    })
-    this.Body = '';
-    this.Link = '';
+  resetFormCodigo(): void {
     this.Nombre = '';
-  }
-
-  //Documentacion
-  PostDocumentacion(): void {
-    this.services.createDocumentacion(this.id_admin, this.Nombre, this.Body, this.Link, this.Referencia).subscribe(() => {
-      console.log(this)
-      alert('Agregado correctamente');
-         
-    })
     this.Body = '';
     this.Link = '';
     this.Referencia = '';
-    this.Nombre = '';
+    // ... restablecer cualquier otro campo relevante para 'Código' ...
+  }
+  //Programacion
+
+  PostProgramacion(): void {
+    console.log('Intentando agregar programación');
+    console.log('Imagen de programación:', this.imagenProgramacion);
+    if (!this.imagenProgramacion) {
+      alert('Por favor, selecciona una imagen para la programación.');
+      return;
+    }
+  
+    this.subscriptions.add(
+      this.services.createProgramacion(
+        this.id_admin,
+        this.Nombre,
+        this.Body,
+        this.Link,
+        this.imagenProgramacion
+      ).subscribe({
+        next: (response) => {
+          console.log('Programación agregada correctamente', response);
+          this.resetFormProgramacion();
+        },
+        error: (error) => {
+          console.error('Error al agregar la programación:', error);
+        }
+      })
+    );
   }
   
+  resetFormProgramacion(): void {
+    this.Nombre = '';
+    this.Body = '';
+    this.Link = '';
+    this.Referencia = '';
+    this.nombreArchivoProgramacion = '';
+    this.imagenProgramacion = null;
+   
+  }
+  //Documentacion
+  PostDocumentacion(): void {
+    if (!this.imagenDocumentacion) {
+      alert('Por favor, selecciona una imagen para la documentación.');
+      return;
+    }
+  
+    this.subscriptions.add(
+      this.services.createDocumentacion(
+        this.id_admin,
+        this.Nombre,
+        this.Body,
+        this.Link,
+        this.Referencia,
+        this.imagenDocumentacion
+      ).subscribe({
+        next: (response) => {
+          console.log('Documentación agregada correctamente', response);
+          this.resetFormDocumentacion();
+        },
+        error: (error) => {
+          console.error('Error al agregar la documentación:', error);
+        }
+      })
+    );
+  }
+  
+  resetFormDocumentacion(): void {
+    this.Nombre = '';
+    this.Body = '';
+    this.Link = '';
+    this.Referencia = '';
+    this.imagenDocumentacion = null;
+  }
 
   // Publicacion
 
   PostPublicacion(): void {
-    this.services.createPublicacion(this.id_admin, this.Nombre,this.Fecha, this.Body, this.Link,this.Autor, this.Referencia).subscribe(() => {
-      console.log(this)
-      alert('Agregado correctamente');
-         
-    })
-
     
-    this.Body = '';
-    this.Link = '';
-    this.Referencia = '';
-    this.Nombre = '';
-    this.Autor='';
-    this.Fecha=new Date();
+      // Asegúrate de que todos los campos necesarios estén definidos
+      if (!this.imagenPublicacion) {
+        alert('Por favor, selecciona una imagen para la publicación.');
+        return;
+      }
     
-    
-  }
-
+      this.subscriptions.add(
+        this.services.createPublicacion(
+          this.id_admin,
+          this.Nombre,
+          this.Fecha,
+          this.Body,
+          this.Link,
+          this.Autor,
+          this.Referencia,
+          this.imagenPublicacion
+        ).subscribe({
+          next: (response) => {
+            console.log('Publicación agregada correctamente', response);
+            this.resetFormPublicacion();
+          },
+          error: (error) => {
+            console.error('Error al agregar la publicación:', error);
+          }
+        })
+      );
+    }
+    resetFormPublicacion(): void {
+      // Restablecer los campos del formulario de publicaciones a sus valores iniciales
+      this.Nombre = '';
+      this.Fecha = new Date();
+      this.Body = '';
+      this.Link = '';
+      this.Autor = '';
+      this.Referencia = '';
+      this.imagenPublicacion = null;
+    }
+  
+    // ... otros métodos del componente ...
+  
     // Encargados
 
     PostEncargados(): void {
-      this.services.createEncargados(this.id_admin,this.Nombre, this.Apellido, this.Carrera, this.Especialidad, this.Investigacion, this.Universidad).subscribe(() => {
-        console.log(this)
-        alert('Agregado correctamente');
-           
-      })
-    this.Nombre = ''; 
-    this.Carrera='';
-    this.Especialidad='';
-    this.Investigacion=''
-    this.Universidad='';
-    this.Apellido='';
-
+      if (!this.imagenEncargado) {
+        alert('Por favor, selecciona una imagen.');
+        return;
+      }
+    
+      this.subscriptions.add(
+        this.services.createEncargados(
+          this.id_admin,
+          this.Nombre,
+          this.Apellido,
+          this.Carrera,
+          this.Especialidad,
+          this.Investigacion,
+          this.Universidad,
+          this.imagenEncargado
+        ).subscribe({
+          next: (response) => {
+            console.log('Encargado agregado correctamente', response);
+            this.resetFormEncargados();
+          },
+          error: (error) => {
+            console.error('Error al agregar el encargado:', error);
+          }
+        })
+      );
     }
 
-
+  resetFormEncargados(): void {
+    // Restablecer los campos del formulario a sus valores iniciales
+    this.id_admin = 1;
+    this.Nombre = '';
+    this.Apellido = '';
+    this.Carrera = '';
+    this.Especialidad = '';
+    this.Investigacion = '';
+    this.Universidad = '';
+    this.imagenEncargado = null;
+    // ... restablecer cualquier otro campo relevante
+  }
 
     arreglo: string[] = [
       "Temas",

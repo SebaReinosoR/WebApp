@@ -9,12 +9,12 @@ const getEncargadoById = (id) => {
   return db.query('SELECT * FROM encargados WHERE idEncargado = ?', [id]);
 };
 
-const createEncargado = (id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad) => {
-  return db.query('INSERT INTO encargados (id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad) VALUES (?, ?,?,?,?,?,?)', [id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad]
+const createEncargado = (id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad,imagenPath) => {
+  return db.query('INSERT INTO encargados (id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad,imagen) VALUES (?, ?,?,?,?,?,?,?)', [id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad, imagenPath]
   )};//
 
-const updateEncargado = (idEncargado,id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad) => {
-  return db.query('UPDATE encargados SET id_admin =? ,Nombre = ?, Apellido = ? , Carrera = ?, Especialidad = ?, Investigacion = ?, Universidad = ? WHERE idEncargado = ?', [id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad, idEncargado]);
+const updateEncargado = (idEncargado,id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad,imagenPath) => {
+  return db.query('UPDATE encargados SET id_admin =? ,Nombre = ?, Apellido = ? , Carrera = ?, Especialidad = ?, Investigacion = ?, Universidad = ?, imagen = ? WHERE idEncargado = ?', [id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad, imagenPath, idEncargado]);
 };
 
 const deleteEncargado = (id) => {

@@ -118,6 +118,13 @@
                 <span class="input-group-text" id="Referencias">Referencias</span>
                 <input type="text" class="form-control" aria-label="Sizing example input" name="Referencia"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Referencia">
               </div>
+              <!-- Campo para la carga de la imagen de Programación -->
+              <div class="input-group mb-3">
+                <div class="custom-file-input" (click)="fileInput.click()">
+                  {{ nombreArchivoProgramacion || 'Sube un archivo' }}
+                </div>
+                <input type="file" #fileInput (change)="onFileChange($event, 'programacion')" hidden>
+              </div>
 
               <div class="btn">
                 <button type="submit" class="btn btn-success"  (click)="PostProgramacion()">Agregar</button>

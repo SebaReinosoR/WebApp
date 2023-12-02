@@ -93,30 +93,55 @@ return this.http.post(this.api_codigo, codigoData);
 
 }
 
-public createProgramacion(id_admin: number, Nombre: string, Body: string, Link: string): Observable<any> {
-  const PrograData = { id_admin, Nombre, Body, Link};
+public createProgramacion(id_admin: number, Nombre: string, Body: string, Link: string, imagen:File): Observable<any> {
+  const formData = new FormData();
+  formData.append('id_admin', id_admin.toString());
+  formData.append('Nombre', Nombre);
+  formData.append('Body', Body);
+  formData.append('Link', Link);
+  formData.append('imagen', imagen);
 
-return this.http.post(this.api_programacion, PrograData);
-
-}
-public createDocumentacion(id_admin: number, Nombre: string, Body: string, Link: string, Referencia: string): Observable<any> {
-  const DocuData = { id_admin, Nombre, Body, Link , Referencia};
-
-return this.http.post(this.api_documentacion, DocuData);
-
+  return this.http.post(this.api_programacion, formData);
 }
 
-public createPublicacion(id_admin: number, Nombre: string, Fecha:Date, Body: string, Link: string, Autor:string, Referencia: string): Observable<any> {
-  const PubliData = { id_admin,Nombre,Fecha,Body,Referencia,Autor, Link};
+public createDocumentacion(id_admin: number, Nombre: string, Body: string, Link: string, Referencia: string, imagen:File): Observable<any> {
+  const formData = new FormData();
+  formData.append('id_admin', id_admin.toString());
+  formData.append('Nombre', Nombre);
+  formData.append('Body', Body);
+  formData.append('Link', Link);
+  formData.append('Referencia', Referencia);
+  formData.append('imagen', imagen);
 
-return this.http.post(this.api_publicaciones, PubliData);
-
+  return this.http.post(this.api_documentacion, formData);
 }
 
-public createEncargados(id_admin: number, Nombre: string, Apellido: string, Carrera: string, Especialidad: string, Investigacion: string,Universidad: string): Observable<any> {
-  const EncargadosData = { id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad};
+public createPublicacion(id_admin: number, Nombre: string, Fecha:Date, Body: string, Link: string, Autor:string, Referencia: string, imagen:File): Observable<any> {
+  const formData = new FormData();
+  formData.append('id_admin', id_admin.toString());
+  formData.append('Nombre', Nombre);
+  formData.append('Fecha', Fecha.toISOString());
+  formData.append('Body', Body);
+  formData.append('Link', Link);
+  formData.append('Autor', Autor);
+  formData.append('Referencia', Referencia);
+  formData.append('imagen', imagen);
 
-return this.http.post(this.api_encargados, EncargadosData);
+  return this.http.post(this.api_publicaciones, formData);
+}
+
+public createEncargados(id_admin: number, Nombre: string, Apellido: string, Carrera: string, Especialidad: string, Investigacion: string,Universidad: string, imagen:File): Observable<any> {
+  const formData = new FormData();
+  formData.append('id_admin', id_admin.toString());
+  formData.append('Nombre', Nombre);
+  formData.append('Apellido', Apellido);
+  formData.append('Carrera', Carrera);
+  formData.append('Especialidad', Especialidad);
+  formData.append('Investigacion', Investigacion);
+  formData.append('Universidad', Universidad);
+  formData.append('imagen', imagen);
+
+  return this.http.post(this.api_encargados, formData);
 
 }
 //PUT
@@ -132,27 +157,63 @@ public PutTema(id: number, id_admin: number, Nombre: string): Observable<any> {
   return this.http.put(url, body);
 }
 
-public PutProgramacion(id: number, id_admin: number, Nombre: string, Body: string, Link: string): Observable<any> {
+public PutProgramacion(id: number, id_admin: number, Nombre: string, Body: string, Link: string, imagen:File): Observable<any> {
   const url = `${this.api_programacion}/${id}`;
-  const body = {id_admin, Nombre, Body, Link};
-  return this.http.put(url, body);
+  const formData = new FormData();
+  formData.append('id_admin', id_admin.toString());
+  formData.append('Nombre', Nombre);
+  formData.append('Body', Body);
+  formData.append('Link', Link);
+  if (imagen) {
+    formData.append('imagen', imagen);
+  }
+
+  return this.http.put(url, formData);
 }
 
-public PutPublicacion(id: number, id_admin: number,Nombre: string, Fecha: Date, Body: string, Referencia: string,Autor:string, Link: string): Observable<any> {
+public PutPublicacion(id: number, id_admin: number,Nombre: string, Fecha: Date, Body: string, Referencia: string,Autor:string, Link: string, imagen:File): Observable<any> {
   const url = `${this.api_publicaciones}/${id}`;
-  const body = {id_admin, Nombre,Fecha,Body,Referencia,Autor, Link};
-  return this.http.put(url, body);
+  const formData = new FormData();
+  formData.append('id_admin', id_admin.toString());
+  formData.append('Nombre', Nombre);
+  formData.append('Fecha', Fecha.toISOString());
+  formData.append('Body', Body);
+  formData.append('Link', Link);
+  formData.append('Autor', Autor);
+  formData.append('Referencia', Referencia);
+  formData.append('imagen', imagen);
+
+  return this.http.put(url, formData);
 }
 
-public PutDocumentacion(id: number, id_admin: number, Nombre: string, Body: string, Link: string, Referencia: string): Observable<any> {
+
+public PutDocumentacion(id: number, id_admin: number, Nombre: string, Body: string, Link: string, Referencia: string, imagen:File): Observable<any> {
   const url = `${this.api_documentacion}/${id}`;
-  const body = {id_admin, Nombre, Body, Link, Referencia};
-  return this.http.put(url, body);
+  const formData = new FormData();
+  formData.append('id_admin', id_admin.toString());
+  formData.append('Nombre', Nombre);
+  formData.append('Body', Body);
+  formData.append('Link', Link);
+  formData.append('Referencia', Referencia);
+  if (imagen) {
+    formData.append('imagen', imagen);
+  }
+
+  return this.http.put(url, formData);
 }
-public PutEncargados(id: number, id_admin: number, Nombre: string, Apellido: string, Carrera: string, Especialidad: string, Investigacion: string, Universidad: string): Observable<any> {
+public PutEncargados(id: number, id_admin: number, Nombre: string, Apellido: string, Carrera: string, Especialidad: string, Investigacion: string, Universidad: string, imagen:File): Observable<any> {
   const url = `${this.api_encargados}/${id}`;
-  const body = {id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad};
-  return this.http.put(url, body);
+  const formData = new FormData();
+  formData.append('id_admin', id_admin.toString());
+  formData.append('Nombre', Nombre);
+  formData.append('Apellido', Apellido);
+  formData.append('Carrera', Carrera);
+  formData.append('Especialidad', Especialidad);
+  formData.append('Investigacion', Investigacion);
+  formData.append('Universidad', Universidad);
+  formData.append('imagen', imagen);
+
+  return this.http.put(url, formData);
 }
 
 public PutSubtema(id: number, id_tema: number, Nombre: string, Body: string, Link: string, Referencia: string): Observable<any> {
@@ -192,6 +253,7 @@ public deleteTema(id: number): Observable<any> {
   const url = `${this.api_temas}/${id}`;
   return this.http.delete(url);
 }
+
 
 
 }
