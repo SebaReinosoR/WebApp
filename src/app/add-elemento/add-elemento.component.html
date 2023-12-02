@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="box-1">
     <h1>Agregar</h1>
-    </div>  
+    </div>
 
       <div class="box" >
 
@@ -12,17 +12,43 @@
 
           <div class="box-2">
 
-            
+
             <!-------------------------------------------------AGREGAR --------------------------------------------------->
+
+
+
+
+
+            <!-------------------------------------------------TEMA --------------------------------------------------->
+
+            <div  id="Tema" *ngIf="mostrarTemas">
+
+            <form [formGroup]="myformTema" (ngSubmit)="submitFormTema()">
+              <div class="input-group mb-3">
+                <span for="titulo" class="input-group-text" for="Nombre">Titulo</span>
+                <input id="titulo" formControlName="titulo" [class.is-invalid]="fTema.titulo.errors && fTema.titulo.touched" type="text" aria-label="name" name="Nombre" class="form-control" placeholder="Nombre del Tema" required />
+                <div id="validationTema" class="invalid-feedback" *ngIf="fTema.titulo.errors && fTema.titulo.touched">
+                  <div *ngIf="fTema.titulo.errors.required">Ingresar Tema OBLIGATORIO</div>
+                </div>
+              </div>
+              <div class="btn">
+                <button class="btn btn-success" type="submit">Agregar</button>
+              </div>
+            </form>
+
+            </div>
+
+             <!-------------------------------------------------SUBTEMA --------------------------------------------------->
+
             <div id="Subtema" *ngIf="mostrarSubtema">
-              
+
               <div class="input-group has-validation mb-3" >
-                <span  class="input-group-text"  for="Nombre">Titulo</span>  
+                <span  class="input-group-text"  for="Nombre">Titulo</span>
                 <input [(ngModel)]="Nombre" type="text" aria-label="name" name="Nombre" class="form-control"  placeholder="Nombre del subtema" required >
               </div>
 
               <div class="input-group mb-3">
-                <select class="form-select" name="id_tema" [(ngModel)]="id_tema" (change)="seleccionarTema()" > <!--AQUI DEBE A VER UN ALERT QUE TE DIGA QUE SI O SI SELECCIONAR-->
+                <select class="form-select" name="id_tema" [(ngModel)]="id_tema"  (change) ="seleccionarTema()" > <!--AQUI DEBE A VER UN ALERT QUE TE DIGA QUE SI O SI SELECCIONAR-->
                   <option value="0">Seleccionar Tema</option>
                   <option *ngFor="let item of temasAll" value="{{item.idTema}}">{{item.Nombre}}</option>
                 </select>
@@ -31,48 +57,35 @@
                 </div>
 
               </div>
-              
+
               <div >
                 <span  class="input-group-text"  for="Nombre">Cuerpo</span>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"  name="Body" [(ngModel)]="Body"></textarea>
               </div>
-              
+
               <div class="input-group" >
-                <span class="input-group-text" id="link">Link</span>  
+                <span class="input-group-text" id="link">Link</span>
                 <input type="text" class="form-control" aria-label="Sizing example input" name= "Link"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Link">
               </div>
-              
+
               <div class="input-group" >
                 <span class="input-group-text" id="Referencias">Referencias</span>
                 <input type="text" class="form-control" aria-label="Sizing example input" name="Referencia"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Referencia">
               </div>
-  
+
               <div class="btn">
                 <button type="submit" class="btn btn-success"  (click)="PostSubtema()">Agregar</button>
               </div>
-  
-            </div>
-        
-            <div  id="Tema" *ngIf="mostrarTemas">
-
-              <form [formGroup]="formTemas">
-                <div class="input-group mb-3" >
-                  <span  for="titulo" class="input-group-text"  for="Nombre">Titulo</span>  
-                  <input id="titulo" formControlName="titulo" [(ngModel)]="Nombre" type="text" aria-label="name" name="Nombre" class="form-control"  placeholder="Nombre del Tema">
-                </div>
-               
-                <div class="btn">
-                  <button type="submit" class="btn btn-success"  (click)="PostTema()">Agregar</button>
-                </div>
-              </form>
-              
 
             </div>
-            
+
+            <!-------------------------------------------------CODIGO --------------------------------------------------->
+
+
             <div id="Codigos" *ngIf="mostrarCodigos" >
 
               <div class="input-group mb-3">
-                <span  class="input-group-text"  for="Nombre">Titulo</span>  
+                <span  class="input-group-text"  for="Nombre">Titulo</span>
                 <input [(ngModel)]="Nombre" type="text" aria-label="name" name="Nombre" class="form-control"  placeholder="Nombre del Codigo">
               </div>
 
@@ -80,12 +93,12 @@
                 <span  class="input-group mb-3" >Cuerpo</span>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"  name="Body" [(ngModel)]="Body"></textarea>
               </div>
-              
+
               <div class="input-group mb-3">
-                <span class="input-group-text" id="link">Link</span>  
+                <span class="input-group-text" id="link">Link</span>
                 <input type="text" class="form-control" aria-label="Sizing example input" name= "Link"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Link">
               </div>
-              
+
               <div class="input-group mb-3">
                 <span class="input-group-text" id="Referencias">Referencias</span>
                 <input type="text" class="form-control" aria-label="Sizing example input" name="Referencia"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Referencia">
@@ -94,13 +107,14 @@
               <div class="btn">
                 <button type="submit" class="btn btn-success"  (click)="PostCodigo()">Agregar</button>
               </div>
-            
+
             </div>
+            <!-------------------------------------------------PROGRAMACION --------------------------------------------------->
 
             <div id="Programación" *ngIf="mostrarProgramacion">
 
               <div class="input-group mb-3" >
-                <span  class="input-group-text"  for="Nombre">Titulo</span>  
+                <span  class="input-group-text"  for="Nombre">Titulo</span>
                 <input [(ngModel)]="Nombre" type="text" aria-label="name" name="Nombre" class="form-control"  placeholder="Nombre de sección">
               </div>
 
@@ -108,12 +122,12 @@
                 <span  class="input-group-text"  for="Nombre">Cuerpo</span>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"  name="Body" [(ngModel)]="Body"></textarea>
               </div>
-              
+
               <div class="input-group mb-3" >
-                <span class="input-group-text" id="link">Link</span>  
+                <span class="input-group-text" id="link">Link</span>
                 <input type="text" class="form-control" aria-label="Sizing example input" name= "Link"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Link">
               </div>
-              
+
               <div class="input-group mb-3" >
                 <span class="input-group-text" id="Referencias">Referencias</span>
                 <input type="text" class="form-control" aria-label="Sizing example input" name="Referencia"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Referencia">
@@ -122,13 +136,14 @@
               <div class="btn">
                 <button type="submit" class="btn btn-success"  (click)="PostProgramacion()">Agregar</button>
               </div>
-            
+
             </div>
+            <!-------------------------------------------------DOCUMENTACION --------------------------------------------------->
 
             <div id="Documentacion" *ngIf="mostrarDocumentacion">
 
               <div class="input-group mb-3" >
-                <span  class="input-group-text"  for="Nombre">Titulo</span>  
+                <span  class="input-group-text"  for="Nombre">Titulo</span>
                 <input [(ngModel)]="Nombre" type="text" aria-label="name" name="Nombre" class="form-control"  placeholder="Nombre de sección">
               </div>
 
@@ -136,12 +151,12 @@
                 <span  class="input-group-text"  for="Nombre">Cuerpo</span>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"  name="Body" [(ngModel)]="Body"></textarea>
               </div>
-              
+
               <div class="input-group mb-3">
-                <span class="input-group-text" id="link">Link</span>  
+                <span class="input-group-text" id="link">Link</span>
                 <input type="text" class="form-control" aria-label="Sizing example input" name= "Link"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Link">
               </div>
-              
+
               <div class="input-group mb-3">
                 <span class="input-group-text" id="Referencias">Referencias</span>
                 <input type="text" class="form-control" aria-label="Sizing example input" name="Referencia"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Referencia">
@@ -150,36 +165,37 @@
               <div class="btn">
                 <button type="submit" class="btn btn-success"  (click)="PostDocumentacion()">Agregar</button>
               </div>
-            
+
             </div>
+            <!-------------------------------------------------PUBLICACION --------------------------------------------------->
 
             <div id="Publicacion" *ngIf="mostrarPublicacion">
 
               <div class="input-group  mb-3"  >
-                <span  class="input-group-text"  for="Nombre">Titulo</span>  
+                <span  class="input-group-text"  for="Nombre">Titulo</span>
                 <input [(ngModel)]="Nombre" type="text" aria-label="name" name="Nombre" class="form-control"  placeholder="Nombre de la publicación">
               </div>
 
               <div class="input-group mb-3">
-                <span  class="input-group-text" >Autor</span>  
+                <span  class="input-group-text" >Autor</span>
                 <input [(ngModel)]="Autor" type="text" aria-label="name" name="Autor" class="form-control"  placeholder="Nombre">
               </div>
 
               <div class="input-group mb-3" >
-                <span  class="input-group-text"  for="Fecha">Fecha</span>  
-                <input [(ngModel)]="Fecha" type="date" aria-label="name" name="Fecha" class="form-control">
+                <span  class="input-group-text"  for="Fecha">Fecha</span>
+                <input [(ngModel)]="Fecha" type="month" aria-label="name" name="Fecha" class="form-control">
               </div>
 
               <div class="input-group mb-3" >
                 <span  class="input-group-text" >Cuerpo</span>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"  name="Body" [(ngModel)]="Body"></textarea>
               </div>
-              
+
               <div class="input-group mb-3" >
-                <span class="input-group-text" id="link">Link</span>  
+                <span class="input-group-text" id="link">Link</span>
                 <input type="text" class="form-control" aria-label="Sizing example input" name= "Link"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Link">
               </div>
-              
+
               <div class="input-group mb-3" >
                 <span class="input-group-text" id="Referencias">Referencias</span>
                 <input type="text" class="form-control" aria-label="Sizing example input" name="Referencia"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Referencia">
@@ -188,12 +204,13 @@
               <div class="btn">
                 <button type="submit" class="btn btn-success"  (click)="PostPublicacion()">Agregar</button>
               </div>
-            
+
             </div>
+            <!-------------------------------------------------ENCARGADOS --------------------------------------------------->
 
             <div id="Encargados" *ngIf="mostrarEncargados">
-            
-              <div class="input-group mb-3"> 
+
+              <div class="input-group mb-3">
                 <span class="input-group-text">Nombre</span>
                 <input [(ngModel)]="Nombre" name="Nombre" type="text" aria-label="name" class="form-control">
                 <span class="input-group-text">Apellido</span>
@@ -204,29 +221,29 @@
                 <input [(ngModel)]="Carrera" name="Carrera" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
               </div>
               <div class="input-group mb-3" >
-                <span class="input-group-text" id="Especialidad">Especialidad</span> 
+                <span class="input-group-text" id="Especialidad">Especialidad</span>
                 <input [(ngModel)]="Especialidad" name="Especialidad" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
               </div>
               <div class="input-group mb-3" >
-                <span class="input-group-text" id="Investigación">Investigación</span> 
+                <span class="input-group-text" id="Investigación">Investigación</span>
                 <input [(ngModel)]="Investigacion" name="Investigacion" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
               </div>
               <div class="input-group mb-3" >
-                <span class="input-group-text" id="Universidad">Universidad</span> 
+                <span class="input-group-text" id="Universidad">Universidad</span>
                 <input [(ngModel)]="Universidad" name="Universidad" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
               </div>
-  
+
               <div class="btn">
                 <button type="submit" class="btn btn-success"  (click)="PostEncargados()">Agregar</button>
               </div>
-            
+
             </div>
-             
-          </div>            
-          
+
+          </div>
+
         </form>
 
-       
+
 
       </div>
 

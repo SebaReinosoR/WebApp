@@ -16,7 +16,7 @@ export class LoginService {
   private helper = new JwtHelperService();
 
   constructor(private httpClient:HttpClient) { }
-  
+
   logearUsuario(correo: string, contraseña: string): Observable<{ token: string  , msg:string}> {
     const body = { correo, contraseña };
     const endpoint = this.api_admi + this.USUARIO_LOGIN_ENDPOINT;
@@ -62,7 +62,7 @@ export class LoginService {
   public postLogin(obj:any): Observable<any> {
     // Se crea un objeto que representa las credenciales del usuario
     const credentials = { usuario: obj.usuario, contrasena: obj.password };
-    
+
     // Retorna un Observable que representa la respuesta de una solicitud HTTP POST
     return this.httpClient.post(`${this.api_admi}`, credentials);
   }

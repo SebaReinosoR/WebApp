@@ -1,20 +1,22 @@
-<button class="arrow_box" routerLink="/inicio">Back</button> <!--crear alerta-->
+<button class="arrow_box" routerLink="/inicio">Atras</button> <!--crear alerta-->
 
 
 <div class="login">
   <form [formGroup]="myform" (ngSubmit)="submitForm()" class="custom-form" >
+
+
     <h4>Inicio Administrador</h4>
-    <input type="email" formControlName="usuario" [class.is-invalid]="f.usuario.errors && f.usuario.touched" placeholder="User" required="required"/>
+    <input type="text" formControlName="usuario" [class.is-invalid]="f.usuario.errors && f.usuario.touched" placeholder="Usuario" required="required"/>
     <div id="validationServerUsernameFeedback" class="invalid-feedback">
       Usuario obligatorio
     </div>
-    
-    <input type="password" formControlName="password" [class.is-invalid]="f.password.errors && f.password.touched" placeholder="Password" required="required"/>
+
+    <input type="password" formControlName="password" [class.is-invalid]="f.password.errors && f.password.touched" placeholder="Contraseña" required="required"/>
     <div id="validationServerUsernameFeedback" class="invalid-feedback">
       contraseña obligatoria
     </div>
-    
+
     <button class="btn-success" >Ingresar</button>
   </form>
-  
+
 </div>
