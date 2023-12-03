@@ -11,7 +11,6 @@ import { EncargadosComponent } from './encargados/encargados.component';
 import { PublicacionComponent } from './publicacion/publicacion.component';
 import { PubliVComponent}from './publicacion/publi.v/publi.v.component';
 import { SubtemaComponent } from './primary-front/subtema/subtema.component';
-import { PermisoRutasService } from './services/otros/permiso-rutas.service';
 import {SubtemaUDComponent} from './administrador/subtema-ud/subtema-ud.component';
 import { AuthGuard } from './services/otros/auth/auth.guard';
 
@@ -19,7 +18,6 @@ import { AuthGuard } from './services/otros/auth/auth.guard';
 const routes: Routes = [
 
   {path: 'inicio', component: PrimaryFrontComponent },
-
   {path:'Login', component: InicioSesionComponent},
   {path:'Admin',canActivate:[AuthGuard], component: AdministradorComponent},
   {path:'Add',canActivate:[AuthGuard], component: AddElementoComponent},

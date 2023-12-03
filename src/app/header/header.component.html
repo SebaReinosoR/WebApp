@@ -1,12 +1,12 @@
 <div class="container-fluid">
   <div class="content">
     <div class="main-content-nav">
-      <div>
+      <div class="titulo">
         <h3>Laboratorio de Simulación de Dinámica Molecular</h3>
       </div>
 
       <div class="user-info">
-        <fa-icon [icon]="userIcon" (click)="verificar()" ></fa-icon>  
+        <fa-icon class="icono" [icon]="userIcon" (click)="verificar()" ></fa-icon>
         <div *ngIf="isAuthenticated; else loginButtons">
           <b (click)="logout()">Cerrar Sesión</b>
         </div>

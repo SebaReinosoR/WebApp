@@ -6,7 +6,7 @@
     "nav contenido"
     "foot foot"
     ;
-  grid-template-rows: 3.8em;
+  grid-template-rows: 5em;
   grid-template-columns: 15%;
   background: linear-gradient(to right, rgba(17,76,95,1) 0%, rgba(17,76,95,0.89) 14%, rgba(156,210,211,0.72) 36%, rgba(156,210,211,0.32) 86%);
 
@@ -23,6 +23,8 @@
 }
 
 app-header{
+  display: flex;
+  align-items: center;
   grid-area: head;
 
 }

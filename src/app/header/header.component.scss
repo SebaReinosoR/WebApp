@@ -13,23 +13,52 @@
       width: 100%;
       background: rgba(74, 110, 176, 0);
       display: grid;
-      grid-template-columns: 90% 10%;
-      align-items: center;
+      grid-template-areas:
+      " - - titulo icono";
 
-      h3{
-        padding-left: 35%;
+
+
+      .titulo{
+        grid-area: titulo;
+        display: flex;
+        justify-content: center;
+          h3{
+
+          }
       }
+
       .user-info{
+          grid-area: icono;
           color: rgb(77, 76, 76);
-          display: grid;
-          grid-template-columns: 20% 10%;
+          display: flex;
           align-items: center;
-          cursor: pointer;
+          justify-content: flex-end;
+          .icono{
+            margin: 0em 0.5em 0em 0em;
+            cursor: pointer;
+            padding: 0.3em;
+            transition: all 0.3s ease-in-out;
+          }
+          .icono:hover{
+            border: 1px solid rgb(0, 0, 0);
+            box-shadow: 4px 4px 20px rgb(153, 147, 147);
+            border-radius: 5px;
+            color: black;
+          }
+          b{
+            margin: 0em 2em 0em 0.5em;
+            cursor: pointer;
+            padding: 0.2em;
+            transition: all 0.3s ease-in-out;
+          }
+          b:hover{
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: 5px;
+            box-shadow: 4px 4px 20px rgb(153, 147, 147);
+            color: black;
+          }
       }
-      b{
-        padding-left: 0;
-        padding-right: 0;
-      }
+
   }
 }
 

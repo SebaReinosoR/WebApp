@@ -1,10 +1,24 @@
 .box-1{
+  display: flex;
+  align-items: center;
+
   h1{
     padding: 2%;
     padding-bottom: 2%;
     padding-left: 4%;
     font-family: Times New Roman, arial;
     margin: 0;
+  }
+  i{
+    font-size: 3em;
+    margin: 0.3em;
+    cursor:pointer;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+  }
+  i:hover{
+    color: rgba(41, 185, 229, 0.503);
+
   }
 
 }
@@ -19,6 +33,41 @@
       width: 50em;
       overflow: scroll;
       max-height: 700px;
+      .contenedor-icon{
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        .help{
+          position: relative;
+          display: inline-block; /* Para limitar el ancho al contenido */
+          max-width: 100%;
+          .mensaje {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: -90%;
+            transform: translateX(-90%);
+            background-color: #ffffffb6;
+            border: 1px solid #ccc;
+            padding: 0.5em;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            width: 30em;
+            max-height: 20em ;
+          }
+
+          .visible {
+            display: block;
+          }
+          i{
+            font-size: 1.5em;
+            margin: 0.5em;
+            padding: 0;
+          };
+        }
+      }
+
       form{
         margin-top: 1em;
       }

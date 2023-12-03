@@ -34,6 +34,8 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
   documentosAll: any[] = [];
   encargadosAll: any[] = [];
 
+  mostrarCuadro: boolean = false;
+
 
   constructor( private services:AdminService, private formBuilder: FormBuilder, private location: Location, private fb:FormBuilder) {
     this.id_tema = 0;
@@ -322,8 +324,8 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
     return this.fb.group({
       Nombre: ['', [Validators.required]],
       Body: ['', [Validators.required]],
-      Link: ['', [Validators.required]],
-      Referencia: [''],
+      Link: [''],
+      Referencia: ['']
     });
   }
   public submitFormDocumentacion(): void {
@@ -372,8 +374,8 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       Autor: ['', [Validators.required]],
       Fecha: ['', [Validators.required]],
       Body: ['', [Validators.required]],
-      Link: ['', [Validators.required]],
-      Referencia: [''],
+      Link: [''],
+      Referencia: ['']
     });
   }
   public submitFormPublicacion(): void {
@@ -439,8 +441,8 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       this.Especialidad = this.myformEncargados.get('Especialidad')?.value ?? '';
       this.Investigacion = this.myformEncargados.get('Investigacion')?.value ?? '';
       this.Universidad = this.myformEncargados.get('Universidad')?.value ?? '';
-      if (this.encargadosAll.find((encargados) => encargados.Nombre === this.Nombre)) {
-        alert('Ya existe un elemento con este Titulo');
+      if (this.encargadosAll.find((encargados) => encargados.Nombre === this.Nombre && encargados.Apellido === this.Apellido)) {
+        alert('Ya existe un encargado con este nombre y apellido');
     } else {
       this.PostEncargados();
     }
@@ -531,7 +533,14 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
         // Define condiciones para otros campos aquí
       };
 
+    //SECCION DE AYUDA (?)------------------------
+    mostrarMensaje() {
+      this.mostrarCuadro = true;
+    }
 
+    ocultarMensaje() {
+      this.mostrarCuadro = false;
+    }
     }
 
 
