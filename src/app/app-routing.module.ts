@@ -13,13 +13,13 @@ import { PubliVComponent}from './publicacion/publi.v/publi.v.component';
 import { SubtemaComponent } from './primary-front/subtema/subtema.component';
 import { PermisoRutasService } from './services/otros/permiso-rutas.service';
 import {SubtemaUDComponent} from './administrador/subtema-ud/subtema-ud.component';
-import { AuthGuard } from './auth/auth.guard';
+import { AuthGuard } from './services/otros/auth/auth.guard';
 
 
 const routes: Routes = [
 
   {path: 'inicio', component: PrimaryFrontComponent },
-  {path: '', redirectTo: 'inicio', pathMatch: 'full'},
+
   {path:'Login', component: InicioSesionComponent},
   {path:'Admin',canActivate:[AuthGuard], component: AdministradorComponent},
   {path:'Add',canActivate:[AuthGuard], component: AddElementoComponent},
@@ -32,8 +32,12 @@ const routes: Routes = [
   //rutas ID
   {path : 'PubliOpen/:id',component:PubliVComponent},
   {path : 'Subtema/:id', component:SubtemaComponent},
-  {path : 'Admin/SubtemaUD/:id',canActivate:[AuthGuard],component:SubtemaUDComponent}
+  {path : 'Admin/SubtemaUD/:id',canActivate:[AuthGuard],component:SubtemaUDComponent},
 
+
+  //url vacio o inexistente
+  {path: '', redirectTo: 'inicio', pathMatch: 'full'},
+  {path: '**', redirectTo: 'inicio'}
 ];
 
 @NgModule({

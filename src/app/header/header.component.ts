@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import {faUser} from '@fortawesome/free-solid-svg-icons'
-import { AuthService } from '../auth/auth.service';
-import { LoginService } from '../services/login.service';
-import { Route, Router } from '@angular/router';
+import { AuthService } from '../services/otros/auth/auth.service';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-header',

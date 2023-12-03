@@ -6,7 +6,7 @@
       </div>
 
       <div class="user-info">
-        <fa-icon [icon]="userIcon" (click)="verificar()" ></fa-icon>  <!--NO OLVIDAR CAMBIAR EL ICONO AL INGRESAR COMO ADMIN  Y CAMBIAR EL BOTON A "CERRAR SESIÓN"-->
+        <fa-icon [icon]="userIcon" (click)="verificar()" ></fa-icon>  
         <div *ngIf="isAuthenticated; else loginButtons">
           <b (click)="logout()">Cerrar Sesión</b>
         </div>
@@ -15,7 +15,7 @@
         </ng-template>
       </div>
 
-      
+
 
 
     </div>

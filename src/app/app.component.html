@@ -1,9 +1,9 @@
 <div class="container-fluid">
-  <app-header *ngIf="router.url !== '/login' && router.url !== '/admin' && router.url !== '/add'"></app-header>
-  <app-nav-bar *ngIf="router.url !== '/login' && router.url !== '/admin' && router.url !== '/add'"></app-nav-bar>
+  <app-header ></app-header>
+  <app-nav-bar ></app-nav-bar>
   <div class="content-outlet">
     <router-outlet></router-outlet>
   </div>
-  <app-footer *ngIf="router.url !== '/login' && router.url !== '/admin'&& router.url !== '/add'"></app-footer>
+  <app-footer ></app-footer>
 </div>
 

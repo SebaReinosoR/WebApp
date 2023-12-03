@@ -1,15 +1,16 @@
-import { Component , OnDestroy, AfterViewInit , ChangeDetectorRef} from '@angular/core';
+import { Component , OnDestroy, AfterViewInit, OnInit , ChangeDetectorRef} from '@angular/core';
 import {AdminService}  from '../services/admin.service'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
+import { finalize } from 'rxjs/internal/operators/finalize';import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-elemento',
   templateUrl: './add-elemento.component.html',
   styleUrls: ['./add-elemento.component.scss']
 })
-export class AddElementoComponent implements AfterViewInit, OnDestroy{
-  
+export class AddElementoComponent implements AfterViewInit, OnDestroy, OnInit {
+
   //variables
   nombreArchivoProgramacion: string = '';
   nombreArchivoDocumentacion: string = '';
@@ -31,9 +32,10 @@ export class AddElementoComponent implements AfterViewInit, OnDestroy{
   imagenDocumentacion: File | null = null;
   imagenProgramacion: File | null = null;
   private subscriptions = new Subscription();
-   
+  id_tema: number;
+  temasAll: any[]=[];
 
-  constructor( private services:AdminService, private formBuilder: FormBuilder,private cdr: ChangeDetectorRef) {
+  constructor( private services:AdminService, private fb: FormBuilder,private cdr: ChangeDetectorRef) {
     this.id_tema = 0; 
     this.Body = '';
     this.Link = '';
@@ -46,26 +48,19 @@ export class AddElementoComponent implements AfterViewInit, OnDestroy{
     this.Especialidad='';
     this.Investigacion=''
     this.Universidad='';
-    
+
 
   // GET ALL TEMA
-    this.services.getTemas().subscribe(temasAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
+  this.services.getTemas().subscribe(temasAll =>
     {
       this.temasAll = temasAll;
-      
     });
 
-  //VALIDATORS
-  
-  this.formTemas = this.formBuilder.group({
-    titulo: ['', Validators.required],
-  
-  });
-
-   }
+  }
 
   ngOnInit() {
     this.loadFormDataFromLocalStorage();
+    this.myformTema = this.createmyformTema(); // CREAR LA VALIDACION TEMA
   }
 
   saveFormDataToLocalStorage(): void {
@@ -177,24 +172,59 @@ export class AddElementoComponent implements AfterViewInit, OnDestroy{
   }
   
    //Validators
-   formTemas: FormGroup;
+  formTemas: FormGroup | undefined;
    
-  temasAll: any[] = [];
-  id_tema: number;
   mostrarAlerta: boolean = true;
-  
-  seleccionarTema() {
-    // Verificar si se ha seleccionado un tema
-    this.mostrarAlerta =  (this.id_tema === 0);
-    console.log('Tema seleccionado:', this.id_tema);
-    console.log(this.mostrarAlerta);
+
+ /*--------------------------------------------POST-------------------------------------------- */
+
+  //TEMA
+
+  PostTema(): void {
+    this.services.createTema(this.id_admin, this.Nombre).pipe(
+      finalize(() => {
+        this.updateTemas();
+      })
+    ).subscribe(() => {
+      console.log(this.Nombre)
+      this.Nombre = '';
+      this.myformTema.get('titulo')?.setValue('');
+      alert('Agregado correctamente');
+
+    });
+  }
+  //ACTUALIZAR LISTA DE TEMAS
+  updateTemas(){
+    this.services.getTemas().subscribe(temasAll =>
+      {
+        this.temasAll = temasAll;
+      });
   }
 
+  //VALIDACIONES
+  public myformTema!:FormGroup;
 
+  private createmyformTema():FormGroup{
+    return this.fb.group({
+      titulo:['',[Validators.required]]
+    });
+  }
 
- /*--------------------------------------------POST-------------------------------------------- */ 
+  public submitFormTema(){
+    if(this.myformTema.invalid){
+      Object.values(this.myformTema.controls).forEach(control=>{
+        control.markAllAsTouched();
+      });
+      return;
+    }
+    this.Nombre= this.myformTema.get('titulo')?.value ?? '';
+    this.PostTema();
 
+  }
 
+  public get fTema():any{
+    return this.myformTema.controls;
+  }
 
   //SUBTEMA
   PostSubtema(): void {
@@ -203,12 +233,12 @@ export class AddElementoComponent implements AfterViewInit, OnDestroy{
       this.resetFormSubtema();
       localStorage.removeItem('formData'); // Limpiar el almacenamiento local 
     })
-    this.id_tema = 0; 
+    this.id_tema = 0;
     this.Body = '';
     this.Link = '';
     this.Referencia = '';
     this.Nombre = '';
-    
+
   }
   resetFormSubtema(): void {
     this.id_tema = 0;
@@ -221,14 +251,6 @@ export class AddElementoComponent implements AfterViewInit, OnDestroy{
 
   //TEMA
 
-  PostTema(): void {
-    this.services.createTema(this.id_admin, this.Nombre).subscribe(() => {
-      alert('Agregado correctamente');
-      this.resetFormTema();  
-    })
-
-    this.Nombre = '';
-  }
   resetFormTema(): void {
     this.Nombre = '';
     // ... restablecer cualquier otro campo relevante para 'Tema' ...
@@ -241,7 +263,7 @@ export class AddElementoComponent implements AfterViewInit, OnDestroy{
       alert('Agregado correctamente');
       this.resetFormCodigo();   
     })
-   
+
     this.Body = '';
     this.Link = '';
     this.Referencia = '';
@@ -425,6 +447,8 @@ export class AddElementoComponent implements AfterViewInit, OnDestroy{
       "Subtema",
     ];
 
+
+
     // Llamada a la función para cargar elementos en ngAfterViewInit
     ngAfterViewInit() {
       this.cargar_elementos();
@@ -474,7 +498,12 @@ export class AddElementoComponent implements AfterViewInit, OnDestroy{
       };
 
 
-    }
+}
+
+
+
+
+
 
 
 

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth/auth.service';
+import { AuthService } from './services/otros/auth/auth.service';
 
 
 @Component({

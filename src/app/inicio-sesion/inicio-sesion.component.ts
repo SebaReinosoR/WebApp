@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import {PermisoRutasService} from '../services/otros/permiso-rutas.service'
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../services/otros/auth/auth.service';
 import Swal from 'sweetalert2';
 import { Location } from '@angular/common';
 
@@ -43,9 +43,9 @@ public submitForm(){
 this.loginInit.postLogin(this.myform.value).subscribe(
   (administrador) => {
     const token = 'token_auth'
-    this.authService.login(token);
+
     if (administrador && administrador.length > 0) {
-      
+      this.authService.login(token);
       this.autenticacion.autenticacion(true);
       this.routerprd.navigateByUrl("/Admin");
     } else {
@@ -63,7 +63,7 @@ this.loginInit.postLogin(this.myform.value).subscribe(
     // Manejar errores de la solicitud HTTP
     console.error('Error en la solicitud HTTP:', error);
     alert("Error interno del servidor");
-    
+
   }
 );
 
