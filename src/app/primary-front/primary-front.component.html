@@ -1,13 +1,14 @@
 <div class="container-fluid">
   <div class="box" *ngFor="let tema of temas">
-    <h4> {{tema.Nombre}} </h4>
-
-    <div *ngFor="let item of subtemas">
-      <div *ngIf="item.id_tema === tema.idTema">
-        <p  [routerLink]="['/Subtema',item.idSubtema]" routerLinkActive="router-link-active">{{item.Nombre}}</p>
+      <h4> {{tema.Nombre}} </h4>
+    <div class="ciclo">
+      <div  *ngFor="let item of subtemas">
+        <div *ngIf="item.id_tema === tema.idTema">
+            <p  [routerLink]="['/Subtema',item.idSubtema]" routerLinkActive="router-link-active">{{item.Nombre}}</p>
+        </div>
       </div>
-     
     </div>
+
 
     <button  type="button" class="btn" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + tema.idTema" >Ver todos</button>
 

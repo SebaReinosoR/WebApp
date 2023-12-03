@@ -27,8 +27,7 @@ export class PrimaryFrontComponent {
     this.services.getAllsubtema().subscribe(subtemas=>
       {
       this.subtemas = subtemas;
-      console.log(this);
-    });
+      });
 
 
 }
@@ -37,10 +36,10 @@ captura(id:number):any{
   this.services.getSubtemaById(id).subscribe(subtemasID =>
     {
       this.subtemasID= subtemasID;
-      
+
     });
 
-    
+
 }
 
 }

@@ -6,18 +6,14 @@
       <div class="box" >
 
         <form onLoad="myOnLoad()">
+          <i class="fa fa-question-circle-o" aria-hidden="true"></i>
           <select class="form-select" name="elementos" (change)="onOptionChange($event)">
             <option value="0">Seleccionar elemento</option>
           </select>
 
           <div class="box-2">
 
-
-            <!-------------------------------------------------AGREGAR --------------------------------------------------->
-
-
-
-
+            <!---------------------------------------------------------------------------AGREGAR --------------------------------------------------------------------->
 
             <!-------------------------------------------------TEMA --------------------------------------------------->
 
@@ -27,8 +23,9 @@
               <div class="input-group mb-3">
                 <span for="titulo" class="input-group-text" for="Nombre">Titulo</span>
                 <input id="titulo" formControlName="titulo" [class.is-invalid]="fTema.titulo.errors && fTema.titulo.touched" type="text" aria-label="name" name="Nombre" class="form-control" placeholder="Nombre del Tema" required />
+
                 <div id="validationTema" class="invalid-feedback" *ngIf="fTema.titulo.errors && fTema.titulo.touched">
-                  <div *ngIf="fTema.titulo.errors.required">Ingresar Tema OBLIGATORIO</div>
+                  <div *ngIf="fTema.titulo.errors.required">Ingresar Tema</div>
                 </div>
               </div>
               <div class="btn">
@@ -42,40 +39,52 @@
 
             <div id="Subtema" *ngIf="mostrarSubtema">
 
-              <div class="input-group has-validation mb-3" >
-                <span  class="input-group-text"  for="Nombre">Titulo</span>
-                <input [(ngModel)]="Nombre" type="text" aria-label="name" name="Nombre" class="form-control"  placeholder="Nombre del subtema" required >
-              </div>
+              <form [formGroup]="myformSubtema" (ngSubmit)="submitFormSubtema()">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" for="Nombre">Titulo</span>
+                  <input id="Nombre" formControlName="Nombre" class="form-control" [class.is-invalid]="fSubtema.Nombre.errors && fSubtema.Nombre.touched" placeholder="Nombre del subtema" required />
 
-              <div class="input-group mb-3">
-                <select class="form-select" name="id_tema" [(ngModel)]="id_tema"  (change) ="seleccionarTema()" > <!--AQUI DEBE A VER UN ALERT QUE TE DIGA QUE SI O SI SELECCIONAR-->
-                  <option value="0">Seleccionar Tema</option>
-                  <option *ngFor="let item of temasAll" value="{{item.idTema}}">{{item.Nombre}}</option>
-                </select>
-                <div *ngIf="mostrarAlerta" class="alert alert-danger">
-                  ¡Por favor, seleccione un tema!
+                  <div id="validationSubtemaNombre" class="invalid-feedback" *ngIf="fSubtema.Nombre.errors && fSubtema.Nombre.touched">
+                    <div *ngIf="fSubtema.Nombre.errors.required">Ingresar Nombre</div>
+                  </div>
                 </div>
 
-              </div>
+                <div class="input-group mb-3">
+                  <select formControlName="id_tema" class="form-select" (change)="seleccionarTema()">
+                    <option value="0">Seleccionar Tema</option>
+                    <option *ngFor="let item of temasAll" [value]="item.idTema">{{item.Nombre}}</option>
+                  </select>
+                  <div *ngIf="mostrarAlerta" class="alert alert-danger">
+                    ¡Por favor, seleccione un tema!
+                  </div>
 
-              <div >
-                <span  class="input-group-text"  for="Nombre">Cuerpo</span>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"  name="Body" [(ngModel)]="Body"></textarea>
-              </div>
+                </div>
+                <div class="input-group mb-3">
+                  <span  class="input-group-text"  for="Body">Cuerpo</span>
+                  <textarea class="form-control" formControlName="Body" [class.is-invalid]="fSubtema.Body.errors && fSubtema.Body.touched"  placeholder="Información del Subtema" required ></textarea>
 
-              <div class="input-group" >
-                <span class="input-group-text" id="link">Link</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" name= "Link"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Link">
-              </div>
+                  <div id="validationSubtemaBody" class="invalid-feedback" *ngIf="fSubtema.Body.errors && fSubtema.Body.touched">
+                    <div *ngIf="fSubtema.Body.errors.required">Ingresar Información</div>
+                  </div>
 
-              <div class="input-group" >
-                <span class="input-group-text" id="Referencias">Referencias</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" name="Referencia"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Referencia">
-              </div>
+                </div>
 
-              <div class="btn">
-                <button type="submit" class="btn btn-success"  (click)="PostSubtema()">Agregar</button>
-              </div>
+
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="link">Link</span>
+                  <input formControlName="Link" class="form-control" placeholder="Link Relacionados al Subtema">
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="Referencias">Referencias</span>
+                  <input formControlName="Referencia" class="form-control" placeholder="Referencias utilizadas (Ingresar formato link)">
+                </div>
+
+                <div class="btn">
+                  <button type="submit" class="btn btn-success">Agregar</button>
+                </div>
+              </form>
 
             </div>
 
@@ -84,158 +93,247 @@
 
             <div id="Codigos" *ngIf="mostrarCodigos" >
 
-              <div class="input-group mb-3">
-                <span  class="input-group-text"  for="Nombre">Titulo</span>
-                <input [(ngModel)]="Nombre" type="text" aria-label="name" name="Nombre" class="form-control"  placeholder="Nombre del Codigo">
-              </div>
+              <form [formGroup]="myformCodigo" (ngSubmit)="submitFormCodigo()">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" for="Nombre">Titulo</span>
+                  <input id="Nombre" formControlName="Nombre" class="form-control" [class.is-invalid]="fCodigo.Nombre.errors && fCodigo.Nombre.touched" placeholder="Nombre del Código" required />
 
-              <div >
-                <span  class="input-group mb-3" >Cuerpo</span>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"  name="Body" [(ngModel)]="Body"></textarea>
-              </div>
+                  <div id="validationSubtemaNombre" class="invalid-feedback" *ngIf="fCodigo.Nombre.errors && fCodigo.Nombre.touched">
+                    <div *ngIf="fCodigo.Nombre.errors.required">Ingresar Nombre</div>
+                  </div>
+                </div>
 
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="link">Link</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" name= "Link"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Link">
-              </div>
+                <div class="input-group mb-3">
+                  <span  class="input-group-text"  for="Body">Cuerpo</span>
+                  <textarea class="form-control" formControlName="Body" [class.is-invalid]="fCodigo.Body.errors && fCodigo.Body.touched"  placeholder="Información del Código" required ></textarea>
 
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="Referencias">Referencias</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" name="Referencia"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Referencia">
-              </div>
+                  <div id="validationSubtemaBody" class="invalid-feedback" *ngIf="fCodigo.Body.errors && fCodigo.Body.touched">
+                    <div *ngIf="fCodigo.Body.errors.required">Ingresar Información</div>
+                  </div>
+                </div>
 
-              <div class="btn">
-                <button type="submit" class="btn btn-success"  (click)="PostCodigo()">Agregar</button>
-              </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="link">Link</span>
+                  <input formControlName="Link" class="form-control" [class.is-invalid]="fCodigo.Link.errors && fCodigo.Link.touched" placeholder="Link Relacionados al Código">
+
+                  <div id="validationSubtemaLink" class="invalid-feedback" *ngIf="fCodigo.Link.errors && fCodigo.Link.touched">
+                    <div *ngIf="fCodigo.Link.errors.required">Ingresar Link(s)</div>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="Referencias">Referencias</span>
+                  <input formControlName="Referencia" class="form-control" placeholder="Referencias utilizadas (Ingresar formato link)">
+                </div>
+
+                <div class="btn">
+                  <button type="submit" class="btn btn-success">Agregar</button>
+                </div>
+              </form>
 
             </div>
             <!-------------------------------------------------PROGRAMACION --------------------------------------------------->
 
             <div id="Programación" *ngIf="mostrarProgramacion">
 
-              <div class="input-group mb-3" >
-                <span  class="input-group-text"  for="Nombre">Titulo</span>
-                <input [(ngModel)]="Nombre" type="text" aria-label="name" name="Nombre" class="form-control"  placeholder="Nombre de sección">
-              </div>
+              <form [formGroup]="myformProgramacion" (ngSubmit)="submitFormProgramacion()">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" for="Nombre">Titulo</span>
+                  <input id="Nombre" formControlName="Nombre" class="form-control" [class.is-invalid]="fProgramacion.Nombre.errors && fProgramacion.Nombre.touched" placeholder="Nombre de 'ayuda de programación'" required />
 
-              <div class="input-group mb-3">
-                <span  class="input-group-text"  for="Nombre">Cuerpo</span>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"  name="Body" [(ngModel)]="Body"></textarea>
-              </div>
+                  <div id="validationSubtemaNombre" class="invalid-feedback" *ngIf="fProgramacion.Nombre.errors && fProgramacion.Nombre.touched">
+                    <div *ngIf="fProgramacion.Nombre.errors.required">Ingresar Nombre</div>
+                  </div>
+                </div>
 
-              <div class="input-group mb-3" >
-                <span class="input-group-text" id="link">Link</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" name= "Link"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Link">
-              </div>
+                <div class="input-group mb-3">
+                  <span  class="input-group-text"  for="Body">Cuerpo</span>
+                  <textarea class="form-control" formControlName="Body" [class.is-invalid]="fProgramacion.Body.errors && fProgramacion.Body.touched"  placeholder="Información" required ></textarea>
 
-              <div class="input-group mb-3" >
-                <span class="input-group-text" id="Referencias">Referencias</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" name="Referencia"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Referencia">
-              </div>
+                  <div id="validationSubtemaBody" class="invalid-feedback" *ngIf="fProgramacion.Body.errors && fProgramacion.Body.touched">
+                    <div *ngIf="fProgramacion.Body.errors.required">Ingresar Información</div>
+                  </div>
+                </div>
 
-              <div class="btn">
-                <button type="submit" class="btn btn-success"  (click)="PostProgramacion()">Agregar</button>
-              </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="link">Link</span>
+                  <input formControlName="Link" class="form-control" [class.is-invalid]="fProgramacion.Link.errors && fProgramacion.Link.touched" placeholder="Link Relacionados">
+
+                  <div id="validationSubtemaLink" class="invalid-feedback" *ngIf="fProgramacion.Link.errors && fProgramacion.Link.touched">
+                    <div *ngIf="fProgramacion.Link.errors.required">Ingresar Link(s)</div>
+                  </div>
+                </div>
+
+                <div class="btn">
+                  <button type="submit" class="btn btn-success">Agregar</button>
+                </div>
+              </form>
 
             </div>
             <!-------------------------------------------------DOCUMENTACION --------------------------------------------------->
 
             <div id="Documentacion" *ngIf="mostrarDocumentacion">
 
-              <div class="input-group mb-3" >
-                <span  class="input-group-text"  for="Nombre">Titulo</span>
-                <input [(ngModel)]="Nombre" type="text" aria-label="name" name="Nombre" class="form-control"  placeholder="Nombre de sección">
-              </div>
+              <form [formGroup]="myformDocumentacion" (ngSubmit)="submitFormDocumentacion()">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" for="Nombre">Titulo</span>
+                  <input id="Nombre" formControlName="Nombre" class="form-control" [class.is-invalid]="fDocumentacion.Nombre.errors && fDocumentacion.Nombre.touched" placeholder="Nombre de la Documentación" required />
 
-              <div class="input-group mb-3" >
-                <span  class="input-group-text"  for="Nombre">Cuerpo</span>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"  name="Body" [(ngModel)]="Body"></textarea>
-              </div>
+                  <div id="validationSubtemaNombre" class="invalid-feedback" *ngIf="fDocumentacion.Nombre.errors && fDocumentacion.Nombre.touched">
+                    <div *ngIf="fDocumentacion.Nombre.errors.required">Ingresar Nombre</div>
+                  </div>
+                </div>
 
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="link">Link</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" name= "Link"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Link">
-              </div>
+                <div class="input-group mb-3">
+                  <span  class="input-group-text"  for="Body">Cuerpo</span>
+                  <textarea class="form-control" formControlName="Body" [class.is-invalid]="fDocumentacion.Body.errors && fDocumentacion.Body.touched"  placeholder="Información de la Documentación" required ></textarea>
 
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="Referencias">Referencias</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" name="Referencia"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Referencia">
-              </div>
+                  <div id="validationSubtemaBody" class="invalid-feedback" *ngIf="fDocumentacion.Body.errors && fDocumentacion.Body.touched">
+                    <div *ngIf="fDocumentacion.Body.errors.required">Ingresar Información</div>
+                  </div>
+                </div>
 
-              <div class="btn">
-                <button type="submit" class="btn btn-success"  (click)="PostDocumentacion()">Agregar</button>
-              </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="link">Link</span>
+                  <input formControlName="Link" class="form-control" [class.is-invalid]="fDocumentacion.Link.errors && fDocumentacion.Link.touched" placeholder="Link Relacionados a la Documentación">
+
+                  <div id="validationSubtemaLink" class="invalid-feedback" *ngIf="fDocumentacion.Link.errors && fDocumentacion.Link.touched">
+                    <div *ngIf="fDocumentacion.Link.errors.required">Ingresar Link(s)</div>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="Referencias">Referencias</span>
+                  <input formControlName="Referencia" class="form-control" placeholder="Referencias utilizadas (Ingresar formato link)">
+                </div>
+
+                <div class="btn">
+                  <button type="submit" class="btn btn-success">Agregar</button>
+                </div>
+              </form>
 
             </div>
             <!-------------------------------------------------PUBLICACION --------------------------------------------------->
 
             <div id="Publicacion" *ngIf="mostrarPublicacion">
 
-              <div class="input-group  mb-3"  >
-                <span  class="input-group-text"  for="Nombre">Titulo</span>
-                <input [(ngModel)]="Nombre" type="text" aria-label="name" name="Nombre" class="form-control"  placeholder="Nombre de la publicación">
-              </div>
+              <form [formGroup]="myformPublicacion" (ngSubmit)="submitFormPublicacion()">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" for="Nombre">Titulo</span>
+                  <input id="Nombre" formControlName="Nombre" class="form-control" [class.is-invalid]="fPublicacion.Nombre.errors && fPublicacion.Nombre.touched" placeholder="Nombre de la Publicación" required />
 
-              <div class="input-group mb-3">
-                <span  class="input-group-text" >Autor</span>
-                <input [(ngModel)]="Autor" type="text" aria-label="name" name="Autor" class="form-control"  placeholder="Nombre">
-              </div>
+                  <div id="validationSubtemaNombre" class="invalid-feedback" *ngIf="fPublicacion.Nombre.errors && fPublicacion.Nombre.touched">
+                    <div *ngIf="fPublicacion.Nombre.errors.required">Ingresar Nombre</div>
+                  </div>
+                </div>
 
-              <div class="input-group mb-3" >
-                <span  class="input-group-text"  for="Fecha">Fecha</span>
-                <input [(ngModel)]="Fecha" type="month" aria-label="name" name="Fecha" class="form-control">
-              </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" for="Autor">Autor</span>
+                  <input id="Autor" formControlName="Autor" class="form-control" [class.is-invalid]="fPublicacion.Autor.errors && fPublicacion.Autor.touched" placeholder="Autor(eres) de la Publicación" required />
 
-              <div class="input-group mb-3" >
-                <span  class="input-group-text" >Cuerpo</span>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"  name="Body" [(ngModel)]="Body"></textarea>
-              </div>
+                  <div id="validationSubtemaAutor" class="invalid-feedback" *ngIf="fPublicacion.Autor.errors && fPublicacion.Autor.touched">
+                    <div *ngIf="fPublicacion.Autor.errors.required">Ingresar Autor</div>
+                  </div>
+                </div>
 
-              <div class="input-group mb-3" >
-                <span class="input-group-text" id="link">Link</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" name= "Link"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Link">
-              </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" for="Autor">Fecha de Emisión</span>
+                  <input id="Fecha" formControlName="Fecha" type="month" class="form-control" [class.is-invalid]="fPublicacion.Fecha.errors && fPublicacion.Fecha.touched" required />
 
-              <div class="input-group mb-3" >
-                <span class="input-group-text" id="Referencias">Referencias</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" name="Referencia"aria-describedby="inputGroup-sizing-default" [(ngModel)]="Referencia">
-              </div>
+                  <div id="validationSubtemaFecha" class="invalid-feedback" *ngIf="fPublicacion.Fecha.errors && fPublicacion.Fecha.touched">
+                    <div *ngIf="fPublicacion.Fecha.errors.required">Ingresar Fecha</div>
+                  </div>
+                </div>
 
-              <div class="btn">
-                <button type="submit" class="btn btn-success"  (click)="PostPublicacion()">Agregar</button>
-              </div>
+                <div class="input-group mb-3">
+                  <span  class="input-group-text"  for="Body">Cuerpo</span>
+                  <textarea class="form-control" formControlName="Body" [class.is-invalid]="fPublicacion.Body.errors && fPublicacion.Body.touched"  placeholder="Información de la Publicación" required ></textarea>
+
+                  <div id="validationSubtemaBody" class="invalid-feedback" *ngIf="fPublicacion.Body.errors && fPublicacion.Body.touched">
+                    <div *ngIf="fPublicacion.Body.errors.required">Ingresar Información</div>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="link">Link</span>
+                  <input formControlName="Link" class="form-control" [class.is-invalid]="fPublicacion.Link.errors && fPublicacion.Link.touched" placeholder="Link Relacionados de la Publicación">
+
+                  <div id="validationSubtemaLink" class="invalid-feedback" *ngIf="fPublicacion.Link.errors && fPublicacion.Link.touched">
+                    <div *ngIf="fPublicacion.Link.errors.required">Ingresar Link(s)</div>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="Referencias">Referencias</span>
+                  <input formControlName="Referencia" class="form-control" placeholder="Referencias Relacionadas (Ingresar formato link)">
+                </div>
+
+                <div class="btn">
+                  <button type="submit" class="btn btn-success">Agregar</button>
+                </div>
+              </form>
+
 
             </div>
             <!-------------------------------------------------ENCARGADOS --------------------------------------------------->
 
             <div id="Encargados" *ngIf="mostrarEncargados">
 
-              <div class="input-group mb-3">
-                <span class="input-group-text">Nombre</span>
-                <input [(ngModel)]="Nombre" name="Nombre" type="text" aria-label="name" class="form-control">
-                <span class="input-group-text">Apellido</span>
-                <input [(ngModel)]="Apellido" name="Apellido"  type="text" aria-label="apellido" class="form-control">
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="Carrera">Carrera</span>
-                <input [(ngModel)]="Carrera" name="Carrera" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-              </div>
-              <div class="input-group mb-3" >
-                <span class="input-group-text" id="Especialidad">Especialidad</span>
-                <input [(ngModel)]="Especialidad" name="Especialidad" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-              </div>
-              <div class="input-group mb-3" >
-                <span class="input-group-text" id="Investigación">Investigación</span>
-                <input [(ngModel)]="Investigacion" name="Investigacion" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-              </div>
-              <div class="input-group mb-3" >
-                <span class="input-group-text" id="Universidad">Universidad</span>
-                <input [(ngModel)]="Universidad" name="Universidad" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-              </div>
+              <form [formGroup]="myformEncargados" (ngSubmit)="submitFormEncargados()">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" for="Nombre">Nombre</span>
+                  <input id="Nombre" formControlName="Nombre" class="form-control" [class.is-invalid]="fEncargados.Nombre.errors && fEncargados.Nombre.touched" placeholder="Nombre" required />
+                  <span class="input-group-text" for="Apellido">Apellido</span>
+                  <input id="Apellido" formControlName="Apellido" class="form-control" [class.is-invalid]="fEncargados.Apellido.errors && fEncargados.Apellido.touched" placeholder="Apellido" required />
+                  <div id="validationSubtemaApellido" class="invalid-feedback" *ngIf="fEncargados.Apellido.errors && fEncargados.Apellido.touched">
+                    <div *ngIf="fEncargados.Apellido.errors.required">Ingresar Apellido</div>
+                  </div>
+                  <div id="validationSubtemaNombre" class="invalid-feedback" *ngIf="fEncargados.Nombre.errors && fEncargados.Nombre.touched">
+                    <div *ngIf="fEncargados.Nombre.errors.required">Ingresar Nombre</div>
+                  </div>
 
-              <div class="btn">
-                <button type="submit" class="btn btn-success"  (click)="PostEncargados()">Agregar</button>
-              </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="link">Carrera</span>
+                  <input formControlName="Carrera" class="form-control" [class.is-invalid]="fEncargados.Carrera.errors && fEncargados.Carrera.touched" placeholder="Carrera de egreso">
+
+                  <div id="validationCarrera" class="invalid-feedback" *ngIf="fEncargados.Carrera.errors && fEncargados.Carrera.touched">
+                    <div *ngIf="fEncargados.Carrera.errors.required">Ingresar Carrera</div>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="link">Universidad</span>
+                  <input formControlName="Universidad" class="form-control" [class.is-invalid]="fEncargados.Universidad.errors && fEncargados.Universidad.touched" placeholder="Universidad de egreso">
+
+                  <div id="validationUniversidad" class="invalid-feedback" *ngIf="fEncargados.Universidad.errors && fEncargados.Universidad.touched">
+                    <div *ngIf="fEncargados.Universidad.errors.required">Ingresar Universidad</div>
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="link">Investigación</span>
+                  <input formControlName="Investigacion" class="form-control" [class.is-invalid]="fEncargados.Investigacion.errors && fEncargados.Investigacion.touched" placeholder="Investigación a la que pertenece">
+
+                  <div id="validationInvestigacion" class="invalid-feedback" *ngIf="fEncargados.Investigacion.errors && fEncargados.Investigacion.touched">
+                    <div *ngIf="fEncargados.Investigacion.errors.required">Ingresar Investigacion</div>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="link">Especialidad</span>
+                  <input formControlName="Especialidad" class="form-control" [class.is-invalid]="fEncargados.Especialidad.errors && fEncargados.Especialidad.touched" placeholder="Especialidad de Investigación">
+
+                  <div id="validationEspecialidad" class="invalid-feedback" *ngIf="fEncargados.Especialidad.errors && fEncargados.Especialidad.touched">
+                    <div *ngIf="fEncargados.Especialidad.errors.required">Ingresar Especialidad</div>
+                  </div>
+                </div>
+
+
+                <div class="btn">
+                  <button type="submit" class="btn btn-success">Agregar</button>
+                </div>
+              </form>
 
             </div>
 

@@ -10,8 +10,6 @@ import {
   faAmbulance,
   faAnchorCircleCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import { AuthService } from '../services/otros/auth/auth.service';
-
 
 @Component({
   selector: 'app-nav-bar',
