@@ -140,7 +140,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
     const savedFormData = localStorage.getItem('formData');
     if (savedFormData) {
       const formData = JSON.parse(savedFormData);
-      this.id_admin = formData.id_admin;
+
       this.Nombre = formData.Nombre;
       this.Body = formData.Body;
       this.Link = formData.Link;
@@ -159,9 +159,12 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
     // Limpia tus suscripciones y cualquier otra limpieza necesaria
     this.subscriptions.unsubscribe();
   }
+
+  //CARGA DE IMG
+
   onFileChange(event: Event, section: string): void {
     console.log('Se ha cambiado un archivo en la sección:', section);
-    this.saveFormDataToLocalStorage();
+
 
     const target = event.target as HTMLInputElement;
 
@@ -194,10 +197,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
 
         // Forzar la actualización de la vista
         this.cdr.detectChanges();
-      } else {
-        // Manejar el caso cuando file es null
       }
-
     }
 
   }
@@ -213,10 +213,10 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
         this.updateTemas();
       })
     ).subscribe(() => {
-      this.Limpieza_Varibles_local();
-      this.myformSubtema.reset();
-      localStorage.removeItem('formData'); // Limpiar el almacenamiento local
       alert('Agregado correctamente');
+      this.Limpieza_Varibles_local();
+      this.myformTema.reset();
+      localStorage.removeItem('formData'); // Limpiar el almacenamiento local
 
     });
   }
@@ -248,6 +248,8 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
     if (this.temasAll.find((tema) => tema.Nombre === this.Nombre)) {
       alert('Ya existe un elemento con este Titulo');
   } else {
+      this.saveFormDataToLocalStorage();
+
       this.PostTema();
   }
   }
@@ -369,7 +371,6 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       alert('Por favor, selecciona una imagen para la programación.');
       return;
     }
-
     this.subscriptions.add(
       this.services.createProgramacion(
         this.id_admin,
@@ -379,8 +380,10 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
         this.imagenProgramacion
       ).subscribe({
         next: (response) => {
+          alert('Agregado correctamente');
           console.log('Programación agregada correctamente', response);
           this.myformProgramacion.reset();
+          this.Limpieza_Varibles_local();
         },
         error: (error) => {
           console.error('Error al agregar la programación:', error);
@@ -397,7 +400,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       Nombre: ['', [Validators.required]],
       Body: ['', [Validators.required]],
       Link: ['', [Validators.required]],
-      imagenProgramacion:['', [Validators.required]]
+      Imagen: [null, [Validators.required]]
     });
   }
   public submitFormProgramacion(): void {
@@ -438,6 +441,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
         this.imagenDocumentacion
       ).subscribe({
         next: (response) => {
+          alert('Agregado correctamente');
           console.log('Documentación agregada correctamente', response);
           this.myformDocumentacion.reset();
           this.Limpieza_Varibles_local();
@@ -457,7 +461,8 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       Nombre: ['', [Validators.required]],
       Body: ['', [Validators.required]],
       Link: [''],
-      Referencia: ['']
+      Referencia: [''],
+      Imagen: [null, [Validators.required]]
     });
   }
   public submitFormDocumentacion(): void {
@@ -471,6 +476,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       this.Body = this.myformDocumentacion.get('Body')?.value ?? '';
       this.Link = this.myformDocumentacion.get('Link')?.value ?? '';
       this.Referencia = this.myformDocumentacion.get('Referencia')?.value ?? '';
+
       if (this.documentosAll.find((docu) => docu.Nombre === this.Nombre)) {
         alert('Ya existe un elemento con este Titulo');
     } else {
@@ -505,6 +511,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
         this.imagenPublicacion
       ).subscribe({
         next: (response) => {
+          alert('Agregado correctamente');
           console.log('Publicación agregada correctamente', response);
           this.myformPublicacion.reset();
           this.Limpieza_Varibles_local();
@@ -544,6 +551,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       this.Body = this.myformPublicacion.get('Body')?.value ?? '';
       this.Link = this.myformPublicacion.get('Link')?.value ?? '';
       this.Referencia = this.myformPublicacion.get('Referencia')?.value ?? '';
+
       if (this.publiAll.find((publi) => publi.Nombre === this.Nombre)) {
         alert('Ya existe un elemento con este Titulo');
     } else {
@@ -577,9 +585,10 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
           this.imagenEncargado
         ).subscribe({
           next: (response) => {
+            alert('Agregado correctamente');
             console.log('Encargado agregado correctamente', response);
             this.Limpieza_Varibles_local();
-            this.myformPublicacion.reset();
+            this.myformEncargados.reset();
           },
           error: (error) => {
             console.error('Error al agregar el encargado:', error);
@@ -599,7 +608,8 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       Carrera: ['', [Validators.required]],
       Especialidad: ['', [Validators.required]],
       Investigacion: ['', [Validators.required]],
-      Universidad: ['',[Validators.required]]
+      Universidad: ['',[Validators.required]],
+      Imagen: [null, [Validators.required]]
     });
   }
   public submitFormEncargados(): void {

@@ -225,7 +225,7 @@
                   <div class="custom-file-input" (click)="fileInput.click()">
                     {{ nombreArchivoProgramacion || 'Sube un archivo' }}
                   </div>
-                  <input type="file" #fileInput (change)="onFileChange($event, 'programacion')" hidden>
+                  <input formControlName="Imagen" type="file" #fileInput (change)="onFileChange($event, 'programacion')" hidden>
                 </div>
 
 
@@ -282,6 +282,12 @@
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="Referencias">Referencias</span>
                   <input formControlName="Referencia" class="form-control" placeholder="Referencias utilizadas (Ingresar formato link)">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="custom-file-input" (click)="fileInput.click()">
+                    {{ nombreArchivoDocumentacion || 'Sube un archivo' }}
+                  </div>
+                  <input formControlName="Imagen" type="file" #fileInput (change)="onFileChange($event, 'documentacion')" hidden>
                 </div>
 
                 <div class="btn">
@@ -360,6 +366,12 @@
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="Referencias">Referencias</span>
                   <input formControlName="Referencia" class="form-control" placeholder="Referencias Relacionadas (Ingresar formato link)">
+                </div>
+                <div class="input-group mb-3">
+                <div class="custom-file-input" (click)="fileInput.click()">
+                    {{ nombreArchivoPublicacion || 'Sube un archivo' }}
+                  </div>
+                  <input formControlName="Imagen" type="file" #fileInput (change)="onFileChange($event, 'publicacion')" hidden>
                 </div>
 
                 <div class="btn">
@@ -441,7 +453,12 @@
                     <div *ngIf="fEncargados.Especialidad.errors.required">Ingresar Especialidad</div>
                   </div>
                 </div>
-
+                <div class="input-group mb-3">
+                  <div class="custom-file-input" (click)="fileInput.click()">
+                    {{ nombreArchivoEncargado || 'Sube un archivo' }}
+                  </div>
+                  <input formControlName="Imagen" type="file" #fileInput (change)="onFileChange($event, 'encargados')" hidden>
+                </div>
 
                 <div class="btn">
                   <button type="submit" class="btn btn-success">Agregar</button>

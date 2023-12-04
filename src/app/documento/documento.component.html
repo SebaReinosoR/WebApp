@@ -3,8 +3,7 @@
     <div class="head">
       <h4> {{item.Nombre | uppercase}} </h4>
       <button  (click)="openPopup(item)">Ver Documento</button>
-    </div>
-    <img src="/assets/prueba.png" alt="AQUI VA LA IMG">
+    <img src="../{{item.imagen}}" alt="AQUI VA LA IMG">
       <div class="body">
         <div [innerHTML]="item.Body"></div>
       </div>

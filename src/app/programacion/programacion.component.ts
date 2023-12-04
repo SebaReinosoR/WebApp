@@ -9,11 +9,15 @@ import { ProgramacionService } from '../services/programacion.service';
   styleUrls: ['./programacion.component.scss']
 })
 export class ProgramacionComponent {
+
   constructor(private services:ProgramacionService){} /*ESTABLECER EL SERVICIO */
   progra:any = {};    /*CREAR VARIABLE PARA LA LISTA DE ELEMENTOS*/
   prograLink:any ={};
+  
 
   ngOnInit() : void{
+
+
     this.services.getAllprogramacion().subscribe(progra => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
       {
         this.progra = progra;
@@ -22,6 +26,9 @@ export class ProgramacionComponent {
             if (this.progra[i].Body) {
               // Convierte los saltos de línea a etiquetas <br>
               this.progra[i].Body = this.convertirSaltosDeLinea(this.progra[i].Body);
+            }
+            if(this.progra[i].imagen){
+              this.progra[i].imagen = this.progra[i].imagen.replace(/\\/g, '/');
             }
           }
         }

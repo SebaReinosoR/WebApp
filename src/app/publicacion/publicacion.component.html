@@ -6,7 +6,7 @@
       <button [routerLink]="['/PubliOpen',item.idPublicacion]" routerLinkActive="router-link-active" >Ver Publicación</button>
     </div>
 
-    <img src="/assets/prueba.png" alt="AQUI VA LA IMG">
+    <img src="../{{item.imagen}}" alt="AQUI VA LA IMG">
 
     <div class="body"> <!--MOSTAR EL ABSTRAC O RESUMEN  // DE SER ASI HAY QUE REESTRUCTURAR EL AGREGAR-->
         <div [innerHTML]="item.Body"></div>

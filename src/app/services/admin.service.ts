@@ -120,7 +120,7 @@ public createPublicacion(id_admin: number, Nombre: string, Fecha:Date, Body: str
   const formData = new FormData();
   formData.append('id_admin', id_admin.toString());
   formData.append('Nombre', Nombre);
-  formData.append('Fecha', Fecha.toISOString());
+  formData.append('Fecha', Fecha.toString());
   formData.append('Body', Body);
   formData.append('Link', Link);
   formData.append('Autor', Autor);
@@ -157,10 +157,9 @@ public PutTema(id: number, id_admin: number, Nombre: string): Observable<any> {
   return this.http.put(url, body);
 }
 
-public PutProgramacion(id: number, id_admin: number, Nombre: string, Body: string, Link: string, imagen:File): Observable<any> {
+public PutProgramacion(id: number, Nombre: string, Body: string, Link: string, imagen:File): Observable<any> {
   const url = `${this.api_programacion}/${id}`;
   const formData = new FormData();
-  formData.append('id_admin', id_admin.toString());
   formData.append('Nombre', Nombre);
   formData.append('Body', Body);
   formData.append('Link', Link);

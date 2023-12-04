@@ -1,4 +1,4 @@
-import {Component , AfterViewInit  } from '@angular/core';
+import {Component , AfterViewInit, ChangeDetectorRef  } from '@angular/core';
 import { AdminService } from '../services/admin.service';
 import { NgForm } from '@angular/forms';
 
@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./administrador.component.scss']
 })
 export class AdministradorComponent implements AfterViewInit {
-  constructor(private services:AdminService){} /*ESTABLECER EL SERVICIO */
+  constructor(private services:AdminService, private cdr: ChangeDetectorRef){} /*ESTABLECER EL SERVICIO */
 
   codigosAll:any;
   subtemasAll:any;
@@ -19,6 +19,16 @@ export class AdministradorComponent implements AfterViewInit {
   temasAll:any;
   encargadosAll:any;
   id_admin:number= 1;
+  //CARGA IMG
+  imagenEncargado: File | null = null;
+  imagenPublicacion: File | null = null;
+  imagenDocumentacion: File | null = null;
+  imagenProgramacion: File | null = null;
+
+  nombreArchivoProgramacion: string = '';
+  nombreArchivoDocumentacion: string = '';
+  nombreArchivoPublicacion: string = '';
+  nombreArchivoEncargado: string = '';
 
   ngOnInit() : void{
 
@@ -69,6 +79,48 @@ export class AdministradorComponent implements AfterViewInit {
 
 
   }
+  //CARGAR IMG
+  onFileChange(event: Event, section: string): void {
+    console.log('Se ha cambiado un archivo en la sección:', section);
+
+
+    const target = event.target as HTMLInputElement;
+
+    if (target.files && target.files.length) {
+      const file = target.files[0];
+      if (file) {
+        const fileName = file.name; // Obtén el nombre del archivo
+
+        switch (section) {
+          case 'programacion':
+            this.imagenProgramacion = file;
+            this.nombreArchivoProgramacion = fileName; // Almacena el nombre del archivo
+            break;
+          case 'documentacion':
+            this.imagenDocumentacion = file;
+            this.nombreArchivoDocumentacion = fileName;
+            break;
+          case 'publicacion':
+            this.imagenPublicacion = file;
+            this.nombreArchivoPublicacion = fileName;
+            break;
+          case 'encargados':
+            this.imagenEncargado = file;
+            this.nombreArchivoEncargado = fileName;
+            break;
+        }
+
+        // Limpia el valor del input de archivo
+        target.value = '';
+
+        // Forzar la actualización de la vista
+        this.cdr.detectChanges();
+      }
+    }
+
+  }
+
+
   // PUT
   PutCodigo(idCodigo: number, form: NgForm): void {
     const { Nombre, Body, Link, Referencia } = form.value;
@@ -90,13 +142,23 @@ export class AdministradorComponent implements AfterViewInit {
     });
   }
   PutProgramacion(idProgra: number, form: NgForm): void {
-    const { Nombre, Body, Link,imagenPath} = form.value;
-    this.services.PutProgramacion(idProgra, this.id_admin, Nombre, Body, Link, imagenPath).subscribe(() => {
-      alert('Modificado correctamente');
-      this.services.getProgramacion().subscribe(programacionAll => {
-        this.programacionAll = programacionAll;
+
+    const { Nombre, Body, Link,} = form.value;
+    const imagenPath = this.imagenProgramacion
+    console.log(form.value);
+    console.log(imagenPath);
+    if (imagenPath){
+      this.services.PutProgramacion(idProgra,Nombre, Body, Link, imagenPath).subscribe(() => {
+        alert('Modificado correctamente');
+        this.services.getProgramacion().subscribe(programacionAll => {
+          this.programacionAll = programacionAll;
+        });
       });
-    });
+    }
+    else{
+      console.log('error en put')
+    }
+
   }
   PutPublicacion(idPublicacion: number, form: NgForm): void {
     const { Nombre,Fecha,Body,Referencia,Autor, Link, imagenPath } = form.value;

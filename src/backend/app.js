@@ -24,12 +24,15 @@ app.use(cors());
 // Configuración de Multer para cargar archivos
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, 'uploads/'); // La carpeta donde se almacenarán los archivos
+    cb(null, '../assets/'); // La carpeta donde se almacenarán los archivos
   },
   filename: function(req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + getExtension(file.originalname));
+    const extension = getExtension(file.originalname);
+    const fileName = file.fieldname + '-' + Date.now() + '.' + extension;
+    cb(null, fileName);
   }
 });
+
 // Función auxiliar para obtener la extensión del archivo
 function getExtension(filename) {
   const parts = filename.split('.');
@@ -38,7 +41,7 @@ function getExtension(filename) {
 const upload = multer({ storage: storage });
 
 // Servir archivos estáticos
-app.post('/upload', upload.single('imagen'), (req, res) => {
+app.post('../assets/', upload.single('imagen'), (req, res) => {
   // 'miArchivo' es el nombre del campo en el formulario
   if (req.file) {
     res.send('Archivo cargado con éxito');
@@ -282,11 +285,11 @@ app.get('/encargados/:id', async (req, res) => {
 });
 
 // Crear un nuevo encargado
-app.post('/encargados',upload.single('imagen'), async (req, res, next) => {
+app.post('/encargados',upload.single('imagen'), cors(), async (req, res) => {
   const {  id_admin, Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad} = req.body;
   const imagenPath = req.file ? req.file.path : null;
 
-  if (!file) {
+  if (!req.file) {
     return res.status(400).send({ message: 'Por favor, carga una imagen.' });
   }
 
@@ -300,7 +303,7 @@ app.post('/encargados',upload.single('imagen'), async (req, res, next) => {
 });
 
 // Actualizar un encargado por ID
-app.put('/encargados/:id', upload.single('imagen'), async (req, res) => {
+app.put('/encargados/:id', upload.single('imagen'),cors(), async (req, res) => {
   const id = req.params.id;
   const {id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad} = req.body;
   const imagenPath = req.file ? req.file.path : null;
@@ -412,7 +415,7 @@ app.get('/programacion/:id', async (req, res) => {
 
 // Crear una programacion
 app.post('/programacion', upload.single('imagen'), cors(), async (req, res) => {
-
+  
   const { id_admin, Nombre, Body, Link} = req.body;
   const imagenPath = req.file ? req.file.path : null;
 
@@ -431,11 +434,11 @@ app.post('/programacion', upload.single('imagen'), cors(), async (req, res) => {
 
 // Actualizar una programacion por ID
 app.put('/programacion/:id', upload.single('imagen'), async (req, res) => {
-
-  const {Nombre, Body, Link, id_admin } = req.body;
+  const id = req.params.id;
+  const {Nombre, Body, Link} = req.body;
   const imagenPath = req.file ? req.file.path : null;
   try {
-    await programacionService.updateProgramacion(id,Nombre, Body, Link, id_admin, imagenPath);
+    await programacionService.updateProgramacion(id,Nombre, Body, Link, imagenPath);
     res.status(200).json({message:'programacion actualizada exitosamente'});
   } catch (error) {
     console.error('Error al actualizar la programacion por ID:', error);
@@ -479,12 +482,12 @@ app.get('/publicaciones/:id', async (req, res) => {
 });
 
 // Crear una nueva publicación
-app.post('/publicaciones',upload.single('imagen'), async (req, res) => {
+app.post('/publicaciones',upload.single('imagen'),cors(), async (req, res) => {
 
   const {id_admin, Nombre,Fecha,Body,Referencia,Autor, Link} = req.body;
   const imagenPath = req.file ? req.file.path : null;
 
-  if (!file) {
+  if (!req.file) {
     return res.status(400).send({ message: 'Por favor, carga una imagen.' });
   }
 
@@ -498,8 +501,8 @@ app.post('/publicaciones',upload.single('imagen'), async (req, res) => {
 });
 
 // Actualizar una publicación por ID
-app.put('/publicaciones/:id',upload.single('imagen'), async (req, res) => {
-
+app.put('/publicaciones/:id',upload.single('imagen'),cors(), async (req, res) => {
+  const id = req.params.id;
   const { Nombre,Fecha,Body,Referencia,Autor, Link} = req.body;
   const imagenPath = req.file ? req.file.path : null;
   try {
@@ -549,12 +552,12 @@ app.get('/documentacion/:id', async (req, res) => {
   }
 });
 
-app.post('/documentacion', upload.single('imagen'), async (req, res) => {
+app.post('/documentacion', upload.single('imagen'), cors(),  async (req, res) => {
 
   const {id_admin, Nombre,Body,Referencia, Link} = req.body;
   const imagenPath = req.file ? req.file.path : null;
 
-  if (!file) {
+  if (!req.file) {
     return res.status(400).send({ message: 'Por favor, carga una imagen.' });
   }
 
@@ -567,8 +570,8 @@ app.post('/documentacion', upload.single('imagen'), async (req, res) => {
   }
 });
 
-app.put('/documentacion/:id', upload.single('imagen'), async (req, res) => {
-
+app.put('/documentacion/:id', upload.single('imagen'),cors(), async (req, res) => {
+  const id = req.params.id;
   const { id_admin,Nombre,Body, Link ,Referencia } = req.body;
   const imagenPath = req.file ? req.file.path : null;
   try {

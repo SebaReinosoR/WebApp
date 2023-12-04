@@ -195,6 +195,13 @@
                     <span class="input-group-text mb-3" id="Referencias">Referencias</span>
                     <input [(ngModel)]="item.Referencia"name="Referencia" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
+
+                  <div class="input-group mb-3">
+                    <div class="custom-file-input" (click)="fileInput.click()">
+                      {{ nombreArchivoPublicacion|| (item?.imagen !== '' ? item?.imagen : 'Sube un archivo') || 'Sube un archivo'  }}
+                    </div>
+                    <input formControlName="Imagen" type="file" #fileInput (change)="onFileChange($event, 'publicacion')" hidden>
+                  </div>
                 </form>
 
               </div>
@@ -263,7 +270,12 @@
                     <span class="input-group-text mb-3" id="link">Link</span>
                     <input [(ngModel)]="item.Link" name="Link" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
                   </div>
-
+                  <div class="input-group mb-3">
+                    <div class="custom-file-input" (click)="fileInput.click()">
+                      {{ nombreArchivoProgramacion|| (item?.imagen !== '' ? item?.imagen : 'Sube un archivo') || 'Sube un archivo'  }}
+                    </div>
+                    <input [(ngModel)]="item.imagen" name="imagen" type="file" #fileInput (change)="onFileChange($event, 'programacion')" hidden>
+                  </div>
                 </form>
 
               </div>
@@ -334,6 +346,12 @@
                   <div class="input-group mb-3">
                     <span class="input-group-text mb-3" id="Referencias">Referencias</span>
                     <input [(ngModel)]="item.Referencia"name="Referencia" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="custom-file-input" (click)="fileInput.click()">
+                      {{ nombreArchivoDocumentacion||(item?.imagen !== '' ? item?.imagen : 'Sube un archivo') || 'Sube un archivo'  }}
+                    </div>
+                    <input formControlName="Imagen" type="file" #fileInput (change)="onFileChange($event, 'documentacion')" hidden>
                   </div>
                 </form>
 
@@ -416,6 +434,12 @@
                   <div class="input-group mb-3" >
                     <span class="input-group-text mb-3" id="Universidad">Universidad</span>
                     <input [(ngModel)]="item.Universidad" name="Universidad" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="custom-file-input" (click)="fileInput.click()">
+                      {{ nombreArchivoEncargado || (item?.imagen !== '' ? item?.imagen : 'Sube un archivo') || 'Sube un archivo' }}
+                    </div>
+                    <input [(ngModel)]="item.imagen" name="imagen" type="file" #fileInput (change)="onFileChange($event, 'encargado')" hidden>
                   </div>
                 </form>
 

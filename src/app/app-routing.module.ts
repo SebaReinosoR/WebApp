@@ -13,14 +13,14 @@ import { PubliVComponent}from './publicacion/publi.v/publi.v.component';
 import { SubtemaComponent } from './primary-front/subtema/subtema.component';
 import {SubtemaUDComponent} from './administrador/subtema-ud/subtema-ud.component';
 import { AuthGuard } from './services/otros/auth/auth.guard';
-
+import { PermisoRutasService } from './services/otros/permiso-rutas.service';
 
 const routes: Routes = [
 
   {path: 'inicio', component: PrimaryFrontComponent },
   {path:'Login', component: InicioSesionComponent},
-  {path:'Admin',canActivate:[AuthGuard], component: AdministradorComponent},
-  {path:'Add',canActivate:[AuthGuard], component: AddElementoComponent},
+  {path:'Admin',canActivate:[PermisoRutasService], component: AdministradorComponent},
+  {path:'Add',canActivate:[PermisoRutasService], component: AddElementoComponent},
   {path:'Codigo', component: CodigoComponent},
   {path:'Documento', component:DocumentoComponent},
   {path:'Programacion', component:ProgramacionComponent},
@@ -30,7 +30,7 @@ const routes: Routes = [
   //rutas ID
   {path : 'PubliOpen/:id',component:PubliVComponent},
   {path : 'Subtema/:id', component:SubtemaComponent},
-  {path : 'Admin/SubtemaUD/:id',canActivate:[AuthGuard],component:SubtemaUDComponent},
+  {path : 'Admin/SubtemaUD/:id',canActivate:[PermisoRutasService],component:SubtemaUDComponent},
 
 
   //url vacio o inexistente

@@ -9,7 +9,7 @@ const getPublicacionById = (id) => {
 };
 
 const createPublicacion = (id_admin,Nombre,Fecha,Body,Referencia,Autor, Link,imagenPath) => {
-  return db.query('INSERT INTO publicacion (id_admin,Nombre,Fecha,Body,Referencia,Autor, Link,imagen) VALUES (?,?, ?, ?, ?, ?,?)', [id_admin,Nombre,Fecha,Body,Referencia,Autor, Link, imagenPath]);
+  return db.query('INSERT INTO publicacion (id_admin,Nombre,Fecha,Body,Referencia,Autor, Link,imagen) VALUES (?,?, ?, ?, ?, ?,?,?)', [id_admin,Nombre,Fecha,Body,Referencia,Autor, Link, imagenPath]);
 };
 
 const updatePublicacion = (id, Nombre,Fecha,Body,Referencia,Autor, Link,imagenPath) => {

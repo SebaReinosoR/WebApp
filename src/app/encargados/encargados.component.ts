@@ -9,8 +9,8 @@ import { EncargadosService } from '../services/encargados.service'; /* LLAMAR AL
 export class EncargadosComponent {
 
   lista:any;    /*CREAR VARIABLE PARA LA LISTA DE ELEMENTOS*/
-  item:any = {};
-
+  item: any = {};
+  mostrar:boolean=false;
   constructor(private services:EncargadosService){ /*ESTABLECER EL SERVICIO */
 
 
@@ -25,7 +25,7 @@ export class EncargadosComponent {
 
   EnvioDatos(item:any){
     this.item=item;
-
+    this.mostrar=true;
   }
 
 
