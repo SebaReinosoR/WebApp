@@ -9,6 +9,7 @@ import {
   faAnchorCircleCheck,
 } from "@fortawesome/free-solid-svg-icons";
 
+
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -47,6 +48,7 @@ export class NavBarComponent {
   ];
 
   showLeftNav: boolean = true;
+
 
   showAndHideLeftNav() {
     this.showLeftNav = !this.showLeftNav;

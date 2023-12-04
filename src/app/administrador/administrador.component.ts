@@ -32,8 +32,8 @@ export class AdministradorComponent implements AfterViewInit {
       this.services.getCodigos().subscribe(codigosAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
         {
           this.codigosAll = codigosAll;
-       
-          
+
+
         });
 
         this.services.getSubtemas().subscribe(subtemasAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
@@ -44,24 +44,24 @@ export class AdministradorComponent implements AfterViewInit {
         this.services.getPublicacion().subscribe(publiAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
         {
           this.publiAll = publiAll;
-          
+
         });
 
         this.services.getProgramacion().subscribe(programacionAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
         {
           this.programacionAll = programacionAll;
-          
+
         });
 
         this.services.getDocumentacion().subscribe(documentosAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
         {
           this.documentosAll = documentosAll;
-          
+
         });
         this.services.getEncargados().subscribe(encargadosAll => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
         {
           this.encargadosAll = encargadosAll;
-          
+
         });
 
 
@@ -69,7 +69,7 @@ export class AdministradorComponent implements AfterViewInit {
 
 
   }
-  // PUT 
+  // PUT
   PutCodigo(idCodigo: number, form: NgForm): void {
     const { Nombre, Body, Link, Referencia } = form.value;
     this.services.PutCodigos(idCodigo, this.id_admin, Nombre, Body, Link, Referencia).subscribe(() => {
@@ -90,8 +90,8 @@ export class AdministradorComponent implements AfterViewInit {
     });
   }
   PutProgramacion(idProgra: number, form: NgForm): void {
-    const { Nombre, Body, Link} = form.value;
-    this.services.PutProgramacion(idProgra, this.id_admin, Nombre, Body, Link).subscribe(() => {
+    const { Nombre, Body, Link,imagenPath} = form.value;
+    this.services.PutProgramacion(idProgra, this.id_admin, Nombre, Body, Link, imagenPath).subscribe(() => {
       alert('Modificado correctamente');
       this.services.getProgramacion().subscribe(programacionAll => {
         this.programacionAll = programacionAll;
@@ -99,8 +99,8 @@ export class AdministradorComponent implements AfterViewInit {
     });
   }
   PutPublicacion(idPublicacion: number, form: NgForm): void {
-    const { Nombre,Fecha,Body,Referencia,Autor, Link } = form.value;
-    this.services.PutPublicacion(idPublicacion, this.id_admin, Nombre,Fecha,Body,Referencia,Autor, Link).subscribe(() => {
+    const { Nombre,Fecha,Body,Referencia,Autor, Link, imagenPath } = form.value;
+    this.services.PutPublicacion(idPublicacion, this.id_admin, Nombre,Fecha,Body,Referencia,Autor, Link, imagenPath).subscribe(() => {
       alert('Modificado correctamente');
       this.services.getPublicacion().subscribe(publiAll => {
         this.publiAll = publiAll;
@@ -108,9 +108,9 @@ export class AdministradorComponent implements AfterViewInit {
     });
   }
   PutDocumentacion(idDocu: number, form: NgForm): void {
-    const { Nombre, Body, Link, Referencia} = form.value;
+    const { Nombre, Body, Link, Referencia,imagenPath} = form.value;
     console.log(form.value);
-    this.services.PutDocumentacion(idDocu, this.id_admin, Nombre, Body, Link, Referencia).subscribe(() => {
+    this.services.PutDocumentacion(idDocu, this.id_admin, Nombre, Body, Link, Referencia,imagenPath).subscribe(() => {
       alert('Modificado correctamente');
       this.services.getDocumentacion().subscribe(documentosAll => {
         this.documentosAll = documentosAll;
@@ -118,8 +118,8 @@ export class AdministradorComponent implements AfterViewInit {
     });
   }
   PutEncargados(idEncargado:number, form:NgForm):void{
-    const { Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad} = form.value;
-    this.services.PutEncargados(idEncargado,this.id_admin,Nombre,Apellido, Carrera, Especialidad, Investigacion, Universidad).subscribe(()=>{
+    const { Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad,imagenPath} = form.value;
+    this.services.PutEncargados(idEncargado,this.id_admin,Nombre,Apellido, Carrera, Especialidad, Investigacion, Universidad,imagenPath).subscribe(()=>{
       alert('Modificado correctamente');
       this.services.getEncargados().subscribe(encargadosAll => {
         this.encargadosAll = encargadosAll;
@@ -129,6 +129,7 @@ export class AdministradorComponent implements AfterViewInit {
   }
 
 
+
   // DELETE
 
   //Eliminar Temas
@@ -136,7 +137,7 @@ export class AdministradorComponent implements AfterViewInit {
   deletetema(idtema:number): void {
     this.services.deleteTema(idtema).subscribe(() => {
       alert('Eliminado correctamente');
-      this.services.getTemas().subscribe(temasAll => 
+      this.services.getTemas().subscribe(temasAll =>
       {
         this.temasAll = temasAll;
       });
@@ -149,7 +150,7 @@ export class AdministradorComponent implements AfterViewInit {
   deleteCodigo(idCodigo:number): void {
     this.services.deleteCodigos(idCodigo).subscribe(() => {
       alert('Eliminado correctamente');
-      this.services.getCodigos().subscribe(codigosAll => 
+      this.services.getCodigos().subscribe(codigosAll =>
         {
           this.codigosAll = codigosAll;
         });
@@ -161,7 +162,7 @@ export class AdministradorComponent implements AfterViewInit {
 
     this.services.deletePublicacion(idPubli).subscribe(() => {
       alert('Eliminado correctamente');
-      this.services.getPublicacion().subscribe(publiAll => 
+      this.services.getPublicacion().subscribe(publiAll =>
       {
         this.publiAll = publiAll;
       });

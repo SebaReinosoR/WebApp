@@ -1,72 +1,67 @@
 
 <div class="container-fluid">
+  <div class="contenedor">
+    <div class="box" *ngIf="item!== '' ">
 
-  <div class="box-1">
+      <div class="head" >
+        <div class="name">
+          <h4 class="Nombre"> {{item.Nombre | uppercase}} </h4>
+          <h4 class="Apellido" > {{item.Apellido | uppercase}} </h4>
+        </div>
+        <img src="/assets/prueba.png" alt="AQUI VA LA IMG">
 
-    <div class="head">
-      <img src="/assets/prueba.png" alt="AQUI VA LA IMG">
-
-    </div>
-    <ul *ngIf="item!== '' ">
-      <li class="name">
-      <h4 class="Nombre"> {{item.Nombre}} </h4>
-      <h4 class="Apellido" > {{item.Apellido}} </h4>
-      </li>
-      <li>
-        <h5>Carrera</h5>
-        <p>{{item.Carrera}}</p>
-        </li>
-      <li>
-        <h5>Universidad</h5>
-        <p>{{item.Universidad}}</p>
-      </li>
-      <li>
-        <h5>Especialidad</h5>
-        <p>{{item.Especialidad}}</p>
-      </li>
-      <li>
-        <h5>Investigación</h5>
-        <p >
-          {{item.Investigacion}}
-        </p>
-
-    </ul>
-
-  </div>
-      <div class="box-scroll" >
-        <div class="box" *ngFor="let item of lista"> 
-          <div class="head">
-            <img src="/assets/prueba.png" alt="AQUI VA LA IMG">
-            <h4 class="Nombre"> {{item.Nombre}} </h4>
-            <h4 class="Apellido">{{item.Apellido}}</h4>
-
-          </div>
-          <ul class="body">
-
-            <li>
-              <p> {{item.Carrera}}</p>
-            <li>
-            <li>
-              <p>{{item.Universidad}}</p>
-
-            </li>
-            <li>
-              <p>{{item.Especialidad}}</p>
-            </li>
-
-          </ul>
-          <p class="btn" (click)="EnvioDatos(item)">↑</p> <!--debe mostrar los elementos por array desde ts-->
+      </div>
+      <div class="body">
+        <div>
+          <h5>Carrera</h5>
+          <p>{{item.Carrera}}</p>
         </div>
 
+        <div>
+          <h5>Universidad</h5>
+          <p>{{item.Universidad}}</p>
+        </div>
 
+        <div>
+          <h5>Especialidad</h5>
+          <p>{{item.Especialidad}}</p>
+        </div>
 
+        <div>
+          <h5>Investigación</h5>
+          <p>{{item.Investigacion}}</p>
+        </div>
 
+      </div>
 
+    </div>
 
+    <div class="box-list" >
 
+      <div class="lista" *ngFor="let item of lista">
 
+        <div class="head">
+              <img src="/assets/prueba.png" alt="AQUI VA LA IMG">
+              <h4 class="Nombre"> {{item.Nombre}} </h4>
+              <h4 class="Apellido">{{item.Apellido}}</h4>
+        </div>
+        <div class="body">
+            <div>
+              <p>Carrera: {{item.Carrera}}</p>
+            </div>
+            <div>
+              <p>Universidad: {{item.Universidad}}</p>
+            </div>
+            <div>
+              <p>Especialidad: {{item.Especialidad}}</p>
+            </div>
+        </div>
 
+        <p class="btn" (click)="EnvioDatos(item)">↑</p> <!--debe mostrar los elementos por array desde ts-->
 
-</div>
+      </div>
+    </div>
+
+  </div>
 
 </div>

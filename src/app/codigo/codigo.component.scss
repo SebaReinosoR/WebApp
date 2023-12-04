@@ -5,7 +5,90 @@
   flex-wrap: wrap;
   max-height: 100%;
   justify-content: space-evenly;
+
+
+
+  .box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 35em;
+  border: 3px solid black;
+  min-width:  30em;
+  margin: 1.5em;
+  border-radius: 0.5em 0.5em 0.5em 0.5em ;
+  box-shadow: 0px 5px 10px 5px rgba(0,0,0,0.75);
+
+
+  h4{
+    margin: 0.5em 1em 0.5em 1em;
+    max-width: 20em;
+
+  }
+    .box-1{
+      border-top: 1px solid black;
+      max-height:30em;
+      margin: 0em 0em 1em 0em;
+      border-bottom: 1px solid black;
+
+      .scroll{
+        overflow: scroll;
+        max-height:20em;
+        padding: 0em 4em 0em 4em;
+        margin-top: 0.5em;
+        margin-bottom: 1em;
+
+        p{
+          text-align: justify;
+        }
+
+      }
+    }
+    .link{
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      margin: 0em 4em 0.5em 4em;
+
+        a{
+          padding-bottom: 1em;
+        }
+
+    }
+
+
+    //SCROLL STYLES
+
+    .scroll::-webkit-scrollbar{
+      width: 8px;     /* Tamaño del scroll en vertical */
+      height: 8px;    /* Tamaño del scroll en horizontal */
+    }
+
+    .scroll::-webkit-scrollbar-thumb{
+      background: #ccc;
+      border-radius: 4px;
+    }
+
+    .scroll::-webkit-scrollbar-thumb:hover{
+      background: #b3b3b3;
+      box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    }
+
+
+    .scroll::-webkit-scrollbar-thumb:active{
+      background-color: #999999;
+
+    }
+
+    .scroll::-webkit-scrollbar-track:hover,
+    .scroll::-webkit-scrollbar-track:active {
+    background: transparent;
+    }
+  }
 }
+
+
+//SCROLL STYLES
 
 .container-fluid::-webkit-scrollbar{
   width: 8px;     /* Tamaño del scroll en vertical */
@@ -22,7 +105,6 @@
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-
 .container-fluid::-webkit-scrollbar-thumb:active{
   background-color: #999999;
 
@@ -31,118 +113,6 @@
 .container-fluid::-webkit-scrollbar-track:hover,
 .container-fluid::-webkit-scrollbar-track:active {
 background: transparent;
-}
-
-
-
-.box{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 30em;
-  border: 3px solid black;
-  max-width:  30em;
-  margin: 1.5em;
-  border-radius: 0.5em 0.5em 0.5em 0.5em ;
-  box-shadow: 10px 5px 10px 5px rgba(0,0,0,0.75);
-
-  h4{
-    margin: 1em 1em 1em 1em;
-    border-bottom: 1px solid black;
-    max-width: 12em;
-
-
-  }
-    .box-1{
-
-      max-height:30em;
-      overflow-y: scroll;
-      padding:0;
-      margin: 0em 0em 1em 0em;
-      ul{
-        list-style-type: none;
-        margin: 1em 2em 0em 0em;
-
-
-        li{
-          border: 3px solid black;
-          margin-bottom: 1.5em;
-          padding-left: 1em ;
-          padding-right: 1em ;
-          width: 25em;
-
-          p{
-            margin-top: 0.5em ;
-          }
-          .link{
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: row;
-            justify-content: space-around;
-            a{
-              padding-bottom: 1em;
-              margin: 0em 0.5em 0.5em 0.5em;
-            }
-          }
-
-        }
-
-      }
-      ul{
-        list-style-type: none;
-        margin: 1em 2em 0em 0em;
-
-
-        li{
-          border: 3px solid black;
-          margin-bottom: 1.5em;
-          padding-left: 1em ;
-          padding-right: 1em ;
-          width: 25em;
-
-          p{
-            margin-top: 0.5em ;
-          }
-          .link{
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: row;
-            justify-content: space-around;
-            a{
-              padding-bottom: 1em;
-              margin: 0em 0.5em 0.5em 0.5em;
-            }
-          }
-
-        }
-
-      }
-    }
-    .box-1::-webkit-scrollbar{
-      width: 8px;     /* Tamaño del scroll en vertical */
-      height: 8px;    /* Tamaño del scroll en horizontal */
-    }
-
-    .box-1::-webkit-scrollbar-thumb{
-      background: #ccc;
-      border-radius: 4px;
-    }
-
-    .box-1::-webkit-scrollbar-thumb:hover{
-      background: #b3b3b3;
-      box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-    }
-
-
-    .box-1::-webkit-scrollbar-thumb:active{
-      background-color: #999999;
-
-    }
-
-    .box-1::-webkit-scrollbar-track:hover,
-    .box-1::-webkit-scrollbar-track:active {
-    background: transparent;
-    }
 }
 
 

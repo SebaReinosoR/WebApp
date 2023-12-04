@@ -1,32 +1,12 @@
   .container-fluid{
+    display: flex ;
+    flex-wrap: wrap;
+    justify-content: space-around;
     overflow-y: scroll;
     max-height: 100%;
-  }
-  .container-fluid::-webkit-scrollbar{
-    width: 8px;     /* Tamaño del scroll en vertical */
-    height: 8px;    /* Tamaño del scroll en horizontal */
+    max-width: 100vw;
   }
 
-  .container-fluid::-webkit-scrollbar-thumb{
-    background: #ccc;
-    border-radius: 4px;
-  }
-
-  .container-fluid::-webkit-scrollbar-thumb:hover{
-    background: #b3b3b3;
-    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-  }
-
-
-  .container-fluid::-webkit-scrollbar-thumb:active{
-    background-color: #999999;
-
-  }
-
-  .container-fluid::-webkit-scrollbar-track:hover,
-  .container-fluid::-webkit-scrollbar-track:active {
-  background: transparent;
-  }
 
 
 .box{
@@ -40,6 +20,9 @@
   grid-template-areas:
      "head head head"
      "img body  box";
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 0.5fr 2fr;
+  max-width: 100%;
 
   .head{
     grid-area: head;
@@ -60,12 +43,13 @@
       color: rgb(167, 33, 33);
 
       &:hover{
-          background-color: rgba(255, 255, 255, 0.301);
+          background-color: rgb(255, 255, 255);
           color: rgb(43, 146, 83);
       }
     }
 
   }
+
   img{
     grid-area: img;
     max-width: 10em;
@@ -74,8 +58,8 @@
     border: 3px dashed black;
     border-radius: 20px 0px 20px 0px;
   }
-    .body{
-        max-width: 60em;
+
+  .body{
         grid-area: body;
         border: 2px solid black;
         border-radius: 10px;
@@ -84,22 +68,28 @@
         margin: 1em 0em 0em 0em;
         padding: 0em 1.5em 0em 1.5em;
 
-        p{
+        div{
           text-align: justify;
         }
 
       }
-      .box-1{
+
+  .box-1{
         grid-area: box;
-        display: flex;
-        margin-top:1.5em ;
+        margin-top: 1.5em;
         ul{
           list-style: none;
+
           li{
             border-left: 2px dashed black;
             padding: 0em 1em 0em 1em;
+
             p{
               padding: 0em 2em 0em 1em;
+              width: 15vw; /* Ajusta el ancho máximo según tus necesidades */
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
 
         }
@@ -115,3 +105,28 @@
 }
 
 
+.container-fluid::-webkit-scrollbar{
+  width: 8px;     /* Tamaño del scroll en vertical */
+  height: 8px;    /* Tamaño del scroll en horizontal */
+}
+
+.container-fluid::-webkit-scrollbar-thumb{
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.container-fluid::-webkit-scrollbar-thumb:hover{
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+
+.container-fluid::-webkit-scrollbar-thumb:active{
+  background-color: #999999;
+
+}
+
+.container-fluid::-webkit-scrollbar-track:hover,
+.container-fluid::-webkit-scrollbar-track:active {
+background: transparent;
+}

@@ -1,4 +1,7 @@
 <div class="container-fluid">
+
+  <i class="fas fa-arrow-left fa-lg" routerLink="/Publicacion"></i>
+
   <div class="box" *ngFor="let item of publi" >
     <div class="head">
       <img src="/assets/prueba.png" alt="AQUI VA LA IMG">
@@ -14,23 +17,15 @@
           </li>
       </ul>
     </div>
-    <ul>
-      <li class="body">
+    <div class="body">
         <p >
             {{item.Body}}
         </p>
 
-        </li>
-
-      <li class="link">
-
-          <a [href]="item.Link">{{item.Link}}</a>
-          <a [href]="item.Referencia">{{item.Referencia}}</a>
-
-      </li>
-    </ul>
+    </div>
+    <div class="link">
+        <a [href]="item.Link">{{item.Link}}</a>
+        <a [href]="item.Referencia">{{item.Referencia}}</a>
+    </div>
   </div>
-
-
-
 </div>

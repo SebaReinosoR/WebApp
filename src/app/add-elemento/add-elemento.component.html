@@ -221,6 +221,14 @@
                   </div>
                 </div>
 
+                <div class="input-group mb-3">
+                  <div class="custom-file-input" (click)="fileInput.click()">
+                    {{ nombreArchivoProgramacion || 'Sube un archivo' }}
+                  </div>
+                  <input type="file" #fileInput (change)="onFileChange($event, 'programacion')" hidden>
+                </div>
+
+
                 <div class="btn">
                   <button type="submit" class="btn btn-success">Agregar</button>
                 </div>
@@ -294,7 +302,7 @@
                     <br>
                     →Autor: Nombre(s) de los autores de la Publicación.
                     <br>
-                    →Fecha de emisión: Fecha en la cuál se realizó la Publicación de la investigación.
+                    →Fecha de emisión: Año en la cuál se realizó la Publicación de la investigación(Revista,paper, etc).
                     <br>
                     →Cuerpo: Agregar el contenido de la Publicación (Abstract,Resumen,Cuerpo,Conclusión,etc).
                     <br>

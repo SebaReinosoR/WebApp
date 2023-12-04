@@ -8,34 +8,6 @@
 }
 
 
-.container-fluid::-webkit-scrollbar{
-  width: 8px;     /* Tamaño del scroll en vertical */
-  height: 8px;    /* Tamaño del scroll en horizontal */
-}
-
-.container-fluid::-webkit-scrollbar-thumb{
-  background: #ccc;
-  border-radius: 4px;
-}
-
-.container-fluid::-webkit-scrollbar-thumb:hover{
-  background: #b3b3b3;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-}
-
-
-.container-fluid::-webkit-scrollbar-thumb:active{
-  background-color: #999999;
-
-}
-
-.container-fluid::-webkit-scrollbar-track:hover,
-.container-fluid::-webkit-scrollbar-track:active {
-background: transparent;
-}
-
-
-
 .box{
   border: 1px solid black;
   border-left: 2px solid black;
@@ -52,11 +24,12 @@ background: transparent;
     grid-area: head;
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid black;
 
-    h4{
+      h4{
       margin: 0.5em 1em 1em 2em;
-    }
-    button{
+      }
+      button{
       font-size: 0.8em;
       max-height: 3em;
       min-width: 10em ;
@@ -67,10 +40,10 @@ background: transparent;
       color: rgb(167, 33, 33);
 
       &:hover{
-          background-color: rgba(255, 255, 255, 0.301);
+          background-color: rgba(255, 255, 255, 0.76);
           color: rgb(43, 146, 83);
       }
-    }
+      }
 
   }
   img{
@@ -82,7 +55,7 @@ background: transparent;
     border-radius: 20px 0px 20px 0px;
   }
     .body{
-        max-width: 60em;
+
         grid-area: body;
         border: 2px solid black;
         border-radius: 10px;
@@ -91,7 +64,7 @@ background: transparent;
         margin: 1em 0em 1.5em 0em;
         padding: 0em 1.5em 0em 1.5em;
 
-        p{
+        div{
           text-align: justify;
         }
 
@@ -123,18 +96,13 @@ background: transparent;
       }
 
       .box-1{
+        margin-top: 2em;
         grid-area: box;
-        display: flex;
-        margin-top:1.5em ;
-        flex-wrap: wrap;
-        max-width:15em ;
-        max-height: 12em;
-
-        a{
-            padding: 0em 0.5em 0em 0.5em;
-
-        }
-
+        display:flex;
+        overflow: hidden;
+        max-width:20vw ;
+        padding: 0.5em;
+        flex-direction: column;
       }
 
 
@@ -166,3 +134,28 @@ background: transparent;
 }
 
 
+.container-fluid::-webkit-scrollbar{
+  width: 8px;     /* Tamaño del scroll en vertical */
+  height: 8px;    /* Tamaño del scroll en horizontal */
+}
+
+.container-fluid::-webkit-scrollbar-thumb{
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.container-fluid::-webkit-scrollbar-thumb:hover{
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+
+.container-fluid::-webkit-scrollbar-thumb:active{
+  background-color: #999999;
+
+}
+
+.container-fluid::-webkit-scrollbar-track:hover,
+.container-fluid::-webkit-scrollbar-track:active {
+background: transparent;
+}

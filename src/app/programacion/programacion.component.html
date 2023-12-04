@@ -4,18 +4,14 @@
       <h4> {{item.Nombre}} </h4>
     </div>
 
-    <img src="assets/prueba.png" alt="imgz">
+    <img src="../../backend/{{item.imagen}}" alt=" no funciona">
 
     <div class="link" >
-      <div class="box-a">
         <a [href]="item.Link">{{item.Link}}</a>
-      </div>
     </div>
 
       <div class="body">
-          <p >
-          {{item.Body}}
-          </p>
+        <div [innerHTML]="item.Body"></div>
       </div>
 
   </div>

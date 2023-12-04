@@ -20,11 +20,23 @@ export class PublicacionComponent {
     this.services.getAllpubli().subscribe(publi => /*LLAMAR A LA FUNCION DEL SERVICIO , SOLICITANDO LOS DATOS */
       {
         this.publi = publi;
+
+        if (this.publi && this.publi.length > 0) {
+          for (let i = 0; i < this.publi.length; i++) {
+            if (this.publi[i].Body) {
+              // Convierte los saltos de línea a etiquetas <br>
+              this.publi[i].Body = this.convertirSaltosDeLinea(this.publi[i].Body);
+            }
+          }
+        }
       });
+    }
+
     
-
-      }
-
+    private convertirSaltosDeLinea(texto: string): string {
+      // Convierte los saltos de línea a etiquetas <br>
+      return texto.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    }
 }
 
 

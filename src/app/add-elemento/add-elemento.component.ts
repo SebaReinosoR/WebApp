@@ -1,8 +1,9 @@
-import { Component , AfterViewInit, OnInit } from '@angular/core';
+import { Component ,  OnDestroy, AfterViewInit, OnInit , ChangeDetectorRef} from '@angular/core';
 import {AdminService}  from '../services/admin.service'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { finalize } from 'rxjs/internal/operators/finalize';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 
 @Component({
@@ -36,8 +37,18 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
 
   mostrarCuadro: boolean = false;
 
+  //CARGA IMG
+  imagenEncargado: File | null = null;
+  imagenPublicacion: File | null = null;
+  imagenDocumentacion: File | null = null;
+  imagenProgramacion: File | null = null;
 
-  constructor( private services:AdminService, private formBuilder: FormBuilder, private location: Location, private fb:FormBuilder) {
+  nombreArchivoProgramacion: string = '';
+  nombreArchivoDocumentacion: string = '';
+  nombreArchivoPublicacion: string = '';
+  nombreArchivoEncargado: string = '';
+
+  constructor( private services:AdminService, private formBuilder: FormBuilder, private location: Location, private fb:FormBuilder , private cdr: ChangeDetectorRef) {
     this.id_tema = 0;
     this.Body = '';
     this.Link = '';
@@ -95,6 +106,9 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
 
 
   ngOnInit(): void {
+    this.loadFormDataFromLocalStorage();
+
+    //VALIDATORS-----------------------------
     this.myformTema = this.createmyformTema(); // CREAR LA VALIDACION TEMA
     this.myformSubtema = this.createMyformSubtema();// CREAR LA VALIDACION DE SUBTEMA
     this.myformCodigo= this.createMyformCodigo();// CREAR LA VALIDACION DE CODIGO
@@ -104,9 +118,89 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
     this.myformEncargados = this.createMyformEncargados();
 
   }
+  //LOCAL STORAGE
+  saveFormDataToLocalStorage(): void {
+    const formData = {
+      Nombre: this.Nombre,
+      Body: this.Body,
+      Link: this.Link,
+      Referencia: this.Referencia,
+      Fecha: this.Fecha,
+      Autor: this.Autor,
+      Apellido: this.Apellido,
+      Carrera: this.Carrera,
+      Especialidad: this.Especialidad,
+      Investigacion: this.Investigacion,
+      Universidad: this.Universidad
+      // ... otras propiedades ...
+    };
+    localStorage.setItem('formData', JSON.stringify(formData));
+  }
+  loadFormDataFromLocalStorage(): void {
+    const savedFormData = localStorage.getItem('formData');
+    if (savedFormData) {
+      const formData = JSON.parse(savedFormData);
+      this.id_admin = formData.id_admin;
+      this.Nombre = formData.Nombre;
+      this.Body = formData.Body;
+      this.Link = formData.Link;
+      this.Referencia = formData.Referencia;
+      this.Fecha = formData.Fecha;
+      this.Autor = formData.Autor;
+      this.Apellido = formData.Apellido;
+      this.Carrera = formData.Carrera;
+      this.Especialidad = formData.Especialidad;
+      this.Investigacion = formData.Investigacion;
+      this.Universidad = formData.Universidad;
+    }
+  }
+  private subscriptions = new Subscription();
+  ngOnDestroy() {
+    // Limpia tus suscripciones y cualquier otra limpieza necesaria
+    this.subscriptions.unsubscribe();
+  }
+  onFileChange(event: Event, section: string): void {
+    console.log('Se ha cambiado un archivo en la sección:', section);
+    this.saveFormDataToLocalStorage();
 
+    const target = event.target as HTMLInputElement;
 
+    if (target.files && target.files.length) {
+      const file = target.files[0];
+      if (file) {
+        const fileName = file.name; // Obtén el nombre del archivo
 
+        switch (section) {
+          case 'programacion':
+            this.imagenProgramacion = file;
+            this.nombreArchivoProgramacion = fileName; // Almacena el nombre del archivo
+            break;
+          case 'documentacion':
+            this.imagenDocumentacion = file;
+            this.nombreArchivoDocumentacion = fileName;
+            break;
+          case 'publicacion':
+            this.imagenPublicacion = file;
+            this.nombreArchivoPublicacion = fileName;
+            break;
+          case 'encargados':
+            this.imagenEncargado = file;
+            this.nombreArchivoEncargado = fileName;
+            break;
+        }
+
+        // Limpia el valor del input de archivo
+        target.value = '';
+
+        // Forzar la actualización de la vista
+        this.cdr.detectChanges();
+      } else {
+        // Manejar el caso cuando file es null
+      }
+
+    }
+
+  }
 
  /*----------------------------------------------------------------------------------POST-------------------------------------------------------------------------------- */
 
@@ -121,6 +215,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
     ).subscribe(() => {
       this.Limpieza_Varibles_local();
       this.myformSubtema.reset();
+      localStorage.removeItem('formData'); // Limpiar el almacenamiento local
       alert('Agregado correctamente');
 
     });
@@ -167,6 +262,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       alert('Agregado correctamente');
       this.Limpieza_Varibles_local();
       this.myformSubtema.reset(); // Limpieza de input
+      localStorage.removeItem('formData'); // Limpiar el almacenamiento local
     })
 
 
@@ -225,6 +321,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       alert('Agregado correctamente');
       this.Limpieza_Varibles_local();
       this.myformCodigo.reset();
+      localStorage.removeItem('formData'); // Limpiar el almacenamiento local
     })
 
 
@@ -268,12 +365,28 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
   //Programacion-----------------------------------------------------
 
   PostProgramacion(): void {
-    this.services.createProgramacion(this.id_admin, this.Nombre, this.Body, this.Link).subscribe(() => {
-      alert('Agregado correctamente');
-      this.Limpieza_Varibles_local();
-      this.myformProgramacion.reset();
+    if (!this.imagenProgramacion) {
+      alert('Por favor, selecciona una imagen para la programación.');
+      return;
+    }
 
-    })
+    this.subscriptions.add(
+      this.services.createProgramacion(
+        this.id_admin,
+        this.Nombre,
+        this.Body,
+        this.Link,
+        this.imagenProgramacion
+      ).subscribe({
+        next: (response) => {
+          console.log('Programación agregada correctamente', response);
+          this.myformProgramacion.reset();
+        },
+        error: (error) => {
+          console.error('Error al agregar la programación:', error);
+        }
+      })
+    );
   }
 
   //VALIDACION
@@ -283,7 +396,8 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
     return this.fb.group({
       Nombre: ['', [Validators.required]],
       Body: ['', [Validators.required]],
-      Link: ['', [Validators.required]]
+      Link: ['', [Validators.required]],
+      imagenProgramacion:['', [Validators.required]]
     });
   }
   public submitFormProgramacion(): void {
@@ -309,12 +423,30 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
   }
   //Documentacion---------------------------------------------------------
   PostDocumentacion(): void {
-    this.services.createDocumentacion(this.id_admin, this.Nombre, this.Body, this.Link, this.Referencia).subscribe(() => {
-      alert('Agregado correctamente');
-      this.Limpieza_Varibles_local();
-      this.myformDocumentacion.reset();
-    })
+    if (!this.imagenDocumentacion) {
+      alert('Por favor, selecciona una imagen para la documentación.');
+      return;
+    }
 
+    this.subscriptions.add(
+      this.services.createDocumentacion(
+        this.id_admin,
+        this.Nombre,
+        this.Body,
+        this.Link,
+        this.Referencia,
+        this.imagenDocumentacion
+      ).subscribe({
+        next: (response) => {
+          console.log('Documentación agregada correctamente', response);
+          this.myformDocumentacion.reset();
+          this.Limpieza_Varibles_local();
+        },
+        error: (error) => {
+          console.error('Error al agregar la documentación:', error);
+        }
+      })
+    );
   }
 
   //VALIDACION
@@ -345,7 +477,6 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       this.PostDocumentacion();
     }
 
-
   }
   public get fDocumentacion():any{
     return this.myformDocumentacion.controls;
@@ -355,13 +486,35 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
   // Publicacion-------------------------------------------------------
 
   PostPublicacion(): void {
-    this.services.createPublicacion(this.id_admin, this.Nombre,this.Fecha, this.Body, this.Link,this.Autor, this.Referencia).subscribe(() => {
-      console.log(this)
-      alert('Agregado correctamente');
-      this.Limpieza_Varibles_local();
-      this.myformPublicacion.reset();
-    })
 
+    // Asegúrate de que todos los campos necesarios estén definidos
+    if (!this.imagenPublicacion) {
+      alert('Por favor, selecciona una imagen para la publicación.');
+      return;
+    }
+
+    this.subscriptions.add(
+      this.services.createPublicacion(
+        this.id_admin,
+        this.Nombre,
+        this.Fecha,
+        this.Body,
+        this.Link,
+        this.Autor,
+        this.Referencia,
+        this.imagenPublicacion
+      ).subscribe({
+        next: (response) => {
+          console.log('Publicación agregada correctamente', response);
+          this.myformPublicacion.reset();
+          this.Limpieza_Varibles_local();
+
+        },
+        error: (error) => {
+          console.error('Error al agregar la publicación:', error);
+        }
+      })
+    );
   }
 
   //VALIDACION
@@ -395,6 +548,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
         alert('Ya existe un elemento con este Titulo');
     } else {
       this.PostPublicacion();
+
     }
 
 
@@ -406,12 +560,32 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
     // Encargados---------------------------------------------------------------
 
     PostEncargados(): void {
-      this.services.createEncargados(this.id_admin,this.Nombre, this.Apellido, this.Carrera, this.Especialidad, this.Investigacion, this.Universidad).subscribe(() => {
-        alert('Agregado correctamente');
-        this.Limpieza_Varibles_local();
-        this.myformPublicacion.reset();
-      })
+      if (!this.imagenEncargado) {
+        alert('Por favor, selecciona una imagen.');
+        return;
+      }
 
+      this.subscriptions.add(
+        this.services.createEncargados(
+          this.id_admin,
+          this.Nombre,
+          this.Apellido,
+          this.Carrera,
+          this.Especialidad,
+          this.Investigacion,
+          this.Universidad,
+          this.imagenEncargado
+        ).subscribe({
+          next: (response) => {
+            console.log('Encargado agregado correctamente', response);
+            this.Limpieza_Varibles_local();
+            this.myformPublicacion.reset();
+          },
+          error: (error) => {
+            console.error('Error al agregar el encargado:', error);
+          }
+        })
+      );
     }
 
     //VALIDACION
@@ -441,6 +615,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       this.Especialidad = this.myformEncargados.get('Especialidad')?.value ?? '';
       this.Investigacion = this.myformEncargados.get('Investigacion')?.value ?? '';
       this.Universidad = this.myformEncargados.get('Universidad')?.value ?? '';
+
       if (this.encargadosAll.find((encargados) => encargados.Nombre === this.Nombre && encargados.Apellido === this.Apellido)) {
         alert('Ya existe un encargado con este nombre y apellido');
     } else {
@@ -453,7 +628,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
     return this.myformEncargados.controls;
   }
 
-    //LIMPIEZA DE CAMPOS
+  //LIMPIEZA DE CAMPOS LOCALES
   Limpieza_Varibles_local(){
     this.id_tema = 0;
     this.Body = '';

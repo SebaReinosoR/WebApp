@@ -13,8 +13,7 @@
 
     <div class="body">
 
-
-      <div class="input-group mb-3" *ngIf=" mostrarTemas ">
+      <div class="lista" *ngIf=" mostrarTemas ">
         <div class="box-1" *ngFor="let item of temasAll" >
           <div class="box">
             <p >
@@ -42,7 +41,7 @@
                   <form #Temaform="ngForm">
                     <div class="input-group mb-3">
                       <span  class="input-group-text mb-3">Titulo</span>
-                      <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" id="input-styles">
+                      <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" class="form-control mb-3">
                     </div>
                   </form>
 
@@ -76,12 +75,11 @@
         </div>
     </div>
 
-    <div class="input-group mb-3" *ngIf=" mostrarCodigos ">
+    <div class="lista" *ngIf=" mostrarCodigos ">
       <div class="box-1" *ngFor="let item of codigosAll" > <!-- el for debe recorrer cada arreglo de la tabla .. tabla codigos for codigos etc-->
         <div class="box">
-          <p>{{item.Nombre}}
-            <br> <br>
-              {{item.Body}}
+          <p>
+            {{item.Nombre}}
           </p>
           <div class="btns">
             <button type="button" id="eliminar" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idCodigos" >Eliminar</button>
@@ -100,7 +98,7 @@
                 <form #Codigoform="ngForm">
                   <div class="input-group mb-3">
                     <span  class="input-group-text mb-3">Titulo</span>
-                    <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" id="input-styles">
+                    <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" class="form-control mb-3">
                   </div>
 
                   <div >
@@ -110,12 +108,12 @@
 
                   <div class="input-group mb-3">
                     <span class="input-group-text mb-3" id="link">Link</span>
-                    <input [(ngModel)]="item.Link" name="Link" type="text" class="input-styles" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
+                    <input [(ngModel)]="item.Link" name="Link" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
                   </div>
 
                   <div class="input-group mb-3">
                     <span class="input-group-text mb-3" id="Referencias">Referencias</span>
-                    <input [(ngModel)]="item.Referencia"name="Referencia" type="text" class="input-styles" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <input [(ngModel)]="item.Referencia"name="Referencia" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
                 </form>
 
@@ -147,7 +145,7 @@
       </div>
     </div>
 
-    <div class="input-group mb-3" *ngIf=" mostrarPublicacion ">
+    <div class="lista" *ngIf=" mostrarPublicacion ">
       <div class="box-1" *ngFor="let item of publiAll" >
         <div class="box">
           <p>{{item.Nombre}}
@@ -171,17 +169,17 @@
                 <form #Publiform="ngForm">
                   <div class="input-group mb-3">
                     <span  class="input-group-text mb-3">Titulo</span>
-                    <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" id="input-styles">
+                    <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" class="form-control mb-3">
                   </div>
 
                   <div class="input-group mb-3">
-                    <span  class="input-group-text" >Autor</span>
-                    <input [(ngModel)]="item.Autor"  type="text" aria-label="name" name="Autor" class="input-styles"  placeholder="Nombre">
+                    <span  class="input-group-text mb-3" >Autor</span>
+                    <input [(ngModel)]="item.Autor"  type="text" aria-label="name" name="Autor" class="form-control mb-3"  placeholder="Nombre">
                   </div>
 
                   <div class="input-group mb-3" >
-                    <span  class="input-group-text"  for="Fecha">Fecha</span>
-                    <input [(ngModel)]="item.Fecha" type="number" aria-label="name" name="Fecha" class="input-styles">
+                    <span  class="input-group-text mb-3"  for="Fecha">Fecha</span>
+                    <input [(ngModel)]="item.Fecha" type="number" aria-label="name" name="Fecha" class="form-control mb-3">
                   </div>
                   <div >
                     <span  class="input-group mb-3" >Cuerpo</span>
@@ -190,12 +188,12 @@
 
                   <div class="input-group mb-3">
                     <span class="input-group-text mb-3" id="link">Link</span>
-                    <input [(ngModel)]="item.Link" name="Link" type="text" class="input-styles" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
+                    <input [(ngModel)]="item.Link" name="Link" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
                   </div>
 
                   <div class="input-group mb-3">
                     <span class="input-group-text mb-3" id="Referencias">Referencias</span>
-                    <input [(ngModel)]="item.Referencia"name="Referencia" type="text" class="input-styles" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <input [(ngModel)]="item.Referencia"name="Referencia" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
                 </form>
 
@@ -229,7 +227,7 @@
       </div>
     </div>
 
-    <div class="input-group mb-3" *ngIf=" mostrarProgramacion ">
+    <div class="lista" *ngIf=" mostrarProgramacion ">
       <div class="box-1" *ngFor="let item of programacionAll" >
         <div class="box">
           <p>
@@ -253,7 +251,7 @@
                 <form #Prograform="ngForm">
                   <div class="input-group mb-3">
                     <span  class="input-group-text mb-3">Titulo</span>
-                    <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" id="input-styles">
+                    <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" class="form-control mb-3">
                   </div>
 
                   <div >
@@ -263,7 +261,7 @@
 
                   <div class="input-group mb-3">
                     <span class="input-group-text mb-3" id="link">Link</span>
-                    <input [(ngModel)]="item.Link" name="Link" type="text" class="input-styles" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
+                    <input [(ngModel)]="item.Link" name="Link" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
                   </div>
 
                 </form>
@@ -297,7 +295,7 @@
       </div>
     </div>
 
-    <div class="input-group mb-3" *ngIf=" mostrarDocumentacion ">
+    <div class="lista" *ngIf=" mostrarDocumentacion ">
       <div class="box-1" *ngFor="let item of documentosAll" >
         <div class="box">
           <p>
@@ -320,7 +318,7 @@
                 <form #Documentacionform="ngForm">
                   <div class="input-group mb-3">
                     <span  class="input-group-text mb-3">Titulo</span>
-                    <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" id="input-styles">
+                    <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" class="form-control mb-3">
                   </div>
 
                   <div >
@@ -330,12 +328,12 @@
 
                   <div class="input-group mb-3">
                     <span class="input-group-text mb-3" id="link">Link</span>
-                    <input [(ngModel)]="item.Link" name="Link" type="text" class="input-styles" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
+                    <input [(ngModel)]="item.Link" name="Link" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
                   </div>
 
                   <div class="input-group mb-3">
                     <span class="input-group-text mb-3" id="Referencias">Referencias</span>
-                    <input [(ngModel)]="item.Referencia"name="Referencia" type="text" class="input-styles" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <input [(ngModel)]="item.Referencia"name="Referencia" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
                 </form>
 
@@ -367,7 +365,7 @@
       </div>
     </div>
 
-    <div class="input-group mb-3" *ngIf=" mostrarEncargados ">
+    <div class="lista" *ngIf=" mostrarEncargados ">
       <div class="box-1"  *ngFor="let item of encargadosAll" >
         <div class="box">
           <p>{{item.Nombre}} {{item.Apellido}}
@@ -390,7 +388,7 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Modificando {{item.Nombre}}</h5>
+                <h5 class="modal-title">Modificando {{item.Nombre }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -399,25 +397,25 @@
 
                   <div class="input-group mb-3">
                     <span class="input-group-text mb-3" >Nombre</span>
-                    <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" class="input-style">
+                    <input [(ngModel)]="item.Nombre" name="Nombre" type="text" aria-label="name" class="form-control mb-3">
                     <span class="input-group-text mb-3">Apellido</span>
-                    <input [(ngModel)]="item.Apellido" name="Apellido"  type="text" aria-label="apellido" class="input-style">
+                    <input [(ngModel)]="item.Apellido" name="Apellido"  type="text" aria-label="apellido" class="form-control mb-3">
                   </div>
                   <div class="input-group mb-3">
                     <span class="input-group-text mb-3" id="Carrera">Carrera</span>
-                    <input [(ngModel)]="item.Carrera" name="Carrera" type="text" class="input-style" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <input [(ngModel)]="item.Carrera" name="Carrera" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
                   <div class="input-group mb-3" >
                     <span class="input-group-text mb-3" id="Especialidad">Especialidad</span>
-                    <input [(ngModel)]="item.Especialidad" name="Especialidad" type="text" class="input-style" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <input [(ngModel)]="item.Especialidad" name="Especialidad" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
                   <div class="input-group mb-3" >
                     <span class="input-group-text mb-3" id="Investigación">Investigación</span>
-                    <input [(ngModel)]="item.Investigacion" name="Investigacion" type="text" class="input-style" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <input [(ngModel)]="item.Investigacion" name="Investigacion" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
                   <div class="input-group mb-3" >
                     <span class="input-group-text mb-3" id="Universidad">Universidad</span>
-                    <input [(ngModel)]="item.Universidad" name="Universidad" type="text" class="input-style" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <input [(ngModel)]="item.Universidad" name="Universidad" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
                 </form>
 

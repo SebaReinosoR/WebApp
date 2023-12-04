@@ -1,13 +1,15 @@
 <div class="container-fluid">
   <div class="box" *ngFor="let item of codigo">
-    <h4>{{item.Nombre}}</h4>
+    <h4>{{item.Nombre | uppercase}}</h4>
     <div class="box-1" >
-      <p>{{item.Body}}</p>
-        <div class="link">
-          <a [href]="item.Link">{{item.Link}}</a>
-          <br>
-          <a [href]="item.Referencia">{{item.Referencia}}</a>
-        </div>
+      <div class="scroll">
+        <div [innerHTML]="item.Body"></div>
+      </div>
+      <div class="link">
+        <a [href]="item.Link">{{item.Link}}</a>
+        <br>
+        <a [href]="item.Referencia">{{item.Referencia}}</a>
+      </div>
     </div>
   </div>
 </div>

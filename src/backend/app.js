@@ -13,15 +13,42 @@ const programacionService = require('./programacion.service.js');
 const documentacionService = require('./documentacion.service');
 const publicacionesService = require('./publicaciones.service');
 
+const multer = require('multer');
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
+// Configuración de Multer para cargar archivos
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'uploads/'); // La carpeta donde se almacenarán los archivos
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + getExtension(file.originalname));
+  }
+});
+// Función auxiliar para obtener la extensión del archivo
+function getExtension(filename) {
+  const parts = filename.split('.');
+  return parts[parts.length - 1];
+}
+const upload = multer({ storage: storage });
+
+// Servir archivos estáticos
+app.post('/upload', upload.single('imagen'), (req, res) => {
+  // 'miArchivo' es el nombre del campo en el formulario
+  if (req.file) {
+    res.send('Archivo cargado con éxito');
+  } else {
+    res.send('Error al cargar el archivo');
+  }
+});
 
 // --------------------------Obtener todos los temas----------------------------------
-app.get('/temas', async (req, res) => { 
+app.get('/temas', async (req, res) => {
   try {
     const tema = await temasService.getTemas();
     res.status(200).json(tema);
@@ -105,7 +132,7 @@ app.get('/administradores/:id', async (req, res) => {
 
 //obtener boolean de confirmacion para login
 app.post('/administrador', async (req, res) => {
-  const { usuario, contrasena } = req.body;  
+  const { usuario, contrasena } = req.body;
   try {
     const administrador = await adminService.postLogin(usuario, contrasena);
     res.status(200).json(administrador);
@@ -255,10 +282,16 @@ app.get('/encargados/:id', async (req, res) => {
 });
 
 // Crear un nuevo encargado
-app.post('/encargados', async (req, res) => {
+app.post('/encargados',upload.single('imagen'), async (req, res, next) => {
   const {  id_admin, Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad} = req.body;
+  const imagenPath = req.file ? req.file.path : null;
+
+  if (!file) {
+    return res.status(400).send({ message: 'Por favor, carga una imagen.' });
+  }
+
   try {
-    await encargadoService.createEncargado(id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad);
+    await encargadoService.createEncargado(id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad, imagenPath);
     res.status(201).json({ message: 'Encargado creado exitosamente' });;
   } catch (error) {
     console.error('Error al crear un nuevo encargado:', error);
@@ -267,11 +300,13 @@ app.post('/encargados', async (req, res) => {
 });
 
 // Actualizar un encargado por ID
-app.put('/encargados/:id', async (req, res) => {
+app.put('/encargados/:id', upload.single('imagen'), async (req, res) => {
   const id = req.params.id;
   const {id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad} = req.body;
+  const imagenPath = req.file ? req.file.path : null;
+
   try {
-    await encargadoService.updateEncargado(id, id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad);
+    await encargadoService.updateEncargado(id, id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad, imagenPath);
     res.status(200).json({message:'Encargado actualizado exitosamente'});
   } catch (error) {
     console.error('Error al actualizar el encargado por ID:', error);
@@ -376,10 +411,17 @@ app.get('/programacion/:id', async (req, res) => {
 });
 
 // Crear una programacion
-app.post('/programacion', async (req, res) => {
+app.post('/programacion', upload.single('imagen'), cors(), async (req, res) => {
+
   const { id_admin, Nombre, Body, Link} = req.body;
+  const imagenPath = req.file ? req.file.path : null;
+
+  if (!req.file) {
+    return res.status(400).send({ message: 'Por favor, carga una imagen.' });
+  }
+
   try {
-    await programacionService.createProgramacion( id_admin,Nombre, Body, Link);
+    await programacionService.createProgramacion( id_admin,Nombre, Body, Link,imagenPath);
     res.status(201).json({ message: 'Programacion actualizado exitosamente' });
   } catch (error) {
     console.error('Error al crear una nueva programacion:', error);
@@ -388,11 +430,12 @@ app.post('/programacion', async (req, res) => {
 });
 
 // Actualizar una programacion por ID
-app.put('/programacion/:id', async (req, res) => {
-  const id = req.params.id;
+app.put('/programacion/:id', upload.single('imagen'), async (req, res) => {
+
   const {Nombre, Body, Link, id_admin } = req.body;
+  const imagenPath = req.file ? req.file.path : null;
   try {
-    await programacionService.updateProgramacion(id,Nombre, Body, Link, id_admin);
+    await programacionService.updateProgramacion(id,Nombre, Body, Link, id_admin, imagenPath);
     res.status(200).json({message:'programacion actualizada exitosamente'});
   } catch (error) {
     console.error('Error al actualizar la programacion por ID:', error);
@@ -436,10 +479,17 @@ app.get('/publicaciones/:id', async (req, res) => {
 });
 
 // Crear una nueva publicación
-app.post('/publicaciones', async (req, res) => {
+app.post('/publicaciones',upload.single('imagen'), async (req, res) => {
+
   const {id_admin, Nombre,Fecha,Body,Referencia,Autor, Link} = req.body;
+  const imagenPath = req.file ? req.file.path : null;
+
+  if (!file) {
+    return res.status(400).send({ message: 'Por favor, carga una imagen.' });
+  }
+
   try {
-    await publicacionesService.createPublicacion(id_admin,Nombre,Fecha,Body,Referencia,Autor, Link);
+    await publicacionesService.createPublicacion(id_admin,Nombre,Fecha,Body,Referencia,Autor, Link, imagenPath);
     res.status(201).json({message: 'Publicación creada exitosamente' });
   } catch (error) {
     console.error('Error al crear una nueva publicación:', error);
@@ -448,17 +498,19 @@ app.post('/publicaciones', async (req, res) => {
 });
 
 // Actualizar una publicación por ID
-app.put('/publicaciones/:id', async (req, res) => {
-  const id = req.params.id;
+app.put('/publicaciones/:id',upload.single('imagen'), async (req, res) => {
+
   const { Nombre,Fecha,Body,Referencia,Autor, Link} = req.body;
+  const imagenPath = req.file ? req.file.path : null;
   try {
-    await publicacionesService.updatePublicacion(id, Nombre,Fecha,Body,Referencia,Autor, Link);
+    await publicacionesService.updatePublicacion(id, Nombre,Fecha,Body,Referencia,Autor, Link, imagenPath );
     res.status(200).json({message:'Publicación actualizada exitosamente'});
   } catch (error) {
     console.error('Error al actualizar la publicación por ID:', error);
     res.status(500).send('Error interno del servidor');
   }
 });
+
 
 // Eliminar una publicación por ID
 app.delete('/publicaciones/:id', async (req, res) => {
@@ -497,10 +549,17 @@ app.get('/documentacion/:id', async (req, res) => {
   }
 });
 
-app.post('/documentacion', async (req, res) => {
+app.post('/documentacion', upload.single('imagen'), async (req, res) => {
+
   const {id_admin, Nombre,Body,Referencia, Link} = req.body;
+  const imagenPath = req.file ? req.file.path : null;
+
+  if (!file) {
+    return res.status(400).send({ message: 'Por favor, carga una imagen.' });
+  }
+
   try {
-    await documentacionService.createDocumentacion(id_admin,Nombre,Body, Link ,Referencia);
+    await documentacionService.createDocumentacion(id_admin,Nombre,Body, Link , Referencia, imagenPath);
     res.status(200).json({ message: 'Documentación eliminado exitosamente' });
   } catch (error) {
     console.error('Error en la ruta /documentacion', error);
@@ -508,11 +567,12 @@ app.post('/documentacion', async (req, res) => {
   }
 });
 
-app.put('/documentacion/:id', async (req, res) => {
-  const { id } = req.params;
+app.put('/documentacion/:id', upload.single('imagen'), async (req, res) => {
+
   const { id_admin,Nombre,Body, Link ,Referencia } = req.body;
+  const imagenPath = req.file ? req.file.path : null;
   try {
-    await documentacionService.updateDocumentacion(id,id_admin,Nombre,Body, Link ,Referencia);
+    await documentacionService.updateDocumentacion(id,id_admin,Nombre,Body, Link ,Referencia,imagenPath);
     res.status(200).json({message:'Documentación actualizada exitosamente'});
   } catch (error) {
     console.error('Error en la ruta /documentacion/:id', error);

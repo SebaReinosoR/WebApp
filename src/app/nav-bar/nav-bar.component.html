@@ -12,14 +12,14 @@
   </div>
 
     <div class="brand">
-      <h2 [ngStyle]="{'font-size':showLeftNav?'30px':'15px'}">
+      <h2 class="titulo" [ngStyle]="{'font-size':showLeftNav?'30px':'10px'}">
         Navegador
       </h2>
     </div>
     <ol class="box">
       <li class="lista" [ngStyle]="{'max-width':showLeftNav?'100%':'2.8em'}" *ngFor="let item of left_nav_lis_item;let i=index;" [routerLink]="item.url" routerLinkActive="active-link">
         <div class="left-nav-list-item">
-          <fa-icon [icon]="item.icon"></fa-icon>
+          <fa-icon [icon]="item.icon" ></fa-icon>
           <span *ngIf="showLeftNav">
             {{item.title}}
           </span>
