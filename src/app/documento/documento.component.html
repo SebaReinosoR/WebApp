@@ -3,16 +3,20 @@
     <div class="head">
       <h4> {{item.Nombre | uppercase}} </h4>
       <button  (click)="openPopup(item)">Ver Documento</button>
+    </div>
     <img src="../{{item.imagen}}" alt="AQUI VA LA IMG">
       <div class="body">
         <div [innerHTML]="item.Body"></div>
-      </div>
-
+      </div>  
         <div class="box-1">
           <a href="{{item.Link}}">{{item.Link}}</a>
           <br>
           <a href="{{item.Referencia}}">{{item.Referencia}}</a>
         </div>
+      
+      
+
+        
 
         <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': item === activeTema ? 'block' : 'none'}">
       <div class="modal-dialog" role="document">

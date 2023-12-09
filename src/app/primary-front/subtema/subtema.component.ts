@@ -24,6 +24,12 @@ export class SubtemaComponent {
     this.services.getSubtemaById(this.id).subscribe(subtemas =>
       {
         this.subtemas = subtemas;
+        if (this.subtemas) {
+            if (this.subtemas.Body) {
+              // Convierte los saltos de línea a etiquetas <br>
+              this.subtemas.Body = this.convertirSaltosDeLinea(this.subtemas.Body);
+            }
+          }
         console.log(this.subtemas)
       });
 
@@ -34,6 +40,10 @@ export class SubtemaComponent {
         });
 
 
+}
+private convertirSaltosDeLinea(texto: string): string {
+  // Convierte los saltos de línea a etiquetas <br>
+  return texto.replace(/(?:\r\n|\r|\n)/g, '<br>');
 }
 
  captura(){

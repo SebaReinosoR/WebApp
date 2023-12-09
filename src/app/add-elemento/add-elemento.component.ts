@@ -153,6 +153,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       this.Investigacion = formData.Investigacion;
       this.Universidad = formData.Universidad;
     }
+    
   }
   private subscriptions = new Subscription();
   ngOnDestroy() {
