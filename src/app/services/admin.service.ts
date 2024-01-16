@@ -163,9 +163,7 @@ public PutProgramacion(id: number, Nombre: string, Body: string, Link: string, i
   formData.append('Nombre', Nombre);
   formData.append('Body', Body);
   formData.append('Link', Link);
-  if (imagen) {
-    formData.append('imagen', imagen);
-  }
+  formData.append('imagen', imagen);
 
   return this.http.put(url, formData);
 }

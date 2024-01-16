@@ -223,9 +223,11 @@
 
                 <div class="input-group mb-3">
                   <div class="custom-file-input" (click)="fileInput.click()">
-                    {{ nombreArchivoProgramacion || 'Sube un archivo' }}
+                    {{ nombreArchivoProgramacion || 'Sube un archivo de imagen (.jpg, .png, .gif)' }}
                   </div>
-                  <input formControlName="Imagen" type="file" #fileInput (change)="onFileChange($event, 'programacion')" hidden>
+                  <input formControlName="imagen" type="file" #fileInput (change)="onFileChange($event, 'programacion')" hidden >
+
+
                 </div>
 
 
@@ -285,7 +287,7 @@
                 </div>
                 <div class="input-group mb-3">
                   <div class="custom-file-input" (click)="fileInput.click()">
-                    {{ nombreArchivoDocumentacion || 'Sube un archivo' }}
+                    {{ nombreArchivoDocumentacion || 'Sube un archivo de imagen (.jpg, .png, .gif)' }}
                   </div>
                   <input formControlName="Imagen" type="file" #fileInput (change)="onFileChange($event, 'documentacion')" hidden>
                 </div>
@@ -369,7 +371,7 @@
                 </div>
                 <div class="input-group mb-3">
                 <div class="custom-file-input" (click)="fileInput.click()">
-                    {{ nombreArchivoPublicacion || 'Sube un archivo' }}
+                    {{ nombreArchivoPublicacion || 'Sube un archivo de imagen (.jpg, .png, .gif)' }}
                   </div>
                   <input formControlName="Imagen" type="file" #fileInput (change)="onFileChange($event, 'publicacion')" hidden>
                 </div>
@@ -404,7 +406,7 @@
                 </div>
               </div>
 
-              <form [formGroup]="myformEncargados" (ngSubmit)="submitFormEncargados()">
+              <form [formGroup]="myformEncargados" (ngSubmit)="submitFormEncargados()"> 
                 <div class="input-group mb-3">
                   <span class="input-group-text" for="Nombre">Nombre</span>
                   <input id="Nombre" formControlName="Nombre" class="form-control" [class.is-invalid]="fEncargados.Nombre.errors && fEncargados.Nombre.touched" placeholder="Nombre" required />
@@ -455,7 +457,7 @@
                 </div>
                 <div class="input-group mb-3">
                   <div class="custom-file-input" (click)="fileInput.click()">
-                    {{ nombreArchivoEncargado || 'Sube un archivo' }}
+                    {{ nombreArchivoEncargado || 'Sube un archivo de imagen (.jpg, .png, .gif)' }}
                   </div>
                   <input formControlName="Imagen" type="file" #fileInput (change)="onFileChange($event, 'encargados')" hidden>
                 </div>

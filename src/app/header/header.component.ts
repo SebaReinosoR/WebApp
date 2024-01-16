@@ -28,7 +28,7 @@ export class HeaderComponent {
       if (!this.isAuthenticated) {
         Swal.fire({
           title: 'No estas logeado',
-          text: 'Porfavor inicia sesion para entrar a tu perfil.',
+          text: 'Porfavor inicia sesion para ingresar como administrador.',
           icon: 'error',
           confirmButtonText: 'Aceptar',
           confirmButtonColor: 'green'

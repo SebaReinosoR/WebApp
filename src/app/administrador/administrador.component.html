@@ -145,7 +145,7 @@
       </div>
     </div>
 
-    <div class="lista" *ngIf=" mostrarPublicacion ">
+    <div class="lista" *ngIf=" mostrarPublicacion "> 
       <div class="box-1" *ngFor="let item of publiAll" >
         <div class="box">
           <p>{{item.Nombre}}
@@ -179,7 +179,7 @@
 
                   <div class="input-group mb-3" >
                     <span  class="input-group-text mb-3"  for="Fecha">Fecha</span>
-                    <input [(ngModel)]="item.Fecha" type="number" aria-label="name" name="Fecha" class="form-control mb-3">
+                    <input [(ngModel)]="item.Fecha" type="text" aria-label="name" name="Fecha" class="form-control mb-3">
                   </div>
                   <div >
                     <span  class="input-group mb-3" >Cuerpo</span>
@@ -196,12 +196,7 @@
                     <input [(ngModel)]="item.Referencia"name="Referencia" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
 
-                  <div class="input-group mb-3">
-                    <div class="custom-file-input" (click)="fileInput.click()">
-                      {{ nombreArchivoPublicacion|| (item?.imagen !== '' ? item?.imagen : 'Sube un archivo') || 'Sube un archivo'  }}
-                    </div>
-                    <input formControlName="Imagen" type="file" #fileInput (change)="onFileChange($event, 'publicacion')" hidden>
-                  </div>
+
                 </form>
 
               </div>
@@ -270,17 +265,23 @@
                     <span class="input-group-text mb-3" id="link">Link</span>
                     <input [(ngModel)]="item.Link" name="Link" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" >
                   </div>
-                  <div class="input-group mb-3">
-                    <div class="custom-file-input" (click)="fileInput.click()">
-                      {{ nombreArchivoProgramacion|| (item?.imagen !== '' ? item?.imagen : 'Sube un archivo') || 'Sube un archivo'  }}
-                    </div>
-                    <input [(ngModel)]="item.imagen" name="imagen" type="file" #fileInput (change)="onFileChange($event, 'programacion')" hidden>
+                  <div>
+                    <p>Imagen Actual</p>
+                    <img [src]="item.imagen" width="100px">
+                  </div>
+                  <input class="input-file" (change)="capturarFile($event)" type="file" >
+                    <div class="preview-img" *ngIf="PreviewProgramacion">
+                    <button class="clear-image" type="button" (click)="clearImage()">Clear</button>
+                    <p>Previsualización</p>
+                    <img  [src]="PreviewProgramacion" alt="" width="100px">
+
+
                   </div>
                 </form>
 
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  (click)="clearImage()" >Close</button>
                 <button type="button" class="btn btn-success" (click)="PutProgramacion(item.idProgramacion, Prograform)" data-bs-dismiss="modal">Modificar</button>
               </div>
             </div>
@@ -347,12 +348,7 @@
                     <span class="input-group-text mb-3" id="Referencias">Referencias</span>
                     <input [(ngModel)]="item.Referencia"name="Referencia" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
-                  <div class="input-group mb-3">
-                    <div class="custom-file-input" (click)="fileInput.click()">
-                      {{ nombreArchivoDocumentacion||(item?.imagen !== '' ? item?.imagen : 'Sube un archivo') || 'Sube un archivo'  }}
-                    </div>
-                    <input formControlName="Imagen" type="file" #fileInput (change)="onFileChange($event, 'documentacion')" hidden>
-                  </div>
+
                 </form>
 
               </div>
@@ -435,12 +431,7 @@
                     <span class="input-group-text mb-3" id="Universidad">Universidad</span>
                     <input [(ngModel)]="item.Universidad" name="Universidad" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
-                  <div class="input-group mb-3">
-                    <div class="custom-file-input" (click)="fileInput.click()">
-                      {{ nombreArchivoEncargado || (item?.imagen !== '' ? item?.imagen : 'Sube un archivo') || 'Sube un archivo' }}
-                    </div>
-                    <input [(ngModel)]="item.imagen" name="imagen" type="file" #fileInput (change)="onFileChange($event, 'encargado')" hidden>
-                  </div>
+
                 </form>
 
               </div>

@@ -1,6 +1,6 @@
 import { Component ,  OnDestroy, AfterViewInit, OnInit , ChangeDetectorRef} from '@angular/core';
 import {AdminService}  from '../services/admin.service'
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Location } from '@angular/common';
 import { finalize } from 'rxjs/internal/operators/finalize';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -153,7 +153,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       this.Investigacion = formData.Investigacion;
       this.Universidad = formData.Universidad;
     }
-    
+
   }
   private subscriptions = new Subscription();
   ngOnDestroy() {
@@ -372,6 +372,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       alert('Por favor, selecciona una imagen para la programación.');
       return;
     }
+    console.log(this.imagenProgramacion)
     this.subscriptions.add(
       this.services.createProgramacion(
         this.id_admin,
@@ -379,9 +380,15 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
         this.Body,
         this.Link,
         this.imagenProgramacion
+
       ).subscribe({
         next: (response) => {
           alert('Agregado correctamente');
+          console.log(this.id_admin,
+        this.Nombre,
+        this.Body,
+        this.Link,
+        this.imagenProgramacion)
           console.log('Programación agregada correctamente', response);
           this.myformProgramacion.reset();
           this.Limpieza_Varibles_local();
@@ -401,7 +408,6 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       Nombre: ['', [Validators.required]],
       Body: ['', [Validators.required]],
       Link: ['', [Validators.required]],
-      Imagen: [null, [Validators.required]]
     });
   }
   public submitFormProgramacion(): void {

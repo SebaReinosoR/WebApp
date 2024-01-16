@@ -19,8 +19,8 @@ const routes: Routes = [
 
   {path: 'inicio', component: PrimaryFrontComponent },
   {path:'Login', component: InicioSesionComponent},
-  {path:'Admin',canActivate:[PermisoRutasService], component: AdministradorComponent},
-  {path:'Add',canActivate:[PermisoRutasService], component: AddElementoComponent},
+  {path:'Admin', component: AdministradorComponent}, /* canActivate:[PermisoRutasService]'*/
+  {path:'Add', component: AddElementoComponent}, /* canActivate:[PermisoRutasService]'*/
   {path:'Codigo', component: CodigoComponent},
   {path:'Documento', component:DocumentoComponent},
   {path:'Programacion', component:ProgramacionComponent},
@@ -30,7 +30,7 @@ const routes: Routes = [
   //rutas ID
   {path : 'PubliOpen/:id',component:PubliVComponent},
   {path : 'Subtema/:id', component:SubtemaComponent},
-  {path : 'Admin/SubtemaUD/:id',canActivate:[PermisoRutasService],component:SubtemaUDComponent},
+  {path : 'Admin/SubtemaUD/:id',component:SubtemaUDComponent}, /* canActivate:[PermisoRutasService]'*/
 
 
   //url vacio o inexistente

@@ -13,7 +13,7 @@ const createProgramacion = (id_admin,Nombre, Body, Link, imagenPath) => {
   return db.query('INSERT INTO programacion ( id_admin,Nombre, Body,Link,imagen) VALUES (?, ?,?,?,?)', [ id_admin,Nombre, Body, Link, imagenPath]);
 };
 
-const updateProgramacion = (id, Nombre, Body, Link, id_admin, imagenPath) => {
+const updateProgramacion = (id, Nombre, Body, Link, imagenPath) => {
   return db.query('UPDATE programacion SET Nombre = ?, Body = ? , Link = ? , imagen = ? WHERE idProgramacion = ?', [Nombre, Body, Link,imagenPath, id]);
 };
 

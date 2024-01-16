@@ -27,26 +27,20 @@ const storage = multer.diskStorage({
     cb(null, '../assets/'); // La carpeta donde se almacenarán los archivos
   },
   filename: function(req, file, cb) {
-    const extension = getExtension(file.originalname);
-    const fileName = file.fieldname + '-' + Date.now() + '.' + extension;
+    const fileName = Date.now() +'-'+ file.originalname;
     cb(null, fileName);
   }
 });
 
-// Función auxiliar para obtener la extensión del archivo
-function getExtension(filename) {
-  const parts = filename.split('.');
-  return parts[parts.length - 1];
-}
 const upload = multer({ storage: storage });
 
 // Servir archivos estáticos
 app.post('../assets/', upload.single('imagen'), (req, res) => {
   // 'miArchivo' es el nombre del campo en el formulario
-  if (req.file) {
+  if (req.file && req.file.mimetype && req.file.mimetype.startsWith('image')) {
     res.send('Archivo cargado con éxito');
   } else {
-    res.send('Error al cargar el archivo');
+    res.send('Error al cargar el archivo o no selecciono una imagen');
   }
 });
 
@@ -414,8 +408,8 @@ app.get('/programacion/:id', async (req, res) => {
 });
 
 // Crear una programacion
-app.post('/programacion', upload.single('imagen'), cors(), async (req, res) => {
-  
+app.post('/programacion',upload.single('imagen'), cors(), async (req, res) => {
+
   const { id_admin, Nombre, Body, Link} = req.body;
   const imagenPath = req.file ? req.file.path : null;
 
@@ -433,10 +427,14 @@ app.post('/programacion', upload.single('imagen'), cors(), async (req, res) => {
 });
 
 // Actualizar una programacion por ID
-app.put('/programacion/:id', upload.single('imagen'), async (req, res) => {
+app.put('/programacion/:id',upload.single('imagen'),cors(), async (req, res) => {
   const id = req.params.id;
   const {Nombre, Body, Link} = req.body;
   const imagenPath = req.file ? req.file.path : null;
+  if (!req.file) {
+    return res.status(400).send({ message: 'La imagen es null' });
+  }
+
   try {
     await programacionService.updateProgramacion(id,Nombre, Body, Link, imagenPath);
     res.status(200).json({message:'programacion actualizada exitosamente'});

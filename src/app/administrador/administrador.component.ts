@@ -1,6 +1,8 @@
 import {Component , AfterViewInit, ChangeDetectorRef  } from '@angular/core';
 import { AdminService } from '../services/admin.service';
 import { NgForm } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -9,7 +11,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./administrador.component.scss']
 })
 export class AdministradorComponent implements AfterViewInit {
-  constructor(private services:AdminService, private cdr: ChangeDetectorRef){} /*ESTABLECER EL SERVICIO */
+  constructor(private services:AdminService, private cdr: ChangeDetectorRef ,private sanitizer: DomSanitizer){} /*ESTABLECER EL SERVICIO */
 
   codigosAll:any;
   subtemasAll:any;
@@ -25,11 +27,16 @@ export class AdministradorComponent implements AfterViewInit {
   imagenDocumentacion: File | null = null;
   imagenProgramacion: File | null = null;
 
-  nombreArchivoProgramacion: string = '';
+  //Previsualizar IMG
+
+  PreviewProgramacion:any;
+
+  nombreArchivoProgramacion:any
   nombreArchivoDocumentacion: string = '';
   nombreArchivoPublicacion: string = '';
   nombreArchivoEncargado: string = '';
 
+  private subscriptions = new Subscription();
   ngOnInit() : void{
 
     /*GET ALL */
@@ -80,48 +87,52 @@ export class AdministradorComponent implements AfterViewInit {
 
   }
   //CARGAR IMG
-  onFileChange(event: Event, section: string): void {
-    console.log('Se ha cambiado un archivo en la sección:', section);
 
-
-    const target = event.target as HTMLInputElement;
-
-    if (target.files && target.files.length) {
-      const file = target.files[0];
-      if (file) {
-        const fileName = file.name; // Obtén el nombre del archivo
-
-        switch (section) {
-          case 'programacion':
-            this.imagenProgramacion = file;
-            this.nombreArchivoProgramacion = fileName; // Almacena el nombre del archivo
-            break;
-          case 'documentacion':
-            this.imagenDocumentacion = file;
-            this.nombreArchivoDocumentacion = fileName;
-            break;
-          case 'publicacion':
-            this.imagenPublicacion = file;
-            this.nombreArchivoPublicacion = fileName;
-            break;
-          case 'encargados':
-            this.imagenEncargado = file;
-            this.nombreArchivoEncargado = fileName;
-            break;
-        }
-
-        // Limpia el valor del input de archivo
-        target.value = '';
-
-        // Forzar la actualización de la vista
-        this.cdr.detectChanges();
-      }
-    }
-
-  }
 
 
   // PUT
+  PutProgramacion(idProgra: number, form: NgForm): void {
+    const { Nombre, Body, Link } = form.value;
+    const imagenPath = this.imagenProgramacion;
+
+    if (!imagenPath) {
+      alert('Por favor, selecciona una imagen para realizar la modificación.');
+      return;
+    }
+    console.log(imagenPath);
+  
+    this.subscriptions.add(
+      this.services.PutProgramacion(idProgra, Nombre, Body, Link, imagenPath).subscribe(() => {
+        console.log(idProgra, Nombre, Body, Link, imagenPath)
+        alert('Modificado correctamente');
+        this.services.getProgramacion().subscribe(programacionAll => {
+          this.programacionAll = programacionAll;
+        });
+      })
+    );
+  }
+
+
+  capturarFile(event:any): any {
+    const archivoCapturado = event.target.files[0]
+
+    this.extraerBase64(archivoCapturado).then((imagen: any) => {
+      this.PreviewProgramacion = imagen.base;
+      console.log(imagen);
+
+    })
+    this.imagenProgramacion = archivoCapturado;
+    console.log(this.imagenProgramacion)
+  }
+
+  clearImage(): any {
+    this.PreviewProgramacion = '';
+    this.imagenProgramacion = null;
+  }
+
+
+
+
   PutCodigo(idCodigo: number, form: NgForm): void {
     const { Nombre, Body, Link, Referencia } = form.value;
     this.services.PutCodigos(idCodigo, this.id_admin, Nombre, Body, Link, Referencia).subscribe(() => {
@@ -141,25 +152,7 @@ export class AdministradorComponent implements AfterViewInit {
 
     });
   }
-  PutProgramacion(idProgra: number, form: NgForm): void {
 
-    const { Nombre, Body, Link,} = form.value;
-    const imagenPath = this.imagenProgramacion
-    console.log(form.value);
-    console.log(imagenPath);
-    if (imagenPath){
-      this.services.PutProgramacion(idProgra,Nombre, Body, Link, imagenPath).subscribe(() => {
-        alert('Modificado correctamente');
-        this.services.getProgramacion().subscribe(programacionAll => {
-          this.programacionAll = programacionAll;
-        });
-      });
-    }
-    else{
-      console.log('error en put')
-    }
-
-  }
   PutPublicacion(idPublicacion: number, form: NgForm): void {
     const { Nombre,Fecha,Body,Referencia,Autor, Link, imagenPath } = form.value;
     this.services.PutPublicacion(idPublicacion, this.id_admin, Nombre,Fecha,Body,Referencia,Autor, Link, imagenPath).subscribe(() => {
@@ -337,6 +330,36 @@ export class AdministradorComponent implements AfterViewInit {
     };
 
 
+    extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
+      try {
+        const unsafeImg = window.URL.createObjectURL($event);
+        const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+        const reader = new FileReader();
+
+        reader.readAsDataURL($event);
+
+        reader.onload = () => {
+          resolve({
+            base: reader.result
+          });
+        };
+
+        reader.onerror = error => {
+          reject({
+            base: null
+          });
+        };
+
+      } catch (e) {
+        reject({
+          base: null
+        });
+      }
+    });
+
 
 
 }
+
+
+
