@@ -168,12 +168,12 @@ public PutProgramacion(id: number, Nombre: string, Body: string, Link: string, i
   return this.http.put(url, formData);
 }
 
-public PutPublicacion(id: number, id_admin: number,Nombre: string, Fecha: Date, Body: string, Referencia: string,Autor:string, Link: string, imagen:File): Observable<any> {
+public PutPublicacion(id: number, id_admin: number,Nombre: string, Fecha: string, Body: string, Referencia: string,Autor:string, Link: string, imagen:File): Observable<any> {
   const url = `${this.api_publicaciones}/${id}`;
   const formData = new FormData();
   formData.append('id_admin', id_admin.toString());
   formData.append('Nombre', Nombre);
-  formData.append('Fecha', Fecha.toISOString());
+  formData.append('Fecha', Fecha);
   formData.append('Body', Body);
   formData.append('Link', Link);
   formData.append('Autor', Autor);

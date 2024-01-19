@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from
 import { Location } from '@angular/common';
 import { finalize } from 'rxjs/internal/operators/finalize';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 })
 export class AddElementoComponent implements AfterViewInit, OnInit {
 
-  //variables
+  //VARIABLES GLOBALES
   id_admin: number = 1;
   Nombre: string;
   Body: string;
@@ -38,17 +39,15 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
   mostrarCuadro: boolean = false;
 
   //CARGA IMG
-  imagenEncargado: File | null = null;
-  imagenPublicacion: File | null = null;
-  imagenDocumentacion: File | null = null;
-  imagenProgramacion: File | null = null;
+  imagen: File | null = null;
+  Preview:any;
+  
+  //VARIBLES TEMA
+  id_tema: number;
+  mostrarAlerta: boolean = true;
 
-  nombreArchivoProgramacion: string = '';
-  nombreArchivoDocumentacion: string = '';
-  nombreArchivoPublicacion: string = '';
-  nombreArchivoEncargado: string = '';
 
-  constructor( private services:AdminService, private formBuilder: FormBuilder, private location: Location, private fb:FormBuilder , private cdr: ChangeDetectorRef) {
+  constructor( private services:AdminService, private formBuilder: FormBuilder, private location: Location, private fb:FormBuilder , private cdr: ChangeDetectorRef, private sanitizer: DomSanitizer) {
     this.id_tema = 0;
     this.Body = '';
     this.Link = '';
@@ -98,13 +97,6 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
   }
 
 
-
-
-  id_tema: number;
-  mostrarAlerta: boolean = true;
-
-
-
   ngOnInit(): void {
     this.loadFormDataFromLocalStorage();
 
@@ -132,7 +124,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       Especialidad: this.Especialidad,
       Investigacion: this.Investigacion,
       Universidad: this.Universidad
-      // ... otras propiedades ...
+    
     };
     localStorage.setItem('formData', JSON.stringify(formData));
   }
@@ -161,48 +153,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  //CARGA DE IMG
-
-  onFileChange(event: Event, section: string): void {
-    console.log('Se ha cambiado un archivo en la sección:', section);
-
-
-    const target = event.target as HTMLInputElement;
-
-    if (target.files && target.files.length) {
-      const file = target.files[0];
-      if (file) {
-        const fileName = file.name; // Obtén el nombre del archivo
-
-        switch (section) {
-          case 'programacion':
-            this.imagenProgramacion = file;
-            this.nombreArchivoProgramacion = fileName; // Almacena el nombre del archivo
-            break;
-          case 'documentacion':
-            this.imagenDocumentacion = file;
-            this.nombreArchivoDocumentacion = fileName;
-            break;
-          case 'publicacion':
-            this.imagenPublicacion = file;
-            this.nombreArchivoPublicacion = fileName;
-            break;
-          case 'encargados':
-            this.imagenEncargado = file;
-            this.nombreArchivoEncargado = fileName;
-            break;
-        }
-
-        // Limpia el valor del input de archivo
-        target.value = '';
-
-        // Forzar la actualización de la vista
-        this.cdr.detectChanges();
-      }
-    }
-
-  }
-
+ 
  /*----------------------------------------------------------------------------------POST-------------------------------------------------------------------------------- */
 
   //TEMA---------------------------------------------
@@ -368,28 +319,23 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
   //Programacion-----------------------------------------------------
 
   PostProgramacion(): void {
-    if (!this.imagenProgramacion) {
+    if (!this.imagen) {
       alert('Por favor, selecciona una imagen para la programación.');
       return;
     }
-    console.log(this.imagenProgramacion)
+    
     this.subscriptions.add(
       this.services.createProgramacion(
         this.id_admin,
         this.Nombre,
         this.Body,
         this.Link,
-        this.imagenProgramacion
+        this.imagen
 
       ).subscribe({
-        next: (response) => {
+        next: () => {
           alert('Agregado correctamente');
-          console.log(this.id_admin,
-        this.Nombre,
-        this.Body,
-        this.Link,
-        this.imagenProgramacion)
-          console.log('Programación agregada correctamente', response);
+          this.clearImage();
           this.myformProgramacion.reset();
           this.Limpieza_Varibles_local();
         },
@@ -433,7 +379,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
   }
   //Documentacion---------------------------------------------------------
   PostDocumentacion(): void {
-    if (!this.imagenDocumentacion) {
+    if (!this.imagen) {
       alert('Por favor, selecciona una imagen para la documentación.');
       return;
     }
@@ -445,11 +391,11 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
         this.Body,
         this.Link,
         this.Referencia,
-        this.imagenDocumentacion
+        this.imagen
       ).subscribe({
-        next: (response) => {
+        next: () => {
           alert('Agregado correctamente');
-          console.log('Documentación agregada correctamente', response);
+          this.clearImage();
           this.myformDocumentacion.reset();
           this.Limpieza_Varibles_local();
         },
@@ -469,7 +415,6 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       Body: ['', [Validators.required]],
       Link: [''],
       Referencia: [''],
-      Imagen: [null, [Validators.required]]
     });
   }
   public submitFormDocumentacion(): void {
@@ -501,7 +446,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
   PostPublicacion(): void {
 
     // Asegúrate de que todos los campos necesarios estén definidos
-    if (!this.imagenPublicacion) {
+    if (!this.imagen) {
       alert('Por favor, selecciona una imagen para la publicación.');
       return;
     }
@@ -515,11 +460,11 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
         this.Link,
         this.Autor,
         this.Referencia,
-        this.imagenPublicacion
+        this.imagen
       ).subscribe({
-        next: (response) => {
+        next: () => {
           alert('Agregado correctamente');
-          console.log('Publicación agregada correctamente', response);
+          this.clearImage();
           this.myformPublicacion.reset();
           this.Limpieza_Varibles_local();
 
@@ -575,7 +520,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
     // Encargados---------------------------------------------------------------
 
     PostEncargados(): void {
-      if (!this.imagenEncargado) {
+      if (!this.imagen) {
         alert('Por favor, selecciona una imagen.');
         return;
       }
@@ -589,11 +534,11 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
           this.Especialidad,
           this.Investigacion,
           this.Universidad,
-          this.imagenEncargado
+          this.imagen
         ).subscribe({
-          next: (response) => {
+          next: () => {
             alert('Agregado correctamente');
-            console.log('Encargado agregado correctamente', response);
+            this.clearImage();
             this.Limpieza_Varibles_local();
             this.myformEncargados.reset();
           },
@@ -616,7 +561,6 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
       Especialidad: ['', [Validators.required]],
       Investigacion: ['', [Validators.required]],
       Universidad: ['',[Validators.required]],
-      Imagen: [null, [Validators.required]]
     });
   }
   public submitFormEncargados(): void {
@@ -659,6 +603,7 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
     this.Especialidad='';
     this.Investigacion=''
     this.Universidad='';
+    this.imagen= null ;
 
   }
 
@@ -733,6 +678,54 @@ export class AddElementoComponent implements AfterViewInit, OnInit {
     ocultarMensaje() {
       this.mostrarCuadro = false;
     }
+
+
+
+    //PREVISUALIZACION IMAGEN 
+    extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
+      try {
+        const unsafeImg = window.URL.createObjectURL($event);
+        const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+        const reader = new FileReader();
+
+        reader.readAsDataURL($event);
+
+        reader.onload = () => {
+          resolve({
+            base: reader.result
+          });
+        };
+
+        reader.onerror = error => {
+          reject({
+            base: null
+          });
+        };
+
+      } catch (e) {
+        reject({
+          base: null
+        });
+      }
+    });
+    capturarFile(event:any): any {
+      const archivoCapturado = event.target.files[0]
+  
+      this.extraerBase64(archivoCapturado).then((imagen: any) => {
+        this.Preview = imagen.base;
+        console.log(imagen);
+  
+      })
+      this.imagen = archivoCapturado;
+      console.log(this.imagen)
+    }
+  //LIMPIEZA DE VARIABLE BOTON
+    clearImage(): any {
+      this.Preview = '';
+      this.imagen = null;
+    }
+
+
     }
 
 

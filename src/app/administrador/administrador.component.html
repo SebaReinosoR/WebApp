@@ -195,13 +195,24 @@
                     <span class="input-group-text mb-3" id="Referencias">Referencias</span>
                     <input [(ngModel)]="item.Referencia"name="Referencia" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
+                  <div>
+                    <p>Imagen Actual</p>
+                    <img [src]="item.imagen" width="100px">
+                  </div>
+                  <input class="input-file" (change)="capturarFile($event)" type="file" >
+                    <div class="preview-img" *ngIf="Preview">
+                    <button class="clear-image" type="button" (click)="clearImage()">Clear</button>
+                    <p>Previsualización</p>
+                    <img  [src]="Preview" alt="" width="100px">
 
+
+                  </div>
 
                 </form>
 
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary"  (click)="clearImage()" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-success" (click)="PutPublicacion(item.idPublicacion, Publiform)" data-bs-dismiss="modal">Modificar</button>
               </div>
             </div>
@@ -270,13 +281,12 @@
                     <img [src]="item.imagen" width="100px">
                   </div>
                   <input class="input-file" (change)="capturarFile($event)" type="file" >
-                    <div class="preview-img" *ngIf="PreviewProgramacion">
+                    <div class="preview-img" *ngIf="Preview">
                     <button class="clear-image" type="button" (click)="clearImage()">Clear</button>
                     <p>Previsualización</p>
-                    <img  [src]="PreviewProgramacion" alt="" width="100px">
-
-
+                    <img  [src]="Preview" alt="" width="100px">
                   </div>
+
                 </form>
 
               </div>
@@ -348,12 +358,24 @@
                     <span class="input-group-text mb-3" id="Referencias">Referencias</span>
                     <input [(ngModel)]="item.Referencia"name="Referencia" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
+                  <div>
+                    <p>Imagen Actual</p>
+                    <img [src]="item.imagen" width="100px">
+                  </div>
+                  <input class="input-file" (change)="capturarFile($event)" type="file" >
+                    <div class="preview-img" *ngIf="Preview">
+                    <button class="clear-image" type="button" (click)="clearImage()">Clear</button>
+                    <p>Previsualización</p>
+                    <img  [src]="Preview" alt="" width="100px">
+
+
+                  </div>
 
                 </form>
 
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary"  (click)="clearImage()" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-success" (click)="PutDocumentacion(item.idDocumentacion, Documentacionform)" data-bs-dismiss="modal">Modificar</button>
               </div>
             </div>
@@ -432,11 +454,24 @@
                     <input [(ngModel)]="item.Universidad" name="Universidad" type="text" class="form-control mb-3" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
 
+                  <div>
+                    <p>Imagen Actual</p>
+                    <img [src]="item.imagen" width="100px">
+                  </div>
+                  <input class="input-file" (change)="capturarFile($event)" type="file" >
+                    <div class="preview-img" *ngIf="Preview">
+                    <button class="clear-image" type="button" (click)="clearImage()">Clear</button>
+                    <p>Previsualización</p>
+                    <img  [src]="Preview" alt="" width="100px">
+
+
+                  </div>
+
                 </form>
 
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary"  (click)="clearImage()" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-success" (click)="PutEncargados(item.idEncargado, Encargadoform)" data-bs-dismiss="modal">Modificar</button>
               </div>
             </div>

@@ -222,11 +222,12 @@
                 </div>
 
                 <div class="input-group mb-3">
-                  <div class="custom-file-input" (click)="fileInput.click()">
-                    {{ nombreArchivoProgramacion || 'Sube un archivo de imagen (.jpg, .png, .gif)' }}
-                  </div>
-                  <input formControlName="imagen" type="file" #fileInput (change)="onFileChange($event, 'programacion')" hidden >
-
+                  <input class="input-file" (change)="capturarFile($event)" type="file" >
+                  <div class="preview-img" *ngIf="Preview">
+                  <button class="clear-image" type="button" (click)="clearImage()">Limpiar</button>
+                  <p>Previsualización</p>
+                  <img  [src]="Preview" alt="" width="200px">
+                </div>
 
                 </div>
 
@@ -286,14 +287,16 @@
                   <input formControlName="Referencia" class="form-control" placeholder="Referencias utilizadas (Ingresar formato link)">
                 </div>
                 <div class="input-group mb-3">
-                  <div class="custom-file-input" (click)="fileInput.click()">
-                    {{ nombreArchivoDocumentacion || 'Sube un archivo de imagen (.jpg, .png, .gif)' }}
+                  <input class="input-file" (change)="capturarFile($event)" type="file" >
+                  <div class="preview-img" *ngIf="Preview">
+                  <button class="clear-image" type="button" (click)="clearImage()">Limpiar</button>
+                  <p>Previsualización</p>
+                  <img  [src]="Preview" alt="" width="200px">
                   </div>
-                  <input formControlName="Imagen" type="file" #fileInput (change)="onFileChange($event, 'documentacion')" hidden>
                 </div>
 
                 <div class="btn">
-                  <button type="submit" class="btn btn-success">Agregar</button>
+                  <button type="submit" class="btn btn-success"  >Agregar</button>
                 </div>
               </form>
 
@@ -370,10 +373,12 @@
                   <input formControlName="Referencia" class="form-control" placeholder="Referencias Relacionadas (Ingresar formato link)">
                 </div>
                 <div class="input-group mb-3">
-                <div class="custom-file-input" (click)="fileInput.click()">
-                    {{ nombreArchivoPublicacion || 'Sube un archivo de imagen (.jpg, .png, .gif)' }}
+                  <input class="input-file" (change)="capturarFile($event)" type="file" >
+                  <div class="preview-img" *ngIf="Preview">
+                  <button class="clear-image" type="button" (click)="clearImage()">Limpiar</button>
+                  <p>Previsualización</p>
+                  <img  [src]="Preview" alt="" width="200px">
                   </div>
-                  <input formControlName="Imagen" type="file" #fileInput (change)="onFileChange($event, 'publicacion')" hidden>
                 </div>
 
                 <div class="btn">
@@ -456,10 +461,12 @@
                   </div>
                 </div>
                 <div class="input-group mb-3">
-                  <div class="custom-file-input" (click)="fileInput.click()">
-                    {{ nombreArchivoEncargado || 'Sube un archivo de imagen (.jpg, .png, .gif)' }}
+                  <input class="input-file" (change)="capturarFile($event)" type="file" >
+                  <div class="preview-img" *ngIf="Preview">
+                  <button class="clear-image" type="button" (click)="clearImage()">Limpiar</button>
+                  <p>Previsualización</p>
+                  <img  [src]="Preview" alt="" width="200px">
                   </div>
-                  <input formControlName="Imagen" type="file" #fileInput (change)="onFileChange($event, 'encargados')" hidden>
                 </div>
 
                 <div class="btn">

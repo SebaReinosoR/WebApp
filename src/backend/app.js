@@ -301,7 +301,9 @@ app.put('/encargados/:id', upload.single('imagen'),cors(), async (req, res) => {
   const id = req.params.id;
   const {id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad} = req.body;
   const imagenPath = req.file ? req.file.path : null;
-
+  if (!req.file) {
+    return res.status(400).send({ message: 'La imagen es null' });
+  }
   try {
     await encargadoService.updateEncargado(id, id_admin,Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad, imagenPath);
     res.status(200).json({message:'Encargado actualizado exitosamente'});
@@ -441,7 +443,7 @@ app.put('/programacion/:id',upload.single('imagen'),cors(), async (req, res) => 
   } catch (error) {
     console.error('Error al actualizar la programacion por ID:', error);
     res.status(500).send('Error interno del servidor');
-  }
+  } 
 });
 
 // Eliminar una programacion por ID

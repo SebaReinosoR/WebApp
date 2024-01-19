@@ -11,7 +11,7 @@
       <div class="box-1" *ngFor="let item of subtema; let i = index">
         <div class="box">
           <p>
-            {{item.Nombre}}
+            {{item.Nombre}}   
           </p>
           <div class="btns">
             <button type="button" id="eliminar" class="btn btn-danger" data-bs-toggle="modal" [attr.data-bs-target]="'#exampleModal' + item.idSubtema" >Eliminar</button>

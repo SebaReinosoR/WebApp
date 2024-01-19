@@ -22,14 +22,12 @@ export class AdministradorComponent implements AfterViewInit {
   encargadosAll:any;
   id_admin:number= 1;
   //CARGA IMG
-  imagenEncargado: File | null = null;
-  imagenPublicacion: File | null = null;
-  imagenDocumentacion: File | null = null;
-  imagenProgramacion: File | null = null;
+
+  imagen: File | null = null;
 
   //Previsualizar IMG
 
-  PreviewProgramacion:any;
+  Preview:any;
 
   nombreArchivoProgramacion:any
   nombreArchivoDocumentacion: string = '';
@@ -93,11 +91,11 @@ export class AdministradorComponent implements AfterViewInit {
   // PUT
   PutProgramacion(idProgra: number, form: NgForm): void {
     const { Nombre, Body, Link } = form.value;
-    const imagenPath = this.imagenProgramacion;
+    const imagenPath = this.imagen;
 
     if (!imagenPath) {
       alert('Por favor, selecciona una imagen para realizar la modificación.');
-      return;
+      return; 
     }
     console.log(imagenPath);
   
@@ -111,26 +109,6 @@ export class AdministradorComponent implements AfterViewInit {
       })
     );
   }
-
-
-  capturarFile(event:any): any {
-    const archivoCapturado = event.target.files[0]
-
-    this.extraerBase64(archivoCapturado).then((imagen: any) => {
-      this.PreviewProgramacion = imagen.base;
-      console.log(imagen);
-
-    })
-    this.imagenProgramacion = archivoCapturado;
-    console.log(this.imagenProgramacion)
-  }
-
-  clearImage(): any {
-    this.PreviewProgramacion = '';
-    this.imagenProgramacion = null;
-  }
-
-
 
 
   PutCodigo(idCodigo: number, form: NgForm): void {
@@ -154,34 +132,66 @@ export class AdministradorComponent implements AfterViewInit {
   }
 
   PutPublicacion(idPublicacion: number, form: NgForm): void {
-    const { Nombre,Fecha,Body,Referencia,Autor, Link, imagenPath } = form.value;
+    const { Nombre,Fecha,Body,Referencia,Autor, Link} = form.value;
+    const imagenPath = this.imagen; 
+    if (!imagenPath) {
+      alert('Por favor, selecciona una imagen para realizar la modificación.');
+      return;
+    } 
+    this.subscriptions.add( 
     this.services.PutPublicacion(idPublicacion, this.id_admin, Nombre,Fecha,Body,Referencia,Autor, Link, imagenPath).subscribe(() => {
       alert('Modificado correctamente');
       this.services.getPublicacion().subscribe(publiAll => {
         this.publiAll = publiAll;
       });
-    });
+    })
+    )
   }
   PutDocumentacion(idDocu: number, form: NgForm): void {
-    const { Nombre, Body, Link, Referencia,imagenPath} = form.value;
-    console.log(form.value);
+    const { Nombre, Body, Link, Referencia} = form.value;
+    const imagenPath = this.imagen;  
+    if (!imagenPath) {
+      alert('Por favor, selecciona una imagen para realizar la modificación.');
+      return;
+    }  
+    this.subscriptions.add(
     this.services.PutDocumentacion(idDocu, this.id_admin, Nombre, Body, Link, Referencia,imagenPath).subscribe(() => {
       alert('Modificado correctamente');
       this.services.getDocumentacion().subscribe(documentosAll => {
         this.documentosAll = documentosAll;
       });
-    });
+    })
+    )
   }
-  PutEncargados(idEncargado:number, form:NgForm):void{
-    const { Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad,imagenPath} = form.value;
-    this.services.PutEncargados(idEncargado,this.id_admin,Nombre,Apellido, Carrera, Especialidad, Investigacion, Universidad,imagenPath).subscribe(()=>{
-      alert('Modificado correctamente');
-      this.services.getEncargados().subscribe(encargadosAll => {
-        this.encargadosAll = encargadosAll;
-      });
 
-    });
+
+
+
+  PutEncargados(idEncargado:number, form:NgForm):void{
+    const { Nombre, Apellido, Carrera, Especialidad, Investigacion, Universidad} = form.value;
+    const imagenPath = this.imagen;
+    if (!imagenPath) {
+      alert('Por favor, selecciona una imagen para realizar la modificación.');
+      return;
+    }
+    this.subscriptions.add(
+      this.services.PutEncargados(idEncargado,this.id_admin,Nombre,Apellido, Carrera, Especialidad, Investigacion, Universidad,imagenPath).subscribe(()=>{
+        alert('Modificado correctamente');
+        this.services.getEncargados().subscribe(encargadosAll => {
+          this.encargadosAll = encargadosAll;
+        });
+
+      })
+    );
   }
+
+
+
+
+
+
+
+
 
 
 
@@ -356,7 +366,22 @@ export class AdministradorComponent implements AfterViewInit {
         });
       }
     });
-
+    capturarFile(event:any): any {
+      const archivoCapturado = event.target.files[0]
+  
+      this.extraerBase64(archivoCapturado).then((imagen: any) => {
+        this.Preview = imagen.base;
+        console.log(imagen);
+  
+      })
+      this.imagen = archivoCapturado;
+      console.log(this.imagen)
+    }
+  
+    clearImage(): any {
+      this.Preview = '';
+      this.imagen = null;
+    }
 
 
 }
